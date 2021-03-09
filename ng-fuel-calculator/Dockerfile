@@ -19,5 +19,5 @@ RUN ng build --prod
 
 FROM nginx:latest
 
-COPY --from=angular_build /ng-fuel-calculator/dist /usr/share/nginx/html
+COPY --from=angular_build /ng-fuel-calculator/dist/ng-fuel-calculator /usr/share/nginx/html
 
