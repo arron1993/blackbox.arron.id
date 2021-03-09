@@ -1,0 +1,9 @@
+version: "2.0"
+services:
+  ng-fuel-calculator:
+    build:
+      context: ng-fuel-calculator/.
+    ports:
+      - "8000:80"
+    volumes:
+      - ./ng-fuel-calculator/nginx/:/etc/nginx/conf.d/
