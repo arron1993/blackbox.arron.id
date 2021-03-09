@@ -15,7 +15,7 @@ COPY ./src /ng-fuel-calculator/src
 COPY ./angular.json /ng-fuel-calculator
 COPY ./tsconfig.app.json /ng-fuel-calculator
 COPY ./tsconfig.json /ng-fuel-calculator
-RUN node --max_old_space_size=512 node_modules/@angular/cli/bin/ng build --target production --build-optimizer --vendor-chunk
+RUN node --max_old_space_size=512 node_modules/@angular/cli/bin/ng build --prod --build-optimizer --vendor-chunk
 
 
 
