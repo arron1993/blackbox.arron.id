@@ -1,4 +1,4 @@
-FROM node:latest as angular_build
+FROM node:12.21.0-alpine3.10 as angular_build
 
 RUN npm install -g @angular/cli
 
