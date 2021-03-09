@@ -11,11 +11,11 @@ RUN npm install
 RUN npx ngcc
 
 COPY ./src /ng-fuel-calculator/src
-COPY ./dist /ng-fuel-calculator/dist
+#COPY ./dist /ng-fuel-calculator/dist
 COPY ./angular.json /ng-fuel-calculator
 COPY ./tsconfig.app.json /ng-fuel-calculator
 COPY ./tsconfig.json /ng-fuel-calculator
-# RUN npm run build-prod
+RUN ng build --prod
 
 FROM nginx:latest
 
