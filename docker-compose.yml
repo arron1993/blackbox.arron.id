@@ -4,6 +4,6 @@ services:
     build:
       context: ng-fuel-calculator/.
     ports:
-      - "8000:80"
+      - "8001:80"
     volumes:
       - ./ng-fuel-calculator/nginx/:/etc/nginx/conf.d/
