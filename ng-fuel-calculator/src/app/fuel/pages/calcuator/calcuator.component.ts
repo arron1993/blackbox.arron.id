@@ -31,8 +31,6 @@ export class CalcuatorComponent implements OnInit {
   }
 
   updateCircuit(e) {
-    this.circuit = this.circuits.find(circuit => circuit.name == e)
-    
-    //this.circuit = circuit;
+    this.circuit = this.circuits.find(circuit => circuit.name.trim() == e.trim())
   }
 }

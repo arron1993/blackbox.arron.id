@@ -22,10 +22,10 @@ export class CircuitService {
     new Circuit("Suzuka Circuit", new Laptime(0, 0), 3.8),
     new Circuit("Weathertech®️ Raceway Laguna Seca", new Laptime(0, 0), 2.7),
     new Circuit("Mount Panorama Circuit", new Laptime(0, 0), 4),
-    new Circuit("Autodromo Internazionale Enzo e Dino Ferrari – Imola   ", new Laptime(0, 0), 3.3),
+    new Circuit("Autodromo Internazionale Enzo e Dino Ferrari – Imola", new Laptime(0, 0), 3.3),
     new Circuit("Donington Park Circuit", new Laptime(0, 0), 2.6),
     new Circuit("Oulton Park Circuit", new Laptime(0, 0), 2.45),
-    new Circuit("Snetterton Circuit ", new Laptime(0, 0), 2.7),
+    new Circuit("Snetterton Circuit", new Laptime(0, 0), 2.7),
   ]
   constructor() { }
 
