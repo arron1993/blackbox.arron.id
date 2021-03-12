@@ -1,4 +1,5 @@
 from ctypes import Structure, sizeof, c_float, c_int32, c_wchar, c_int
+import mmap
 
 class SPageFilePhysics(Structure):
 	_fields_ = [
@@ -89,7 +90,7 @@ class SPageFilePhysics(Structure):
 		("tyreTemp", c_float * 4),
 	]
 
-	def toDict(self):
+	def __dict__(self):
 		return {
 			"fuel": self.fuel,
 			"brakeBias": self.brakeBias,

@@ -51,4 +51,6 @@ class SPageFileStatic(Structure):
 		return {
 			"PitWindowStart": self.PitWindowStart,
 			"PitWindowEnd": self.PitWindowEnd,
+			"carModel": self.carModel,
+			"track": self.track,
 		}

@@ -49,7 +49,7 @@ class SPageFileGraphic(Structure):
 		("TCCut", c_int),
 		("EngineMap", c_int),
 		("ABS", c_int),
-		("fuelXLap", c_int),
+		("fuelXLap", c_float),
 		("rainLights", c_int),
 		("flashingLights", c_int),
 		("lightsStage", c_int),
