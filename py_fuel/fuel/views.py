@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework import permissions
-from py_fuel.fuel.serializers import UserSerializer
+from py_fuel.fuel.serializers.user import UserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):

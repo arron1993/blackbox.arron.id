@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { FuelModule } from './fuel/fuel.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { FuelModule } from './fuel/fuel.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FuelModule,  
+    FuelModule,
+    AuthModule,  
     FormsModule
   ],
   providers: [],

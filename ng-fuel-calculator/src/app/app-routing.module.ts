@@ -4,8 +4,8 @@ import { CalcuatorComponent } from './fuel/pages/calcuator/calcuator.component';
 
 const routes: Routes = [
   {
-    path: "",
-    component: CalcuatorComponent
+    path: "auth",
+    loadChildren: () => import("./auth/auth-routing.module").then(m => m.AuthRoutingModule)
   }
 ];
 
