@@ -4,11 +4,16 @@ import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
   {
+    path: "",
+    redirectTo: "dashboard",
+    pathMatch: "full",
+  },
+  {
     path: "auth",
     loadChildren: () => import("./auth/auth-routing.module").then(m => m.AuthRoutingModule)
   }, 
   {
-    path: "circuits",
+    path: "dashboard",
     loadChildren: () => import("./core/core-routing.module").then(m => m.CoreRoutingModule),
     canActivate: [AuthGuard]
   }

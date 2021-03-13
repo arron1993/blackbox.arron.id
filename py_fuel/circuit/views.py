@@ -3,6 +3,8 @@ from circuit.serializers.circuit import CircuitSerializer
 from rest_framework import generics
 
 from rest_framework.permissions import IsAuthenticated
+
+
 class CircuitList(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Circuit.objects.all()

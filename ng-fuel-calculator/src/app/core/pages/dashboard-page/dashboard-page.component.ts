@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CircuitService } from '../../services/circuit.service';
 
 @Component({
-  selector: 'app-circuit-list-page',
-  templateUrl: './circuit-list-page.component.html',
-  styleUrls: ['./circuit-list-page.component.scss']
+  selector: 'app-dashboard-page',
+  templateUrl: './dashboard-page.component.html',
+  styleUrls: ['./dashboard-page.component.scss']
 })
-export class CircuitListPageComponent implements OnInit {
+export class DashboardPageComponent implements OnInit {
   circuits: any[];
 
   constructor(private cs: CircuitService) { }

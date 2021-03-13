@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CoreRoutingModule } from './core-routing.module';
-import { CircuitListPageComponent } from './pages/circuit-list-page/circuit-list-page.component';
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { CarListComponent } from './components/car-list/car-list.component';
 
 
 @NgModule({
-  declarations: [CircuitListPageComponent],
+  declarations: [DashboardPageComponent, CarListComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,

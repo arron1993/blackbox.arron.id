@@ -37,6 +37,7 @@ REST_FRAMEWORK = {
 INSTALLED_APPS = [
     'fuel.apps.FuelConfig',
     'circuit.apps.CircuitConfig',
+    'car.apps.CarConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CircuitListPageComponent } from './pages/circuit-list-page/circuit-list-page.component';
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 
 const routes: Routes = [
   {
     path: "",
-    component: CircuitListPageComponent,
+    component: DashboardPageComponent,
   }
 ];
 

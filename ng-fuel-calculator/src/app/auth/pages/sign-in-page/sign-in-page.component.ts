@@ -20,7 +20,7 @@ export class SignInPageComponent implements OnInit {
     const { username, password } = form.value;
     this.as.signin(username, password).subscribe(resp => {
       console.log(this.as.whoami())
-      this.router.navigate(["/circuits"]);
+      this.router.navigate(["/dashboard"]);
     })
   }
 }
