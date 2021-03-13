@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CalcuatorComponent } from './fuel/pages/calcuator/calcuator.component';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: "auth",
     loadChildren: () => import("./auth/auth-routing.module").then(m => m.AuthRoutingModule)
+  }, 
+  {
+    path: "circuits",
+    loadChildren: () => import("./core/core-routing.module").then(m => m.CoreRoutingModule),
+    canActivate: [AuthGuard]
   }
 ];
 

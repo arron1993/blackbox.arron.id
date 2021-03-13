@@ -1,0 +1,106 @@
+[
+  {
+    "model": "circuit.circuit",
+    "pk": 1,
+    "fields": {
+      "name": "Circuit De Barcelona - Catalunya",
+      "keyname": "barcelona"
+    }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 2,
+    "fields": { "name": "Brands Hatch Circuit", "keyname": "brands_hatch" }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 3,
+    "fields": { "name": "Hungaroring", "keyname": "hungaroring" }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 4,
+    "fields": { "name": "Misano World Circuit", "keyname": "misano" }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 5,
+    "fields": { "name": "Monza Circuit", "keyname": "monza" }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 6,
+    "fields": { "name": "Nurburgring", "keyname": "nurburgring" }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 7,
+    "fields": { "name": "Paul Ricard", "keyname": "paul_ricard" }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 8,
+    "fields": { "name": "Silverstone", "keyname": "silverstone" }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 9,
+    "fields": { "name": "Circuit De Spa-Francorchamps", "keyname": "spa" }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 10,
+    "fields": { "name": "Circuit Zandvoort", "keyname": "zandvoort" }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 11,
+    "fields": { "name": "Circuit Zolder", "keyname": "zolder" }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 12,
+    "fields": { "name": "Kyalami Grand Prix Circuit", "keyname": "kylami" }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 13,
+    "fields": { "name": "Suzuka Circuit", "keyname": "suzuka" }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 14,
+    "fields": {
+      "name": "Weathertech\u00ae\ufe0f Raceway Laguna Seca",
+      "keyname": "laguna_seca"
+    }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 15,
+    "fields": { "name": "Mount Panorama Circuit", "keyname": "bathurst" }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 16,
+    "fields": {
+      "name": "Autodromo Internazionale Enzo e Dino Ferrari \u2013 Imola",
+      "keyname": "imola"
+    }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 17,
+    "fields": { "name": "Donington Park Circuit", "keyname": "donington_park" }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 18,
+    "fields": { "name": "Oulton Park Circuit", "keyname": "oulton_park" }
+  },
+  {
+    "model": "circuit.circuit",
+    "pk": 19,
+    "fields": { "name": "Snetterton Circuit", "keyname": "snetterton" }
+  }
+]
