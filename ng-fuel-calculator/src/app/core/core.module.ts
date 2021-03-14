@@ -7,10 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CarListComponent } from './components/car-list/car-list.component';
 import { SessionListComponent } from './components/session-list/session-list.component';
+import { CircuitListComponent } from './components/circuit-list/circuit-list.component';
 
 
 @NgModule({
-  declarations: [DashboardPageComponent, CarListComponent, SessionListComponent],
+  declarations: [DashboardPageComponent, CarListComponent, SessionListComponent, CircuitListComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,

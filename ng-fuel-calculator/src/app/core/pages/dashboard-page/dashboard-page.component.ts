@@ -7,14 +7,8 @@ import { CircuitService } from '../../services/circuit.service';
   styleUrls: ['./dashboard-page.component.scss']
 })
 export class DashboardPageComponent implements OnInit {
-  circuits: any[];
 
-  constructor(private cs: CircuitService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.cs.get().subscribe((resp: any) => {
-      this.circuits = resp;
-    })
-  }
-
+  ngOnInit(): void {}
 }
