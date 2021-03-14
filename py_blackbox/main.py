@@ -16,13 +16,12 @@ class Game(Observer):
         self.gapi = GameApi()
         Observer.__init__(self)  # Observer's init needs to be called
 
-    def session_changed(self, status):
-        print(time.time(), "session changed", 2)
+    def on_new_session(self, data=None):
+        print(time.time(), "on new session")
         try:
-            if status == 2:
-                self.bbapi.create_session(
-                    self.gapi.get_session_details()
-                )
+            self.bbapi.create_session(
+                self.gapi.get_session_details()
+            )
         except Exception as e:
             import traceback
             traceback.print_exc(e)
@@ -41,12 +40,13 @@ def session_loop():
     session_status = api.get_session_status()
     if session_status == 2:
         # if we're already running, the create the new session
-        Event("onSessionChange", session_status)
+        Event("onNewSession", session_status)
     while True:
         last_session_status = session_status
         session_status = api.get_session_status()
+        print("Session Status:", session_status)
         if last_session_status != session_status:
-            Event("onSessionChange", session_status)
+            Event("onNewSession", session_status)
         time.sleep(1)
 
 
@@ -76,7 +76,7 @@ def main():
         return 1
 
     game = Game(bbapi)
-    game.attach('onSessionChange',  game.session_changed)
+    game.attach('onNewSession',  game.on_new_session)
     game.attach('onNewLap',  game.on_new_lap)
 
     if os.name == 'nt':
