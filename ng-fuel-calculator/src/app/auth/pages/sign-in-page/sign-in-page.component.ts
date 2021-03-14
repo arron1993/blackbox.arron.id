@@ -19,7 +19,6 @@ export class SignInPageComponent implements OnInit {
   onSubmit(form) {
     const { username, password } = form.value;
     this.as.signin(username, password).subscribe(resp => {
-      console.log(this.as.whoami())
       this.router.navigate(["/dashboard"]);
     })
   }
