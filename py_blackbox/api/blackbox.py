@@ -10,26 +10,26 @@ class BlackboxApi():
     def _normalize_path(self, path):
         if not path.endswith("/"):
             path += "/"
-        return path
+        return f'{API_ENDPOINT}{path}'
 
     def get(self, path):
         path = self._normalize_path(path)
-        return self.session.get(os.path.join(API_ENDPOINT, path))
+        return self.session.get(path)
 
     def post(self, path, data):
         path = self._normalize_path(path)
 
         return self.session.post(
-            os.path.join(API_ENDPOINT, path),
+            path,
             json=data)
 
     def create_session(self, data):
         return self.post("api/session/", data).json()
 
     def signin(self, username, password):
-        resp = self.session.post(
-            os.path.join(API_ENDPOINT, "api", "signin/"),
-            json={"username": username, "password": password})
+        resp = self.post(
+            "api/signin/",
+            {"username": username, "password": password})
 
         if resp.ok:
             result = resp.json()
