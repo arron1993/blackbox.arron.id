@@ -5,8 +5,8 @@ import mmap
 class SPageFileGraphic(Structure):
     _fields_ = [
         ("packetId", c_int),
-        ("AC_STATUS", c_int),
-        ("AC_SESSION_TYPE", c_int),
+        ("ACC_STATUS", c_int),
+        ("ACC_SESSION_TYPE", c_int),
         ("currentTime", c_wchar * 15),
         ("lastTime", c_wchar * 15),
         ("bestTime", c_wchar * 15),

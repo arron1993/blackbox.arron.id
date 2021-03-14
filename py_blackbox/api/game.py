@@ -10,6 +10,7 @@ class GraphicWrapper:
         data = SPageFileGraphic.from_buffer(buf)
         return getattr(data, attr)
 
+
 class StaticWrapper:
     def __getattr__(self, attr):
         buf = mmap.mmap(-1, sizeof(SPageFileStatic), u"Local\\acpmf_static")
@@ -23,7 +24,7 @@ class GameApi():
         self.static = StaticWrapper()
 
     def get_session_status(self):
-        return self.graphic.AC_STATUS
+        return self.graphic.ACC_STATUS
 
     def get_number_of_laps(self):
         return self.graphic.completedLaps

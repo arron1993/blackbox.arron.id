@@ -9,6 +9,7 @@ from observer.event import Event
 from api.game import GameApi
 from api.blackbox import BlackboxApi
 
+
 class Game(Observer):
     def __init__(self):
         self.bbapi = BlackboxApi()
@@ -16,11 +17,15 @@ class Game(Observer):
         Observer.__init__(self)  # Observer's init needs to be called
 
     def session_changed(self, status):
-        if status == 2:
-            self.bbapi.create_session(
-                self.gapi.get_session_details()
-            )
-        print(time.time(), "session changed")
+        print(time.time(), "session changed", 2)
+        try:
+            if status == 2:
+                self.bbapi.create_session(
+                    self.gapi.get_session_details()
+                )
+        except Exception as e:
+            print(e)
+
         # create a new session in the backend
         # get a sessionId - assign it to class
 
@@ -32,18 +37,15 @@ class Game(Observer):
 
 def session_loop():
     api = GameApi()
-    bbapi = BlackboxApi()
     session_status = api.get_session_status()
     if session_status == 2:
         # if we're already running, the create the new session
-        Event("onSessionChange")
+        Event("onSessionChange", session_status)
     while True:
         last_session_status = session_status
         session_status = api.get_session_status()
-
-        print(session_status)
         if last_session_status != session_status:
-            Event("onSessionChange")
+            Event("onSessionChange", session_status)
         time.sleep(1)
 
 
@@ -63,10 +65,9 @@ def main():
     game = Game()
     game.attach('onSessionChange',  game.session_changed)
     game.attach('onNewLap',  game.on_new_lap)
-    # 
+    #
     api = BlackboxApi()
 
-    
     username = input("Enter username: ")
     password = input("Enter password: ")
     resp = api.signin(username, password)
@@ -89,6 +90,7 @@ def main():
         if quit_:
             for loop in loops:
                 loop.thread.join()
+
 
 if __name__ == "__main__":
     main()
