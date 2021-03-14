@@ -30,8 +30,9 @@ class BlackboxApi():
         resp = self.session.post(
             os.path.join(API_ENDPOINT, "api", "signin/"),
             json={"username": username, "password": password})
-        resp = resp.json()
-        self.refreshToken = resp["refresh"]
-        
-        self.session.headers.update({'Authorization': f'Bearer {resp["access"]}'})
-        return
+
+        if resp.ok:
+            result = resp.json()
+            self.refreshToken = result["refresh"]
+            self.session.headers.update({'Authorization': f'Bearer {result["access"]}'})
+        return resp

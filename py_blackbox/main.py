@@ -2,7 +2,7 @@ import time
 import mmap
 import os
 
-from poller.poller import Poller
+from background_event_loop.background_event_loop import BackgroundEventLoop
 from observer.observer import Observer
 from observer.event import Event
 
@@ -11,9 +11,15 @@ from api.blackbox import BlackboxApi
 
 class Game(Observer):
     def __init__(self):
+        self.bbapi = BlackboxApi()
+        self.gapi = GameApi()
         Observer.__init__(self)  # Observer's init needs to be called
 
-    def session_changed(self, data=None):
+    def session_changed(self, status):
+        if status == 2:
+            self.bbapi.create_session(
+                self.gapi.get_session_details()
+            )
         print(time.time(), "session changed")
         # create a new session in the backend
         # get a sessionId - assign it to class
@@ -24,10 +30,13 @@ class Game(Observer):
         # the backend
 
 
-def session_event_loop():
+def session_loop():
     api = GameApi()
+    bbapi = BlackboxApi()
     session_status = api.get_session_status()
-
+    if session_status == 2:
+        # if we're already running, the create the new session
+        Event("onSessionChange")
     while True:
         last_session_status = session_status
         session_status = api.get_session_status()
@@ -38,7 +47,7 @@ def session_event_loop():
         time.sleep(1)
 
 
-def lap_event_loop():
+def lap_loop():
     api = GameApi()
     current_lap = api.get_number_of_laps()
 
@@ -54,24 +63,32 @@ def main():
     game = Game()
     game.attach('onSessionChange',  game.session_changed)
     game.attach('onNewLap',  game.on_new_lap)
-    # p = Poller(session_event_loop)
+    # 
     api = BlackboxApi()
 
+    
     username = input("Enter username: ")
     password = input("Enter password: ")
-    api.signin(username, password)
-    resp = api.create_session({
-        "car": "amr_v12_vantage_gt3",
-        "circuit": "silverstone",
-        "type": "practice"
-    })
-    breakpoint()
-    while True:
-        if os.name == 'nt':
-            lap_event_loop()
-        # print(api.get_number_of_laps())
-        time.sleep(1)
+    resp = api.signin(username, password)
+    if not resp.ok:
+        print("Invalid username or password")
+        return 1
 
+    if os.name == 'nt':
+        loops = [
+            BackgroundEventLoop(session_loop),
+            BackgroundEventLoop(lap_loop)
+        ]
+    else:
+        loops = []
+
+    quit_ = False
+    while not quit_:
+        should_exit = input("type exit to quit: ")
+        quit_ = should_exit == "exit"
+        if quit_:
+            for loop in loops:
+                loop.thread.join()
 
 if __name__ == "__main__":
     main()
