@@ -11,8 +11,8 @@ from api.blackbox import BlackboxApi
 
 
 class Game(Observer):
-    def __init__(self):
-        self.bbapi = BlackboxApi()
+    def __init__(self, bbapi):
+        self.bbapi = bbapi()
         self.gapi = GameApi()
         Observer.__init__(self)  # Observer's init needs to be called
 
@@ -62,18 +62,21 @@ def lap_loop():
 
 
 def main():
-    game = Game()
-    game.attach('onSessionChange',  game.session_changed)
-    game.attach('onNewLap',  game.on_new_lap)
+    
     #
-    api = BlackboxApi()
+    bbapi = BlackboxApi()
 
     username = input("Enter username: ")
     password = input("Enter password: ")
     resp = api.signin(username, password)
+
     if not resp.ok:
         print("Invalid username or password")
         return 1
+
+    game = Game(bbapi)
+    game.attach('onSessionChange',  game.session_changed)
+    game.attach('onNewLap',  game.on_new_lap)
 
     if os.name == 'nt':
         loops = [
