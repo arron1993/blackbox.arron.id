@@ -1,14 +1,13 @@
 import time
 import mmap
-
-from ctypes import Structure, sizeof, c_float, c_int32, c_wchar, c_int
+import os
 
 from poller.poller import Poller
 from observer.observer import Observer
 from observer.event import Event
-from api.game import GameApi
-from lib.s_page_file_graphic import SPageFileGraphic
 
+from api.game import GameApi
+from api.blackbox import BlackboxApi
 
 class Game(Observer):
     def __init__(self):
@@ -56,11 +55,22 @@ def main():
     game.attach('onSessionChange',  game.session_changed)
     game.attach('onNewLap',  game.on_new_lap)
     # p = Poller(session_event_loop)
-    # api = GameApi()
+    api = BlackboxApi()
+
+    username = input("Enter username: ")
+    password = input("Enter password: ")
+    api.signin(username, password)
+    resp = api.create_session({
+        "car": "amr_v12_vantage_gt3",
+        "circuit": "silverstone",
+        "type": "practice"
+    })
+    breakpoint()
     while True:
-        lap_event_loop()
+        if os.name == 'nt':
+            lap_event_loop()
         # print(api.get_number_of_laps())
-        # time.sleep(1)
+        time.sleep(1)
 
 
 if __name__ == "__main__":

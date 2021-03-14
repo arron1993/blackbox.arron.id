@@ -1,0 +1,13 @@
+<div class="row no-gutters">
+  <div class="col-12 row no-gutters" *ngFor="let session of sessions">
+    <div class="col-2">
+      {{ session.type }}
+    </div>
+    <div class="col-2">
+      {{ session.circuit.name }}
+    </div>
+    <div class="col-2">
+      {{ session.car.name }}
+    </div>
+  </div>
+</div>

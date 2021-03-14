@@ -1,7 +1,18 @@
-<div class="row no-gutters">
-  <div class="col-12" *ngFor="let circuit of circuits">
-    {{ circuit.name }}
+<div class="row no-gutters" style="height: 20vh">
+  <div class="col-6 h-100" style="overflow-y: scroll">
+    <div class="row no-gutters">
+      <div class="col-12" *ngFor="let circuit of circuits">
+        {{ circuit.name }}
+      </div>
+    </div>
+  </div>
+  <div class="col-6 h-100" style="overflow-y: scroll">
+    <app-car-list></app-car-list>
   </div>
 </div>
 
-<app-car-list></app-car-list>
+<div class="row no-gutters">
+  <div class="col-12">
+    <app-session-list></app-session-list>
+  </div>
+</div>

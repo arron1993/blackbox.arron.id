@@ -6,10 +6,11 @@ import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.co
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CarListComponent } from './components/car-list/car-list.component';
+import { SessionListComponent } from './components/session-list/session-list.component';
 
 
 @NgModule({
-  declarations: [DashboardPageComponent, CarListComponent],
+  declarations: [DashboardPageComponent, CarListComponent, SessionListComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,

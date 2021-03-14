@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'fuel.apps.FuelConfig',
     'circuit.apps.CircuitConfig',
     'car.apps.CarConfig',
+    'session.apps.SessionConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
