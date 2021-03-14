@@ -35,3 +35,9 @@ class GameApi():
             "car": self.static.carModel,
             "circuit": self.static.track
         }
+    
+    def get_last_lap_details(self):
+        return {
+            "number": self.graphic.completedLaps,
+            "time": self.iLastTime,
+        }

@@ -11,4 +11,8 @@ export class SessionService {
   get() {
       return this.http.get("/api/session/")
   }
+
+  getLaps(sessionId) {
+      return this.http.get(`/api/session/${sessionId}/laps/`)
+  }
 }

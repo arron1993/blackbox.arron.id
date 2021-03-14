@@ -13,7 +13,7 @@ const routes: Routes = [
     loadChildren: () => import("./auth/auth-routing.module").then(m => m.AuthRoutingModule)
   }, 
   {
-    path: "dashboard",
+    path: "sessions",
     loadChildren: () => import("./core/core-routing.module").then(m => m.CoreRoutingModule),
     canActivate: [AuthGuard]
   }

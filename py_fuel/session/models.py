@@ -14,4 +14,4 @@ class Session(models.Model):
 class Lap(models.Model):
     number = models.IntegerField()
     time = models.IntegerField()
-    session = models.ForeignKey(Session, on_delete=models.CASCADE)
+    session_id = models.ForeignKey(Session, on_delete=models.CASCADE)

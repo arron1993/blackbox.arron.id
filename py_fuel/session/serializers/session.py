@@ -31,5 +31,5 @@ class SessionSerializer(serializers.ModelSerializer):
 class LapSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lap
-        fields = ['id', 'laptime', 'keyname']
+        fields = ['id', 'session_id', 'number', 'time']
 

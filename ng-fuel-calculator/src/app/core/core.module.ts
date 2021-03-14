@@ -8,10 +8,11 @@ import { FormsModule } from '@angular/forms';
 import { CarListComponent } from './components/car-list/car-list.component';
 import { SessionListComponent } from './components/session-list/session-list.component';
 import { CircuitListComponent } from './components/circuit-list/circuit-list.component';
+import { SessionPageComponent } from './pages/session-page/session-page.component';
 
 
 @NgModule({
-  declarations: [DashboardPageComponent, CarListComponent, SessionListComponent, CircuitListComponent],
+  declarations: [DashboardPageComponent, CarListComponent, SessionListComponent, CircuitListComponent, SessionPageComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,

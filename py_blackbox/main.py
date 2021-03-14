@@ -14,23 +14,31 @@ class Game(Observer):
     def __init__(self, bbapi):
         self.bbapi = bbapi
         self.gapi = GameApi()
+        self.session_id = None
         Observer.__init__(self)  # Observer's init needs to be called
 
     def on_new_session(self, data=None):
         print(time.time(), "on new session")
         try:
-            self.bbapi.create_session(
+            new_session = self.bbapi.create_session(
                 self.gapi.get_session_details()
-            )
+            ).json()
+            self.session_id = new_session["id"]
         except Exception as e:
-            import traceback
-            traceback.print_exc(e)
+            print(e)
 
         # create a new session in the backend
         # get a sessionId - assign it to class
 
     def on_new_lap(self, data):
         print(time.time(), "on new lap", data)
+        try:
+            new_lap = self.bbapi.create_lap(
+                self.session_id,
+                self.gapi.get_last_lap_details()
+            ).json()
+        except Exception as e:
+            print(e)
         # register previous lap data against session id in
         # the backend
 
@@ -63,8 +71,6 @@ def lap_loop():
 
 
 def main():
-
-    #
     bbapi = BlackboxApi()
 
     username = input("Enter username: ")
@@ -75,23 +81,30 @@ def main():
         print("Invalid username or password")
         return 1
 
-    game = Game(bbapi)
-    game.attach('onNewSession',  game.on_new_session)
-    game.attach('onNewLap',  game.on_new_lap)
-
     if os.name == 'nt':
+        game = Game(bbapi)
+        game.attach('onNewSession',  game.on_new_session)
+        game.attach('onNewLap',  game.on_new_lap)
         loops = [
             BackgroundEventLoop(session_loop),
             BackgroundEventLoop(lap_loop)
         ]
-    else:
-        breakpoint()
-        loops = []
+        quit_ = False
+        while not quit_:
+            should_exit = input("type exit to quit: ")
+            quit_ = should_exit == "exit"
+    else:        
+        # res = bbapi.create_session({
+        #     "type": "practice",
+        #     "circuit": "silverstone",
+        #     "car": "bentley_continental_gt3_2016"
+        # })
+        res = bbapi.create_lap(10, {
+            "time": 120,
+            "number": 1
+        })
 
-    quit_ = False
-    while not quit_:
-        should_exit = input("type exit to quit: ")
-        quit_ = should_exit == "exit"
+
     return 0
 
 

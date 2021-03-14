@@ -28,6 +28,10 @@ class BlackboxApi():
         print(data)
         return self.post("api/session/", data)
 
+    def create_lap(self, session_id, data):
+        print(data)
+        return self.post(f"api/session/{session_id}/laps/", data)
+        
     def signin(self, username, password):
         resp = self.post(
             "api/signin/",
