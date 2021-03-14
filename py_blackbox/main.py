@@ -44,8 +44,8 @@ def session_loop():
     while True:
         last_session_status = session_status
         session_status = api.get_session_status()
-        print("Session Status:", session_status)
-        if last_session_status != session_status:
+        if (last_session_status != session_status and
+                last_session_status == 0):
             Event("onNewSession", session_status)
         time.sleep(1)
 
