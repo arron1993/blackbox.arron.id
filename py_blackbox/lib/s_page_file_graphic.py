@@ -60,6 +60,11 @@ class SPageFileGraphic(Structure):
 		("rainTypes", c_int),
 	]
 
+	def __getattr__(self, attr):
+		buf = mmap.mmap(-1, sizeof(self), u"Local\\acpmf_graphics")
+		data = self.from_buffer(buf)
+		return data[attr]
+
 	def toDict(self):
 		return {
 			"bestTime": self.bestTime,

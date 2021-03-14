@@ -1,31 +1,46 @@
-from ctypes import sizeof
-
-from lib.s_page_file_physics import SPageFilePhysics
-from lib.s_page_file_static import SPageFileStatic
-from lib.s_page_file_graphic import SPageFileGraphic
-
 import time
-import mmap
 
-def read_physics():
-	buf = mmap.mmap(-1, sizeof(SPageFilePhysics), u"Local\\acpmf_physics")
-	data = SPageFilePhysics.from_buffer(buf)
-	return data.__dict__()
+from poller.poller import Poller
+from observer.observer import Observer
+from observer.event import Event
+from api.game import GameApi
 
-def read_static():
-	buf = mmap.mmap(-1, sizeof(SPageFileStatic), u"Local\\acpmf_static")
-	data = SPageFileStatic.from_buffer(buf)
-	return data.toDict()
 
-def read_graphics():
-	buf = mmap.mmap(-1, sizeof(SPageFileGraphic), u"Local\\acpmf_graphics")
-	data = SPageFileGraphic.from_buffer(buf)
-	return data.toDict()
+class Game(Observer):
+    def __init__(self):
+        print("Room is ready.")
+        Observer.__init__(self) # Observer's init needs to be called
 
-while True:
-	print(time.time(), read_graphics())
-	print(read_graphics())
-	print(read_static())
-	time.sleep(1)
-# print(read_static())
-#print(read_graphics())
+    def session_changed(self, data=None):
+        print("session changed")
+        # create a new session in the backend
+        # get a sessionId - assign it to class
+    
+    def on_new_lap(self, data=None):
+        print("on new lap")
+        # register previous lap data against session id in
+        # the backend
+
+
+def session_event_loop():
+    api = GameApi()
+    session_status = api.get_session_status()
+
+    while True:
+        last_session_status = session_status
+        session_status = api.get_status_session()
+        if last_session_status != session_status:
+            Event("onSessionChange")
+        time.sleep(1)
+
+def main():
+    game = Game()
+    game.attach('onSessionChange',  game.session_changed)
+    p = Poller(session_event_loop)
+
+    while True:
+        time.sleep(1)
+
+
+if __name__ == "__main__":
+    main()
