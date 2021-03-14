@@ -24,6 +24,9 @@ class Game(Observer):
                 self.gapi.get_session_details()
             ).json()
             self.session_id = new_session["id"]
+            current_lap = self.gapi.get_number_of_laps()
+            if current_lap > 0:
+                Event("onNewLap", current_lap)
         except Exception as e:
             print(e)
 
@@ -49,6 +52,7 @@ def session_loop():
     if session_status == 2:
         # if we're already running, the create the new session
         Event("onNewSession", session_status)
+
     while True:
         last_session_status = session_status
         session_status = api.get_session_status()
@@ -93,7 +97,7 @@ def main():
         while not quit_:
             should_exit = input("type exit to quit: ")
             quit_ = should_exit == "exit"
-    else:        
+    else:
         # res = bbapi.create_session({
         #     "type": "practice",
         #     "circuit": "silverstone",
@@ -103,7 +107,6 @@ def main():
             "time": 120,
             "number": 1
         })
-
 
     return 0
 

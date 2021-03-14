@@ -33,11 +33,12 @@ class GameApi():
         return {
             "type": "practice",  # self.graphic.ACC_SESSION_TYPE,
             "car": self.static.carModel,
-            "circuit": self.static.track
+            # # silverstone is "Silverstone" can't be doing with that
+            "circuit": self.static.track.lower()
         }
-    
+
     def get_last_lap_details(self):
         return {
             "number": self.graphic.completedLaps,
-            "time": self.iLastTime,
+            "time": self.graphic.iLastTime,
         }
