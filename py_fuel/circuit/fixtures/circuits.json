@@ -91,12 +91,12 @@
   {
     "model": "circuit.circuit",
     "pk": 17,
-    "fields": { "name": "Donington Park Circuit", "keyname": "donington_park" }
+    "fields": { "name": "Donington Park Circuit", "keyname": "donington" }
   },
   {
     "model": "circuit.circuit",
     "pk": 18,
-    "fields": { "name": "Oulton Park Circuit", "keyname": "oulton_park" }
+    "fields": { "name": "Oulton Park Circuit", "keyname": "oulton" }
   },
   {
     "model": "circuit.circuit",
