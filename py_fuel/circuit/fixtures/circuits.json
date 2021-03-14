@@ -96,7 +96,7 @@
   {
     "model": "circuit.circuit",
     "pk": 18,
-    "fields": { "name": "Oulton Park Circuit", "keyname": "oulton" }
+    "fields": { "name": "Oulton Park Circuit", "keyname": "oulton_park" }
   },
   {
     "model": "circuit.circuit",
