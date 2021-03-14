@@ -85,6 +85,7 @@ def main():
             BackgroundEventLoop(lap_loop)
         ]
     else:
+        breakpoint()
         loops = []
 
     quit_ = False
