@@ -1,2 +1,5 @@
 .py-fuel
 .py-blackbox
+__pycache__/
+*.py[cod]
+*$py.class
