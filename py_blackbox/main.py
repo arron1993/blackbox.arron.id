@@ -12,7 +12,7 @@ from api.blackbox import BlackboxApi
 
 class Game(Observer):
     def __init__(self, bbapi):
-        self.bbapi = bbapi()
+        self.bbapi = bbapi
         self.gapi = GameApi()
         Observer.__init__(self)  # Observer's init needs to be called
 
@@ -24,7 +24,8 @@ class Game(Observer):
                     self.gapi.get_session_details()
                 )
         except Exception as e:
-            print(e)
+            import traceback
+            traceback.print_exc(e)
 
         # create a new session in the backend
         # get a sessionId - assign it to class
@@ -62,13 +63,13 @@ def lap_loop():
 
 
 def main():
-    
+
     #
     bbapi = BlackboxApi()
 
     username = input("Enter username: ")
     password = input("Enter password: ")
-    resp = api.signin(username, password)
+    resp = bbapi.signin(username, password)
 
     if not resp.ok:
         print("Invalid username or password")
@@ -90,9 +91,7 @@ def main():
     while not quit_:
         should_exit = input("type exit to quit: ")
         quit_ = should_exit == "exit"
-        if quit_:
-            for loop in loops:
-                loop.thread.join()
+    return 0
 
 
 if __name__ == "__main__":

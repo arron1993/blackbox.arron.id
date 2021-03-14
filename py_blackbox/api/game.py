@@ -31,7 +31,7 @@ class GameApi():
 
     def get_session_details(self):
         return {
-            "type": self.graphic.ACC_SESSION_TYPE,
+            "type": "practice",  # self.graphic.ACC_SESSION_TYPE,
             "car": self.static.carModel,
             "circuit": self.static.track
         }

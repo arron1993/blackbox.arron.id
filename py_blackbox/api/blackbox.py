@@ -3,6 +3,7 @@ import os
 
 from config import API_ENDPOINT
 
+
 class BlackboxApi():
     def __init__(self):
         self.session = requests.Session()
@@ -24,7 +25,8 @@ class BlackboxApi():
             json=data)
 
     def create_session(self, data):
-        return self.post("api/session/", data).json()
+        print(data)
+        return self.post("api/session/", data)
 
     def signin(self, username, password):
         resp = self.post(
@@ -34,5 +36,6 @@ class BlackboxApi():
         if resp.ok:
             result = resp.json()
             self.refreshToken = result["refresh"]
-            self.session.headers.update({'Authorization': f'Bearer {result["access"]}'})
+            self.session.headers.update(
+                {'Authorization': f'Bearer {result["access"]}'})
         return resp
