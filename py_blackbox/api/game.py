@@ -18,7 +18,7 @@ SESSION_TYPE_MAP = {
 
 class GraphicWrapper:
     def __getattr__(self, attr):
-        buf = mmap.mmap(-1, sizeof(SPageFileGraphic), u"Local\\acpmf_graphics): buf 
+        buf = mmap.mmap(-1, sizeof(SPageFileGraphic), u"Local\\acpmf_graphics"):
         data = SPageFileGraphic.from_buffer(buf)
         return getattr(data, attr)
 
