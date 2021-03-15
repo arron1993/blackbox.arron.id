@@ -18,7 +18,6 @@ class BlackboxApi():
         return f'{API_ENDPOINT}{path}'
 
     def _set_auth_header(self, tokens):
-        print(tokens)
         self.refresh_token = tokens["refresh"]
         self.token = tokens["access"]
         self.session.headers.update(
@@ -37,7 +36,7 @@ class BlackboxApi():
     def refresh(self):
         if self.token:
             token_expiry = jwt.decode(
-                self.token, options={"verify_signatures": False})["exp"]
+                self.token, options={"verify_signature": False})["exp"]
             token_expiry = datetime.datetime.fromtimestamp(token_expiry)
             time_til_expires = token_expiry - datetime.datetime.now()
 

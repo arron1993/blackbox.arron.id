@@ -100,7 +100,9 @@ def lap_loop():
     while True:
         last_lap = current_lap
         current_lap = api.get_number_of_laps()
-        if last_lap != current_lap:
+        if current_lap > last_lap:
+            # use greater than so when the user quits and laps
+            # drop to 0 we don't think its a new lap
             Event("onNewLap", current_lap)
         time.sleep(1)
 
