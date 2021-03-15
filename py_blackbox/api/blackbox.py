@@ -9,6 +9,8 @@ from config import API_ENDPOINT
 class BlackboxApi():
     def __init__(self):
         self.session = requests.Session()
+        self.token = None
+        self.refresh_token = None
 
     def _normalize_path(self, path):
         if not path.endswith("/"):
@@ -17,7 +19,7 @@ class BlackboxApi():
 
     def _set_auth_header(self, tokens):
         print(tokens)
-        self.refreshToken = tokens["refresh"]
+        self.refresh_token = tokens["refresh"]
         self.token = tokens["access"]
         self.session.headers.update(
             {'Authorization': f'Bearer {tokens["access"]}'})
@@ -33,15 +35,17 @@ class BlackboxApi():
         return resp
 
     def refresh(self):
-        token_expiry = jwt.decode(
-            self.token, options={"verify_signatures": False})["exp"]
-        token_expiry = datetime.datetime.fromtimestamp(token_expiry)
-        time_til_expires = token_expiry - datetime.datetime.now()
+        if self.token:
+            token_expiry = jwt.decode(
+                self.token, options={"verify_signatures": False})["exp"]
+            token_expiry = datetime.datetime.fromtimestamp(token_expiry)
+            time_til_expires = token_expiry - datetime.datetime.now()
 
-        if time_til_expires < datetime.timedelta(days=1):
-            resp = self.post('signin/refresh/', {"refresh": self.refreshToken})
-            if resp.ok:
-                self._set_auth_header(resp.json())
+            if time_til_expires < datetime.timedelta(days=1):
+                resp = self.post('signin/refresh/',
+                                 {"refresh": self.refresh_token})
+                if resp.ok:
+                    self._set_auth_header(resp.json())
 
     def get(self, path):
         self.refresh()
