@@ -4,12 +4,12 @@ from ctypes import sizeof
 import mmap
 
 SESSION_TYPE_MAP = {
-    "-1": "Unknown"
-    "0": "Practice" ,
+    "-1": "Unknown",
+    "0": "Practice",
     "1": "Qualifying",
     "2": "Race",
     "3": "Hotlap",
-    "4": "Time Attack" ,
+    "4": "Time Attack",
     "5": "Drift",
     "6": "Drag",
     "7": "Hot Stint",
