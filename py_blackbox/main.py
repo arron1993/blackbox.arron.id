@@ -85,11 +85,12 @@ def stint_loop():
     is_in_pitlane = api.get_is_in_pitlane()
 
     while True:
-        was_in_pitlane = is_in_pitlane
-        is_in_pitlane = api.get_is_in_pitlane()
-        if was_in_pitlane == 1 and is_in_pitlane == 0:
-            # was in the pitlane but has now left
-            Event("onNewStint")
+        if api.get_session_status() == 2:
+            was_in_pitlane = is_in_pitlane
+            is_in_pitlane = api.get_is_in_pitlane()
+            if was_in_pitlane == 1 and is_in_pitlane == 0:
+                # was in the pitlane but has now left
+                Event("onNewStint")
         time.sleep(1)
 
 
