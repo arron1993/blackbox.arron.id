@@ -33,7 +33,10 @@ class SessionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Session
-        fields = ['id', 'user', 'type', 'car', 'circuit', 'circuit_id', "car_id", "laps"]
+        fields = [
+            'id', 'user', 'type',
+            'car', 'circuit', 'circuit_id',
+            "car_id", "laps", "created_at"]
 
 
 

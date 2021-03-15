@@ -5,6 +5,9 @@
     *ngFor="let session of sessions"
   >
     <div class="col-2">
+      {{ session.created_at }}
+    </div>
+    <div class="col-2">
       {{ session.type }}
     </div>
     <div class="col-2">
