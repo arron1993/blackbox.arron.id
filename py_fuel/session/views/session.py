@@ -1,16 +1,16 @@
-from session.models import Session, Lap
-from circuit.models import Circuit
-from car.models import Car
-from session.serializers.session import (SessionSerializer, LapSerializer)
-
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
+
+from circuit.models import Circuit
+from car.models import Car
+
+from session.models import Session
+from session.serializers.session import SessionSerializer
 
 
 class SessionList(generics.ListCreateAPIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     queryset = Session.objects.all()
     serializer_class = SessionSerializer
 
@@ -31,31 +31,10 @@ class SessionList(generics.ListCreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class SessionDetail(generics.RetrieveUpdateDestroyAPIView):
     #permission_classes = (IsAuthenticated,)
     queryset = Session.objects.all()
     serializer_class = SessionSerializer
+    lookup_field = "id"
 
-
-
-class LapList(generics.ListCreateAPIView):
-    # permission_classes = (IsAuthenticated,)
-    serializer_class = LapSerializer
-    queryset = Session.objects.all()
-
-    def get(self, request, **kwargs):
-        session_id = kwargs.get("pk")
-        laps = Lap.objects.filter(session_id=session_id)
-        serializer = LapSerializer(laps, many=True)
-        return Response(serializer.data)
-
-    
-    def post(self, request, **kwargs):
-        lap = request.data
-        lap["session_id"] = kwargs.get("pk")
-
-        serializer = LapSerializer(data=lap)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

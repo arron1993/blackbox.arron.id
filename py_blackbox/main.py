@@ -33,11 +33,20 @@ class Game(Observer):
         # create a new session in the backend
         # get a sessionId - assign it to class
 
+    def on_new_stint(self, data):
+        print(time.time(), "on new lap", data)
+        try:
+            new_lap = self.bbapi.create_stint(
+                self.session_id
+            ).json()
+        except Exception as e:
+            print(e)
+
     def on_new_lap(self, data):
         print(time.time(), "on new lap", data)
         try:
             new_lap = self.bbapi.create_lap(
-                self.session_id,
+                self.stint_id,
                 self.gapi.get_last_lap_details()
             ).json()
         except Exception as e:
@@ -59,6 +68,19 @@ def session_loop():
         if (last_session_status != session_status and
                 last_session_status == 0):
             Event("onNewSession", session_status)
+        time.sleep(1)
+
+
+def stint_loop():
+    api = GameApi()
+    is_in_pitlane = api.get_is_in_pitlane()
+
+    while True:
+        was_in_pitlane = is_in_pitlane
+        is_in_pitlane = api.get_is_in_pitlane()
+        if was_in_pitlane == 1 and is_in_pitlane == 0:
+            # was in the pitlane but has now left
+            Event("onNewStint")
         time.sleep(1)
 
 
@@ -98,16 +120,23 @@ def main():
             should_exit = input("type exit to quit: ")
             quit_ = should_exit == "exit"
     else:
-        # res = bbapi.create_session({
-        #     "type": "practice",
-        #     "circuit": "silverstone",
-        #     "car": "bentley_continental_gt3_2016"
-        # })
-        res = bbapi.create_lap(10, {
-            "time": 120,
-            "number": 1
-        })
+        def create_session():
+            res = bbapi.create_session({
+                "type": "practice",
+                "circuit": "silverstone",
+                "car": "bentley_continental_gt3_2016"
+            })
 
+        def create_stint():
+            bbapi.create_stint(1)
+        
+        def create_lap():
+            res = bbapi.create_lap(1, 1, {
+                "time": 120 * 1000,
+                "number": 1,
+                "fuel_used": 2.5,
+            })
+        create_lap()
     return 0
 
 

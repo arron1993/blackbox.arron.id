@@ -25,13 +25,14 @@ class BlackboxApi():
             json=data)
 
     def create_session(self, data):
-        print(data)
         return self.post("api/session/", data)
 
-    def create_lap(self, session_id, data):
-        print(data)
-        return self.post(f"api/session/{session_id}/laps/", data)
-        
+    def create_stint(self, session_id):
+        return self.post(f"api/session/{session_id}/stints/", {})
+
+    def create_lap(self, session_id, stint_id, data):
+        return self.post(f"api/session/{session_id}/stints/{stint_id}/laps/", data)
+
     def signin(self, username, password):
         resp = self.post(
             "api/signin/",

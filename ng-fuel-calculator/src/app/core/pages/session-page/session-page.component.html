@@ -11,18 +11,25 @@
     <div class="col-6">
       <table
         class="table table-hover"
-        *ngIf="session.laps.length > 0; else noLapsRecorded"
+        *ngIf="session.stints.length > 0; else noLapsRecorded"
       >
         <thead>
           <tr>
-            <th>Lap</th>
-            <th>Time</th>
+            <th>Stint</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let lap of session.laps">
-            <td>{{ lap.number }}</td>
-            <td>{{ convertTime(lap.time) }}</td>
+          <tr *ngFor="let stint of session.stints; let i = index">
+            <td>
+              {{ i + 1 }}
+              <table class="table">
+                <tr *ngFor="let lap of stint.laps">
+                  <td>{{ lap.number }}</td>
+                  <td>{{ convertTime(lap.time) }}</td>
+                  <td>{{ lap.fuel_used }}</td>
+                </tr>
+              </table>
+            </td>
           </tr>
         </tbody>
       </table>

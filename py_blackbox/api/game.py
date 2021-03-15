@@ -54,4 +54,8 @@ class GameApi():
         return {
             "number": self.graphic.completedLaps,
             "time": self.graphic.iLastTime,
+            "fuel_used": self.graphic.fuelXLap,
         }
+
+    def get_is_in_pitlane(self):
+        return self.graphic.isInPitLane

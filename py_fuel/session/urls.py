@@ -1,11 +1,15 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
-from session import views
+from session.views import session, lap, stint
 
 urlpatterns = [
-    path('', views.SessionList.as_view()),
-    path('<int:pk>/', views.SessionDetail.as_view()),
-    path('<int:pk>/laps/', views.LapList.as_view()),
+    path('', session.SessionList.as_view()),
+    path('<int:id>/', session.SessionDetail.as_view()),
+
+    path('<int:session_id>/stints/', stint.StintList.as_view()),
+    path('<int:session_id>/stints/<int:id>/', stint.StintDetail.as_view()),
+
+    path('<int:session_id>/stints/<int:id>/laps/', lap.LapList.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

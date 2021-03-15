@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from circuit.models import Circuit
 from car.models import Car
 
+
 class Session(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -13,9 +14,17 @@ class Session(models.Model):
     car = models.ForeignKey(Car, on_delete=models.DO_NOTHING )
 
 
+class Stint(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    session_id = models.ForeignKey(Session, on_delete=models.CASCADE)    
+
+
 class Lap(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    stint_id = models.ForeignKey(Stint, on_delete=models.CASCADE)
     number = models.IntegerField()
     time = models.IntegerField()
-    session_id = models.ForeignKey(Session, on_delete=models.CASCADE)
+    fuel_used = models.FloatField()
+    

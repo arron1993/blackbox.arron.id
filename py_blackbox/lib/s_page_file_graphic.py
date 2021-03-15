@@ -42,7 +42,6 @@ class SPageFileGraphic(Structure):
         ("windSpeed", c_float),
         ("windDirection", c_float),
 
-
         ("isSetupMenuVisible", c_int),
 
         ("mainDisplayIndex", c_int),
