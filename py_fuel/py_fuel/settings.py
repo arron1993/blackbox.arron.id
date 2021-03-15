@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import datetime
 
 from pathlib import Path
 
@@ -33,7 +34,10 @@ REST_FRAMEWORK = {
     ],
 }
 # Application definition
-
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(days=7),
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=14),
+}
 INSTALLED_APPS = [
     'fuel.apps.FuelConfig',
     'circuit.apps.CircuitConfig',
