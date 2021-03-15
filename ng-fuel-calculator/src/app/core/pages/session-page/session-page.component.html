@@ -1,8 +1,23 @@
-<div class="row no-gutters" *ngFor="let lap of laps">
-  <div class="col-2">
-    {{ lap.number }}
+<ng-container *ngIf="session">
+  <div class="row no-gutters">
+    <h1>{{ session.circuit.name }} - {{ session.car.name }}</h1>
   </div>
-  <div class="col-2">
-    {{ convertTime(lap.time) }}
+  <div class="row no-gutters mt-2">
+    <div class="col-6">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Lap</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let lap of session.laps">
+            <td>{{ lap.number }}</td>
+            <td>{{ convertTime(lap.time) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+</ng-container>

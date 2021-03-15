@@ -8,8 +8,7 @@ import { SessionService } from '../../services/session.service';
   styleUrls: ['./session-page.component.scss']
 })
 export class SessionPageComponent implements OnInit {
-  sessionId = null;
-  laps = [];
+  session = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -17,9 +16,9 @@ export class SessionPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.sessionId = params.id;
-      this.ss.getLaps(this.sessionId).subscribe((resp: any) => {
-        this.laps = resp;
+      
+      this.ss.getDetail(params.id).subscribe((resp: any) => {
+        this.session = resp;
       })
     })
   }

@@ -11,6 +11,8 @@ from rest_framework.views import APIView
 
 class SessionList(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
+    queryset = Session.objects.all()
+    serializer_class = SessionSerializer
 
     def get(self, request, format=None):
         sessions = Session.objects.all()
@@ -30,7 +32,7 @@ class SessionList(generics.ListCreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class SessionDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticated,)
+    #permission_classes = (IsAuthenticated,)
     queryset = Session.objects.all()
     serializer_class = SessionSerializer
 

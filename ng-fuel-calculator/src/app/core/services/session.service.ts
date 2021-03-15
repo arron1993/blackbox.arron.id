@@ -12,7 +12,7 @@ export class SessionService {
       return this.http.get("/api/session/")
   }
 
-  getLaps(sessionId) {
-      return this.http.get(`/api/session/${sessionId}/laps/`)
+  getDetail(sessionId) {
+      return this.http.get(`/api/session/${sessionId}/`)
   }
 }
