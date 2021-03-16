@@ -1,4 +1,4 @@
-.py-fuel
+.py-blackbox-backend
 .py-blackbox
 __pycache__/
 *.py[cod]
