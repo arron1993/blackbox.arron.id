@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'ng-fuel-calculator'`, () => {
+  it(`should have as title 'ng-blackbox'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ng-fuel-calculator');
+    expect(app.title).toEqual('ng-blackbox');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('ng-fuel-calculator app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('ng-blackbox app is running!');
   });
 });
