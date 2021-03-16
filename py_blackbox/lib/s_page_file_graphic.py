@@ -14,6 +14,7 @@ class SPageFileGraphic(Structure):
         ("completedLaps", c_int),
         ("position", c_int),
         ("iCurrentTime", c_int),
+        ("iDeltaLapTime", c_int),
         ("iLastTime", c_int),
         ("iBestTime", c_int),
         ("sessionTimeLeft", c_float),

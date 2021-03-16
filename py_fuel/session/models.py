@@ -26,5 +26,9 @@ class Lap(models.Model):
     stint_id = models.ForeignKey(Stint, on_delete=models.CASCADE)
     number = models.IntegerField()
     time = models.IntegerField()
+    delta_time = models.IntegerField()
     fuel_used = models.FloatField()
+    position = models.IntegerField()
+    is_valid = models.BooleanField()
+    
     

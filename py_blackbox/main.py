@@ -1,6 +1,6 @@
 import time
-import mmap
 import os
+import datetime 
 
 from background_event_loop.background_event_loop import BackgroundEventLoop
 from observer.observer import Observer
@@ -52,16 +52,25 @@ class Game(Observer):
 
     def on_new_lap(self, data):
         print(time.time(), "on new lap", data)
+        
         try:
+            details = self.gapi.get_last_lap_details()
+            # TODO: Add the sector times here
             new_lap = self.bbapi.create_lap(
                 self.session_id,
                 self.stint_id,
-                self.gapi.get_last_lap_details()
+                details    
             ).json()
+            self.sector_times = []
         except Exception as e:
             print(e)
         # register previous lap data against session id in
         # the backend
+
+    def on_new_sector(self, sector):
+        print(datetime.datetime.now(), "new sector", data)
+        time = self.gapi.get_last_sector_time()
+        self.sector_times.append((sector, time))
 
 
 def session_loop():
@@ -97,7 +106,7 @@ def stint_loop():
 def lap_loop():
     api = GameApi()
     current_lap = api.get_number_of_laps()
-
+    current_sector = 1
     while True:
         last_lap = current_lap
         current_lap = api.get_number_of_laps()
@@ -105,6 +114,11 @@ def lap_loop():
             # use greater than so when the user quits and laps
             # drop to 0 we don't think its a new lap
             Event("onNewLap", current_lap)
+
+        last_sector = current_sector
+        current_sector = api.get_current_sector()
+        if current_sector != last_sector:
+            Event("onNewSector", last_sector)
         time.sleep(1)
 
 
@@ -124,6 +138,8 @@ def main():
         game.attach('onNewSession',  game.on_new_session)
         game.attach('onNewLap',  game.on_new_lap)
         game.attach('onNewStint', game.on_new_stint)
+        game.attach('onNewSector', game.on_new_sector)
+
         loops = [
             BackgroundEventLoop(session_loop),
             BackgroundEventLoop(stint_loop),

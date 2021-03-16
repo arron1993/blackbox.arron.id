@@ -55,7 +55,17 @@ class GameApi():
             "number": self.graphic.completedLaps,
             "time": self.graphic.iLastTime,
             "fuel_used": self.graphic.fuelXLap,
+            "position": self.graphic.position,
+            "time_delta": self.graphic.iDeltaLapTime,
+            "is_valid": self.graphic.isValidLap,
         }
 
     def get_is_in_pitlane(self):
         return self.graphic.isInPitLane
+
+    def get_last_sector_time(self):
+        return self.lastSectorTime
+
+
+    def get_current_sector(self):
+        return self.currentSectorIndex
