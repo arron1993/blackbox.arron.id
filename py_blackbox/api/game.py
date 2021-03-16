@@ -16,6 +16,7 @@ SESSION_TYPE_MAP = {
     "8": "Super Pole",
 }
 
+
 class GraphicWrapper:
     def __getattr__(self, attr):
         buf = mmap.mmap(-1, sizeof(SPageFileGraphic), u"Local\\acpmf_graphics")
@@ -64,8 +65,7 @@ class GameApi():
         return self.graphic.isInPitLane
 
     def get_last_sector_time(self):
-        return self.lastSectorTime
-
+        return self.graphic.lastSectorTime
 
     def get_current_sector(self):
-        return self.currentSectorIndex
+        return self.graphic.currentSectorIndex

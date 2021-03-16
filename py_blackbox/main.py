@@ -1,6 +1,6 @@
 import time
 import os
-import datetime 
+import datetime
 
 from background_event_loop.background_event_loop import BackgroundEventLoop
 from observer.observer import Observer
@@ -16,6 +16,7 @@ class Game(Observer):
         self.gapi = GameApi()
         self.session_id = None
         self.stint_id = None
+        self.sector_times = []
         Observer.__init__(self)  # Observer's init needs to be called
 
     def on_new_session(self, data=None):
@@ -52,14 +53,14 @@ class Game(Observer):
 
     def on_new_lap(self, data):
         print(time.time(), "on new lap", data)
-        
+
         try:
             details = self.gapi.get_last_lap_details()
             # TODO: Add the sector times here
             new_lap = self.bbapi.create_lap(
                 self.session_id,
                 self.stint_id,
-                details    
+                details
             ).json()
             self.sector_times = []
         except Exception as e:
@@ -68,9 +69,10 @@ class Game(Observer):
         # the backend
 
     def on_new_sector(self, sector):
-        print(datetime.datetime.now(), "new sector", data)
+        print(datetime.datetime.now(), "new sector", sector)
         time = self.gapi.get_last_sector_time()
         self.sector_times.append((sector, time))
+        print(self.sector_times)
 
 
 def session_loop():
