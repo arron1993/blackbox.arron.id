@@ -14,7 +14,6 @@ class SPageFileGraphic(Structure):
         ("completedLaps", c_int),
         ("position", c_int),
         ("iCurrentTime", c_int),
-        ("iDeltaLapTime", c_int),
         ("iLastTime", c_int),
         ("iBestTime", c_int),
         ("sessionTimeLeft", c_float),
@@ -36,12 +35,13 @@ class SPageFileGraphic(Structure):
         ("penalty", c_int),
         ("idealLineOn", c_int),
         ("isInPitLane", c_int),
-        ("isValidLap", c_int),
+
         ("surfaceGrip", c_float),
         ("mandatoryPitDone", c_int),
 
         ("windSpeed", c_float),
         ("windDirection", c_float),
+
 
         ("isSetupMenuVisible", c_int),
 
@@ -57,9 +57,19 @@ class SPageFileGraphic(Structure):
         ("lightsStage", c_int),
         ("exhaustTemperature", c_float),
         ("wiperLV", c_int),
-        ("DriverStintTotalTimeLeft", c_int),
-        ("DriverStintTimeLeft", c_int),
-        ("rainTypes", c_int),
+        ("driverStintTotalTimeLeft", c_int),
+        ("driverStintTimeLeft", c_int),
+        ("rainTyres", c_int),
+
+        ("sessionIndex", c_int),
+        ("usedFuel", c_float),
+        ("deltaLapTime", c_wchar * 15),
+        ("iDeltaLapTime", c_int),
+        ("estimatedLapTime", c_wchar * 15),
+        ("iEstimatedLapTime", c_int),
+        ("isDeltaPositive", c_int),
+        ("iSplit", c_int),
+        ("isValidLap", c_int),
     ]
 
     def toDict(self):

@@ -42,6 +42,9 @@ class GameApi():
     def get_number_of_laps(self):
         return self.graphic.completedLaps
 
+    def get_last_lap_time(self):
+        return self.graphic.iLastTime
+
     def get_session_details(self):
         return {
             "type": SESSION_TYPE_MAP[
@@ -57,7 +60,7 @@ class GameApi():
             "time": self.graphic.iLastTime,
             "fuel_used": self.graphic.fuelXLap,
             "position": self.graphic.position,
-            "delta_time": self.graphic.iDeltaLapTime,
+            "delta_time": self.graphic.deltaLapTime,
             "is_valid": self.graphic.isValidLap,
         }
 

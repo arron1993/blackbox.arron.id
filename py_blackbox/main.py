@@ -20,8 +20,8 @@ class Game(Observer):
         Observer.__init__(self)  # Observer's init needs to be called
 
     def on_new_session(self, data=None):
-        print(time.time(), "on new session")
         try:
+            print(time.time(), "new session")
             new_session = self.bbapi.create_session(
                 self.gapi.get_session_details()
             ).json()
@@ -42,8 +42,8 @@ class Game(Observer):
         # get a sessionId - assign it to class
 
     def on_new_stint(self, data=None):
-        print(time.time(), "on new stint")
         try:
+            print(time.time(), "new stint")
             new_stint = self.bbapi.create_stint(
                 self.session_id
             ).json()
@@ -51,17 +51,17 @@ class Game(Observer):
         except Exception as e:
             print(e)
 
-    def on_new_lap(self, data):
-        print(time.time(), "on new lap", data)
-
+    def on_new_lap(self, data=None):
         try:
             details = self.gapi.get_last_lap_details()
+            print(datetime.datetime.now(), "new lap", details)
             # TODO: Add the sector times here
-            new_lap = self.bbapi.create_lap(
+            self.bbapi.create_lap(
                 self.session_id,
                 self.stint_id,
                 details
             ).json()
+            print(self.sector_times)
             self.sector_times = []
         except Exception as e:
             print(e)
@@ -69,10 +69,20 @@ class Game(Observer):
         # the backend
 
     def on_new_sector(self, sector):
+        """
+        Sector times are cumlative, first sector is 10 seconds
+        second sector is 25 sec, is 45 seconds.
+        Would mean S1 10s, S2 15s, S3 20s - last sector is the total lap time
+        """
         print(datetime.datetime.now(), "new sector", sector)
-        time = self.gapi.get_last_sector_time()
-        self.sector_times.append((sector, time))
-        print(self.sector_times)
+
+        if sector == 2:
+            self.sector_times.append(
+                (sector + 1, self.gapi.get_last_lap_time()))
+            self.on_new_lap()
+        else:
+            self.sector_times.append(
+                (sector + 1, self.gapi.get_last_sector_time()))
 
 
 def session_loop():
@@ -107,14 +117,18 @@ def stint_loop():
 
 def lap_loop():
     api = GameApi()
-    current_lap = api.get_number_of_laps()
+    current_sector = 0
     while True:
-        last_lap = current_lap
-        current_lap = api.get_number_of_laps()
-        if current_lap > last_lap:
-            # use greater than so when the user quits and laps
-            # drop to 0 we don't think its a new lap
-            Event("onNewLap", current_lap)
+        # to track a lap change we detect when
+        # the car leaves sector 2, that way we
+        # can record the sector times
+        # then create the lap entry
+        if api.get_session_status() == 2:
+            # no point doing work if the game isn't running
+            last_sector = current_sector
+            current_sector = api.get_current_sector()
+            if current_sector != last_sector:
+                Event("onNewSector", last_sector)
         time.sleep(1)
 
 
