@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="row no-gutters mt-2">
-    <div class="col-6">
+    <div class="col-12">
       <table
         class="table table-hover"
         *ngIf="session.stints.length > 0; else noLapsRecorded"
@@ -23,10 +23,21 @@
             <td>
               {{ i + 1 }}
               <table class="table">
+                <thead>
+                  <th>Lap</th>
+                  <th>Time</th>
+                  <th>Delta</th>
+                  <th>Fuel Usage</th>
+                  <th>Position</th>
+                  <th>Valid</th>
+                </thead>
                 <tr *ngFor="let lap of stint.laps">
                   <td>{{ lap.number }}</td>
                   <td>{{ convertTime(lap.time) }}</td>
+                  <td>{{ convertTime(lap.delta_time) }}</td>
                   <td>{{ lap.fuel_used }}</td>
+                  <td>{{ lap.position }}</td>
+                  <td>{{ lap.is_valid }}</td>
                 </tr>
               </table>
             </td>
