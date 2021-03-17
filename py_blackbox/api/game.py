@@ -57,7 +57,7 @@ class GameApi():
             "time": self.graphic.iLastTime,
             "fuel_used": self.graphic.fuelXLap,
             "position": self.graphic.position,
-            "time_delta": self.graphic.iDeltaLapTime,
+            "delta_time": self.graphic.iDeltaLapTime,
             "is_valid": self.graphic.isValidLap,
         }
 
@@ -69,3 +69,6 @@ class GameApi():
 
     def get_current_sector(self):
         return self.graphic.currentSectorIndex
+
+    def get_split(self):
+        return self.graphic.split

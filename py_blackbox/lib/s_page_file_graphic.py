@@ -36,7 +36,7 @@ class SPageFileGraphic(Structure):
         ("penalty", c_int),
         ("idealLineOn", c_int),
         ("isInPitLane", c_int),
-
+        ("isValidLap", c_int),
         ("surfaceGrip", c_float),
         ("mandatoryPitDone", c_int),
 

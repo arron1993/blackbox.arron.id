@@ -78,7 +78,7 @@ class Game(Observer):
 def session_loop():
     api = GameApi()
     session_status = api.get_session_status()
-    if session_status == 2:
+    if session_status != 0:
         # if we're already running, the create the new session
         Event("onNewSession", session_status)
 
@@ -108,7 +108,6 @@ def stint_loop():
 def lap_loop():
     api = GameApi()
     current_lap = api.get_number_of_laps()
-    current_sector = 1
     while True:
         last_lap = current_lap
         current_lap = api.get_number_of_laps()
@@ -116,11 +115,6 @@ def lap_loop():
             # use greater than so when the user quits and laps
             # drop to 0 we don't think its a new lap
             Event("onNewLap", current_lap)
-
-        # last_sector = current_sector
-        # current_sector = api.get_current_sector()
-        # if current_sector != last_sector:
-        #     Event("onNewSector", last_sector)
         time.sleep(1)
 
 
