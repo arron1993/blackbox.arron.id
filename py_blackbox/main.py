@@ -117,10 +117,10 @@ def lap_loop():
             # drop to 0 we don't think its a new lap
             Event("onNewLap", current_lap)
 
-        last_sector = current_sector
-        current_sector = api.get_current_sector()
-        if current_sector != last_sector:
-            Event("onNewSector", last_sector)
+        # last_sector = current_sector
+        # current_sector = api.get_current_sector()
+        # if current_sector != last_sector:
+        #     Event("onNewSector", last_sector)
         time.sleep(1)
 
 
