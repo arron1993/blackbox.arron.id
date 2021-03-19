@@ -30,5 +30,9 @@ class Lap(models.Model):
     fuel_used = models.FloatField()
     position = models.IntegerField()
     is_valid = models.BooleanField()
+
+    sector1 = models.IntegerField(null=True)
+    sector2 = models.IntegerField(null=True)
+    sector3 = models.IntegerField(null=True)
     
     

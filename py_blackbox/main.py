@@ -16,12 +16,12 @@ class Game(Observer):
         self.gapi = GameApi()
         self.session_id = None
         self.stint_id = None
-        self.sector_times = []
+        self.sector_times = {}
         Observer.__init__(self)  # Observer's init needs to be called
 
     def on_new_session(self, data=None):
         try:
-            print(time.time(), "new session")
+            print(datetime.datetime.now(), "new session")
             new_session = self.bbapi.create_session(
                 self.gapi.get_session_details()
             ).json()
@@ -43,7 +43,7 @@ class Game(Observer):
 
     def on_new_stint(self, data=None):
         try:
-            print(time.time(), "new stint")
+            print(datetime.datetime.now(), "new stint")
             new_stint = self.bbapi.create_stint(
                 self.session_id
             ).json()
@@ -54,6 +54,9 @@ class Game(Observer):
     def on_new_lap(self, data=None):
         try:
             details = self.gapi.get_last_lap_details()
+            details["sector1"] = self.sector_times.get("sector1")
+            details["sector2"] = self.sector_times.get("sector2")
+            details["sector3"] = self.sector_times.get("sector3")
             print(datetime.datetime.now(), "new lap", details)
             # TODO: Add the sector times here
             self.bbapi.create_lap(
@@ -62,11 +65,9 @@ class Game(Observer):
                 details
             ).json()
             print(self.sector_times)
-            self.sector_times = []
+            self.sector_times = {}
         except Exception as e:
             print(e)
-        # register previous lap data against session id in
-        # the backend
 
     def on_new_sector(self, sector):
         """
@@ -75,14 +76,11 @@ class Game(Observer):
         Would mean S1 10s, S2 15s, S3 20s - last sector is the total lap time
         """
         print(datetime.datetime.now(), "new sector", sector)
-
+        human_readable_sector = sector + 1
+        sector_time = self.gapi.get_last_lap_time()
+        self.sector_times[f"sector{sector_time}"] = sector_time
         if sector == 2:
-            self.sector_times.append(
-                (sector + 1, self.gapi.get_last_lap_time()))
-            self.on_new_lap()
-        else:
-            self.sector_times.append(
-                (sector + 1, self.gapi.get_last_sector_time()))
+            self.on_new_lap()            
 
 
 def session_loop():

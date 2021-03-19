@@ -26,6 +26,9 @@
                 <thead>
                   <th>Lap</th>
                   <th>Time</th>
+                  <th>Sector 1</th>
+                  <th>Sector 2</th>
+                  <th>Sector 3</th>
                   <th>Delta</th>
                   <th>Fuel Usage</th>
                   <th>Position</th>
@@ -34,6 +37,9 @@
                 <tr *ngFor="let lap of stint.laps">
                   <td>{{ lap.number }}</td>
                   <td>{{ convertTime(lap.time) }}</td>
+                  <td>{{ convertTime(lap.sector1) }}</td>
+                  <td>{{ convertTime(lap.sector2) }}</td>
+                  <td>{{ convertTime(lap.sector3) }}</td>
                   <td>{{ convertTime(lap.delta_time) }}</td>
                   <td>{{ lap.fuel_used }}</td>
                   <td>{{ lap.position }}</td>

@@ -7,4 +7,6 @@ class LapSerializer(serializers.ModelSerializer):
         model = Lap
         fields = [
             'id', 'stint_id', 'number', 'time', 'fuel_used',
-            'delta_time', 'position', 'is_valid']
+            'delta_time', 'position', 'is_valid', 'sector1',
+            'sector2', 'sector3'
+        ]

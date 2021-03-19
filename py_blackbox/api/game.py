@@ -60,7 +60,7 @@ class GameApi():
             "time": self.graphic.iLastTime,
             "fuel_used": self.graphic.fuelXLap,
             "position": self.graphic.position,
-            "delta_time": self.graphic.deltaLapTime,
+            "delta_time": self.graphic.iDeltaLapTime,
             "is_valid": self.graphic.isValidLap,
         }
 
