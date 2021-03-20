@@ -20,9 +20,6 @@ class LapList(generics.ListCreateAPIView):
     def post(self, request, **kwargs):
         lap = request.data
         lap["stint_id"] = kwargs.get("id")
-        # {'sector1': 39426, 'sector2': 87345, 'sector3': 152763}
-        lap["sector2"] = lap.get("sector2", 0) - lap.get("sector1", 0) 
-        lap["sector3"] = lap.get("sector3", 0) - lap.get("sector2", 0) 
         serializer = LapSerializer(data=lap)
         if serializer.is_valid():
             serializer.save()
