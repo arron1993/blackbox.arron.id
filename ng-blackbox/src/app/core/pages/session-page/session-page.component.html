@@ -1,16 +1,23 @@
 <ng-container *ngIf="session">
-  <div class="row no-gutters">
-    <div class="col-12">
-      <h1>{{ session.circuit.name }} - {{ session.car.name }}</h1>
+  <div class="row no-gutters session-title">
+    <div
+      class="col-12 text-center font-weight-bold"
+      style="letter-spacing: 2px"
+    >
+      <h1>{{ session.circuit.name }}</h1>
+      <h1>
+        {{ session.car.name }}
+      </h1>
     </div>
-    <div class="col-12">
-      <h4>{{ session.created_at }}</h4>
+    <div class="col-12 text-center">
+      <h4>{{ session.created_at.substring(0, 16).replace("T", " ") }}</h4>
     </div>
   </div>
+
   <div class="row no-gutters mt-2">
     <div class="col-12">
       <table
-        class="table table-hover"
+        class="w-100"
         *ngIf="session.stints.length > 0; else noLapsRecorded"
       >
         <thead>
@@ -21,7 +28,7 @@
         <tbody>
           <tr *ngFor="let stint of session.stints; let i = index">
             <td>
-              {{ i + 1 }}
+              <span class="text-red stint-title">{{ i + 1 }}</span>
               <table class="table">
                 <thead>
                   <th>Lap</th>
@@ -41,9 +48,16 @@
                   <td>{{ convertTime(lap.sector2 - lap.sector1) }}</td>
                   <td>{{ convertTime(lap.sector3 - lap.sector2) }}</td>
                   <td>{{ convertTime(lap.delta_time) }}</td>
-                  <td>{{ lap.fuel_used }}</td>
+                  <td>{{ lap.fuel_used.toFixed(2) }} litres</td>
                   <td>{{ lap.position }}</td>
-                  <td>{{ lap.is_valid }}</td>
+                  <td
+                    [ngClass]="{
+                      'bg-success': lap.is_valid,
+                      'bg-danger': !lap.is_valid
+                    }"
+                  >
+                    {{ lap.is_valid }}
+                  </td>
                 </tr>
               </table>
             </td>

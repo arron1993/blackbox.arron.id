@@ -1,0 +1,16 @@
+.side-menu {
+    border-right: 5px solid #FF0000;
+
+    .side-menu-item {
+        font-size: 1.5rem;
+        transition: 0.2s linear;
+        a {
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        &:hover {
+            background-color: #545454
+        }
+    }
+}

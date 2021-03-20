@@ -36,4 +36,8 @@ export class SessionPageComponent implements OnInit {
     return `${minsPadded}:${secondsPadded}:${msPadded}`;
   }
 
+  formatDate(isoDate) {
+     return new Date(isoDate).toISOString().substring(0, 10);
+  }
+
 }

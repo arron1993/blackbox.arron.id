@@ -1,1 +1,13 @@
+
+@import "./colours";
 @import "~bootstrap/scss/bootstrap";
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    app-root {
+        display: block;
+        height: 100vh;
+    }
+}

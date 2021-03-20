@@ -13,4 +13,8 @@ export class SessionListComponent implements OnInit {
   ngOnInit(): void {
     this.ss.get().subscribe((resp: any) => this.sessions = resp)
   }
+
+  open(sessionId) {
+    console.log(sessionId)
+  }
 }

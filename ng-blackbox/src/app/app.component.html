@@ -1,10 +1,15 @@
-<div class="row no-gutters p-2">
-  <div class="col-1">
-    <div class="d-flex flex-column">
-      <a routerLink="/">Home</a>
+<div class="row no-gutters h-100">
+  <div class="col-1 side-menu bg-dark-grey">
+    <div class="w-100">
+      <div class="d-flex py-3 side-menu-item flex-column text-center">
+        <a class="text-white" routerLink="/">Home</a>
+      </div>
     </div>
   </div>
-  <div class="col-11">
-    <router-outlet></router-outlet>
+
+  <div class="col-11 py-2 px-4">
+    <div class="w-100">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

@@ -1,20 +1,16 @@
-<div class="row no-gutters">
-  <a
-    [routerLink]="session.id"
-    class="col-12 row no-gutters"
-    *ngFor="let session of sessions"
-  >
-    <div class="col-2">
-      {{ session.created_at }}
-    </div>
-    <div class="col-2">
-      {{ session.type }}
-    </div>
-    <div class="col-2">
-      {{ session.circuit.name }}
-    </div>
-    <div class="col-2">
-      {{ session.car.name }}
-    </div>
-  </a>
-</div>
+<table class="table table-hover">
+  <thead>
+    <th>Time</th>
+    <th>Type</th>
+    <th>Circuit</th>
+    <th>Car</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let session of sessions" [routerLink]="session.id">
+      <td>{{ session.created_at.substring(0, 16).replace("T", " ") }}</td>
+      <td>{{ session.type }}</td>
+      <td>{{ session.circuit.name }}</td>
+      <td>{{ session.car.name }}</td>
+    </tr>
+  </tbody>
+</table>
