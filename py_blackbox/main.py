@@ -31,10 +31,6 @@ class Game(Observer):
                 # then start a new stint
                 Event("onNewStint")
 
-            current_lap = self.gapi.get_number_of_laps()
-            if current_lap > 0:
-                Event("onNewLap", current_lap)
-
         except Exception as e:
             print(e)
 
@@ -67,6 +63,8 @@ class Game(Observer):
             print(self.sector_times)
             self.sector_times = {}
         except Exception as e:
+            import traceback
+            traceback.format_exc(e)
             print(e)
 
     def on_new_sector(self, sector):
@@ -77,10 +75,14 @@ class Game(Observer):
         """
         print(datetime.datetime.now(), "new sector", sector)
         human_readable_sector = sector + 1
-        sector_time = self.gapi.get_last_lap_time()
-        self.sector_times[f"sector{sector_time}"] = sector_time
+        sector_time = self.gapi.get_last_sector_time()
+        sector_key = f"sector{human_readable_sector}"
+
         if sector == 2:
-            self.on_new_lap()            
+            self.sector_times[sector_key] = self.gapi.get_last_lap_time()
+            self.on_new_lap()
+        else:
+            self.sector_times[sector_key] = sector_time
 
 
 def session_loop():
