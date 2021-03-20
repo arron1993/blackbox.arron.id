@@ -50,9 +50,9 @@ class Game(Observer):
     def on_new_lap(self, data=None):
         try:
             details = self.gapi.get_last_lap_details()
-            details["sector1"] = self.sector_times.get("sector1")
-            details["sector2"] = self.sector_times.get("sector2")
-            details["sector3"] = self.sector_times.get("sector3")
+            details["sector1"] = self.sector_times.get("sector1", 0)
+            details["sector2"] = self.sector_times.get("sector2", 0)
+            details["sector3"] = self.sector_times.get("sector3", 0)
             print(datetime.datetime.now(), "new lap", details)
             # TODO: Add the sector times here
             self.bbapi.create_lap(
