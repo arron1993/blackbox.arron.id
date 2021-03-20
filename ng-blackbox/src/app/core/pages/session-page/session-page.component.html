@@ -38,8 +38,8 @@
                   <td>{{ lap.number }}</td>
                   <td>{{ convertTime(lap.time) }}</td>
                   <td>{{ convertTime(lap.sector1) }}</td>
-                  <td>{{ convertTime(lap.sector2) }}</td>
-                  <td>{{ convertTime(lap.sector3) }}</td>
+                  <td>{{ convertTime(lap.sector2 - lap.sector1) }}</td>
+                  <td>{{ convertTime(lap.sector3 - lap.sector2) }}</td>
                   <td>{{ convertTime(lap.delta_time) }}</td>
                   <td>{{ lap.fuel_used }}</td>
                   <td>{{ lap.position }}</td>
