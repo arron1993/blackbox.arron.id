@@ -1,5 +1,5 @@
 <ng-container *ngIf="session">
-  <div class="row no-gutters session-title">
+  <div class="row no-gutters session-title mt-4">
     <div
       class="col-12 text-center font-weight-bold"
       style="letter-spacing: 2px"
@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div class="row no-gutters mt-2">
+  <div class="row no-gutters mt-4 bg-white p-3 border">
     <div class="col-12">
       <table
         class="w-100"
@@ -43,10 +43,37 @@
                 </thead>
                 <tr *ngFor="let lap of stint.laps">
                   <td>{{ lap.number }}</td>
-                  <td>{{ convertTime(lap.time) }}</td>
-                  <td>{{ convertTime(lap.sector1) }}</td>
-                  <td>{{ convertTime(lap.sector2 - lap.sector1) }}</td>
-                  <td>{{ convertTime(lap.sector3 - lap.sector2) }}</td>
+                  <td
+                    [ngClass]="{
+                      'bg-success text-white': lap.time === fastestLapTime
+                    }"
+                  >
+                    {{ convertTime(lap.time) }}
+                  </td>
+                  <td
+                    [ngClass]="{
+                      'bg-success text-white':
+                        lap.sector1 === fastestSector1.time
+                    }"
+                  >
+                    {{ convertTime(lap.sector1) }}
+                  </td>
+                  <td
+                    [ngClass]="{
+                      'bg-success text-white':
+                        lap.sector2 === fastestSector2.time
+                    }"
+                  >
+                    {{ convertTime(lap.sector2 - lap.sector1) }}
+                  </td>
+                  <td
+                    [ngClass]="{
+                      'bg-success text-white':
+                        lap.sector3 === fastestSector3.time
+                    }"
+                  >
+                    {{ convertTime(lap.sector3 - lap.sector2) }}
+                  </td>
                   <td>{{ convertTime(lap.delta_time) }}</td>
                   <td>{{ lap.fuel_used.toFixed(2) }} litres</td>
                   <td>{{ lap.position }}</td>

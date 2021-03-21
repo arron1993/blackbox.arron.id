@@ -1,16 +1,19 @@
 .side-menu {
-    border-right: 5px solid #FF0000;
+    .home-icon {
+        font-size: 2rem;
+    }
+    background: linear-gradient(
+        45deg
+        , #5f5f5f, #313131);
+    border-right: 3px solid #FF0000;
 
     .side-menu-item {
         font-size: 1.5rem;
         transition: 0.2s linear;
-        a {
-            &:hover {
-                text-decoration: none;
-            }
-        }
+
         &:hover {
-            background-color: #545454
+            cursor: pointer;
+            background-color: #545454;
         }
     }
 }

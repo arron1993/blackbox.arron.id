@@ -33,7 +33,6 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
-# Application definition
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": datetime.timedelta(days=7),
     "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=14),
@@ -43,6 +42,7 @@ INSTALLED_APPS = [
     'circuit.apps.CircuitConfig',
     'car.apps.CarConfig',
     'session.apps.SessionConfig',
+    'session_type.apps.SessionTypeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

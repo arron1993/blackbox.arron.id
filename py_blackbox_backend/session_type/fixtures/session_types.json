@@ -1,0 +1,43 @@
+[
+  {
+    "model": "session_type.SessionType",
+    "pk": 1,
+    "fields": { "name": "Unknown", "key": -1 }
+  }, {
+    "model": "session_type.SessionType",
+    "pk": 2,
+    "fields": { "name": "Practice", "key": 0 }
+  }, {
+    "model": "session_type.SessionType",
+    "pk": 3,
+    "fields": { "name": "Qualify", "key": 1 }
+  }, {
+    "model": "session_type.SessionType",
+    "pk": 4,
+    "fields": { "name": "Race", "key": 2 }
+  }, {
+    "model": "session_type.SessionType",
+    "pk": 5,
+    "fields": { "name": "Hot Lap", "key": 3 }
+  }, {
+    "model": "session_type.SessionType",
+    "pk": 6,
+    "fields": { "name": "Time Attack", "key": 4 }
+  }, {
+    "model": "session_type.SessionType",
+    "pk": 7,
+    "fields": { "name": "Drift", "key": 5 }
+  }, {
+    "model": "session_type.SessionType",
+    "pk": 8,
+    "fields": { "name": "Drag", "key": 6 }
+  }, {
+    "model": "session_type.SessionType",
+    "pk": 9,
+    "fields": { "name": "Hot Stint", "key": 7 }
+  }, {
+    "model": "session_type.SessionType",
+    "pk": 10,
+    "fields": { "name": "Superpole", "key": 8 }
+  }  
+]

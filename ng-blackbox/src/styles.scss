@@ -2,7 +2,11 @@
 @import "./colours";
 @import "~bootstrap/scss/bootstrap";
 
+$material-icons-font-path: '~material-icons/iconfont/';
+@import '~material-icons/iconfont/material-icons.scss';
+
 body {
+    background-color: $grey;
     min-height: 100vh;
     margin: 0;
     padding: 0;
