@@ -1,53 +1,63 @@
-<div class="container py-5" *ngIf="circuit">
-  <div class="row no-gutters">
-    <div class="col-12 col-md-8 col-lg-4">
-      <form #calcForm="ngForm">
-        <div class="form-group">
-          <select
-            class="form-control"
-            [(ngModel)]="selectedCircuit"
-            name="selectedCircuit"
-            (ngModelChange)="updateCircuit($event)"
-          >
-            <option *ngFor="let circuit_ of circuits">
-              {{ circuit_.name }}
-            </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="font-italic">Stint Length (Minutes)</label>
-          <input
-            [(ngModel)]="stintLength"
-            name="stintLength"
-            type="number"
-            class="form-control"
-          />
-        </div>
-
-        <div class="form-group">
-          <label class="font-italic">Estimated Lap Time</label>
-          <div class="d-flex">
-            <label class="mr-md-1">
-              <input
-                [(ngModel)]="circuit.laptime.minutes"
-                type="number"
-                class="form-control"
-                name="minutes"
-              />
-              Minutes
-            </label>
-            <label class="ml-md-1">
-              <input
-                [(ngModel)]="circuit.laptime.seconds"
-                type="number"
-                class="form-control"
-                name="seconds"
-              />
-              Seconds
-            </label>
+<div class="row no-gutters mt-4 p-3">
+  <div class="col-12">
+    <form #calcForm="ngForm">
+      <div class="row no-gutters">
+        <div class="col-6 pr-lg-3">
+          <div class="form-group bg-white p-3 border">
+            <label class="font-italic">Circuit</label>
+            <select
+              class="form-control"
+              [(ngModel)]="selectedCircuit"
+              name="selectedCircuit"
+              (ngModelChange)="updateCircuit($event)"
+            >
+              <option *ngFor="let circuit_ of circuits">
+                {{ circuit_.name }}
+              </option>
+            </select>
           </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group bg-white p-3 border">
+            <label class="font-italic">Stint Length (Minutes)</label>
+            <input
+              [(ngModel)]="stintLength"
+              name="stintLength"
+              type="number"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
 
-          <div class="form-group">
+      <div class="row no-gutters">
+        <div class="col-6 pr-3">
+          <div class="form-group bg-white w-100 h-100 p-3 border">
+            <label class="font-italic">Estimated Lap Time</label>
+            <div class="row no-gutters">
+              <label class="col-6 pr-lg-5">
+                <input
+                  [(ngModel)]="circuit.laptime.minutes"
+                  type="number"
+                  class="form-control"
+                  name="minutes"
+                />
+                Minutes
+              </label>
+              <label class="col-6">
+                <input
+                  [(ngModel)]="circuit.laptime.seconds"
+                  type="number"
+                  class="form-control"
+                  name="seconds"
+                />
+                Seconds
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group bg-white w-100 h-100 p-3 border">
             <label for="" class="font-italic">
               Estimated Fuel Usage Per Lap
               <input
@@ -59,8 +69,12 @@
             </label>
           </div>
         </div>
-      </form>
+      </div>
+    </form>
+  </div>
+  <div class="col-12 mt-4">
+    <div class="p-3 bg-white border">
+      Predicted fuel usage for stint {{ fuelForStint }}L
     </div>
-    <div class="col-12">Predicted fuel usage for stint {{ fuelForStint }}L</div>
   </div>
 </div>

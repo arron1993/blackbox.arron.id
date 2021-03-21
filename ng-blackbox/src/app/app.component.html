@@ -9,6 +9,21 @@
           <span class="material-icons home-icon">home</span>
           <span class="d-none d-lg-block">Home</span>
         </div>
+
+        <div
+          class="d-flex py-3 side-menu-item flex-column text-center text-white"
+        >
+          <span class="material-icons home-icon">local_gas_station</span>
+          <span class="d-none d-lg-block">Fuel Plan</span>
+        </div>
+
+        <div
+          (click)="signOut()"
+          class="d-flex py-3 side-menu-item flex-column text-center text-white"
+        >
+          <span class="material-icons home-icon">logout</span>
+          <span class="d-none d-lg-block">Sign Out</span>
+        </div>
       </div>
     </ng-container>
   </div>
