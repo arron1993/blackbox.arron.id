@@ -1,14 +1,16 @@
 <div class="row no-gutters h-100">
   <div class="col-1 side-menu">
-    <div class="mt-4 w-100">
-      <div
-        routerLink="/sessions"
-        class="d-flex py-3 side-menu-item flex-column text-center text-white"
-      >
-        <span class="material-icons home-icon">home</span>
-        Home
+    <ng-container *ngIf="isSignedIn()">
+      <div class="mt-4 w-100 h-100">
+        <div
+          routerLink="/sessions"
+          class="d-flex py-3 side-menu-item flex-column text-center text-white"
+        >
+          <span class="material-icons home-icon">home</span>
+          <span class="d-none d-lg-block">Home</span>
+        </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 
   <div class="col-11 py-2 px-4">
