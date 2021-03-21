@@ -1,4 +1,4 @@
-from rest_framework import generics, status
+from rest_framework import generics, status, filters
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
@@ -14,8 +14,11 @@ class SessionList(generics.ListCreateAPIView):
     queryset = Session.objects.all()
     serializer_class = SessionSerializer
 
-    def get(self, request, format=None):
-        sessions = Session.objects.all()
+    def get(self, request, format=None):                
+        query_params = self.request.query_params        
+        filters = {k: v for k, v in query_params.items() if 
+                   k in ['car_id', 'circuit_id', 'session_type_id']}
+        sessions = Session.objects.filter(**filters)        
         serializer = SessionSerializer(sessions, many=True)
         return Response(serializer.data)
 

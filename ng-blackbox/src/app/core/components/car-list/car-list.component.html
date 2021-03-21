@@ -1,8 +1,8 @@
 <div class="row no-gutters">
   <div class="col-12">
-    <select class="form-control">
-      <option>Car</option>
-      <option *ngFor="let car of cars">{{ car.name }}</option>
+    <select class="form-control" (change)="onChange($event)">
+      <option [value]="null">Car</option>
+      <option *ngFor="let car of cars" [value]="car.id">{{ car.name }}</option>
     </select>
   </div>
 </div>

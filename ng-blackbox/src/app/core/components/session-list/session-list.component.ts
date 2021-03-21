@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SessionService } from '../../services/session.service';
 
 @Component({
@@ -7,14 +7,26 @@ import { SessionService } from '../../services/session.service';
   styleUrls: ['./session-list.component.scss'],
 })
 export class SessionListComponent implements OnInit {
+  @Input() carId = null;
+  @Input() circuitId = null;
+
   sessions = [];
   constructor(private ss: SessionService) {}
 
   ngOnInit(): void {
-    this.ss.get().subscribe((resp: any) => this.sessions = resp)
+    this.getSessions();
   }
 
-  open(sessionId) {
-    console.log(sessionId)
+  ngOnChanges(): void {
+    this.getSessions();
+  }
+
+  getSessions() {
+    const filters = {
+      car_id: this.carId !== 'null' ? this.carId : null,
+      circuit_id: this.circuitId !== 'null' ? this.circuitId : null,
+    };
+    console.log(filters);
+    this.ss.get(filters).subscribe((resp: any) => (this.sessions = resp));
   }
 }
