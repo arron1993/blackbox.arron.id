@@ -14,11 +14,11 @@ class SessionList(generics.ListCreateAPIView):
     queryset = Session.objects.all()
     serializer_class = SessionSerializer
 
-    def get(self, request, format=None):                
-        query_params = self.request.query_params        
-        filters = {k: v for k, v in query_params.items() if 
+    def get(self, request, format=None):
+        query_params = self.request.query_params
+        filters = {k: v for k, v in query_params.items() if
                    k in ['car_id', 'circuit_id', 'session_type_id']}
-        sessions = Session.objects.filter(**filters)        
+        sessions = Session.objects.filter(**filters)
         serializer = SessionSerializer(sessions, many=True)
         return Response(serializer.data)
 
@@ -27,7 +27,7 @@ class SessionList(generics.ListCreateAPIView):
         session["user"] = request.user.id
         session["circuit_id"] = Circuit.objects.get(keyname=session['circuit']).id
         session["car_id"] = Car.objects.get(keyname=session['car']).id
-
+        session["session_type_id"] = SessionType.objects.get(keyname=session['session_type']).id
         serializer = SessionSerializer(data=session)
         if serializer.is_valid():
             serializer.save()

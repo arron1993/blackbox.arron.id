@@ -1,6 +1,8 @@
 <div class="row no-gutters mt-4">
   <div class="col-4 pr-2">
-    <app-session-type-list></app-session-type-list>
+    <app-session-type-list
+      (sessionType)="sessionTypeId = $event"
+    ></app-session-type-list>
   </div>
   <div class="col-4 pr-2">
     <app-circuit-list (circuit)="circuitId = $event"></app-circuit-list>
@@ -15,6 +17,7 @@
     <app-session-list
       [carId]="carId"
       [circuitId]="circuitId"
+      [sessionTypeId]="sessionTypeId"
     ></app-session-list>
   </div>
 </div>

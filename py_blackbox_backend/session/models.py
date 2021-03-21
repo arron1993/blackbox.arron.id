@@ -3,21 +3,23 @@ from django.contrib.auth.models import User
 
 from circuit.models import Circuit
 from car.models import Car
+from session_type.models import SessionType
 
 
 class Session(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    type = models.CharField(max_length=50)
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)    
+
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     circuit = models.ForeignKey(Circuit, on_delete=models.DO_NOTHING)
     car = models.ForeignKey(Car, on_delete=models.DO_NOTHING )
+    session_type = models.ForeignKey(SessionType, on_delete=models.DO_NOTHING )
 
 
 class Stint(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    session_id = models.ForeignKey(Session, on_delete=models.CASCADE)    
+    session_id = models.ForeignKey(Session, on_delete=models.CASCADE)
 
 
 class Lap(models.Model):
@@ -34,5 +36,4 @@ class Lap(models.Model):
     sector1 = models.IntegerField(null=True)
     sector2 = models.IntegerField(null=True)
     sector3 = models.IntegerField(null=True)
-    
-    
+

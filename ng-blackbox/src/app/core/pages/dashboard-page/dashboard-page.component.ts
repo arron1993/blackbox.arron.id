@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardPageComponent implements OnInit {
   carId = null;
   circuitId = null;
+  sessionTypeId = null;
 
   constructor() {}
 

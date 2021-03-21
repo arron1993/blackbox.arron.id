@@ -9,7 +9,7 @@
     <ng-container *ngIf="sessions.length > 0; else noSessions">
       <tr *ngFor="let session of sessions" [routerLink]="session.id">
         <td>{{ session.created_at.substring(0, 16).replace("T", " ") }}</td>
-        <td>{{ session.type }}</td>
+        <td>{{ session.session_type.name }}</td>
         <td>{{ session.circuit.name }}</td>
         <td>{{ session.car.name }}</td>
       </tr>

@@ -1,8 +1,8 @@
 <div class="row no-gutters">
   <div class="col-12">
-    <select class="form-control">
-      <option>Session Type</option>
-      <option *ngFor="let type of sessionTypes">
+    <select class="form-control" (change)="onChange($event)">
+      <option value="null">Session Type</option>
+      <option [value]="type.id" *ngFor="let type of sessionTypes">
         {{ type.name }}
       </option>
     </select>

@@ -9,6 +9,7 @@ import { SessionService } from '../../services/session.service';
 export class SessionListComponent implements OnInit {
   @Input() carId = null;
   @Input() circuitId = null;
+  @Input() sessionTypeId = null;
 
   sessions = [];
   constructor(private ss: SessionService) {}
@@ -25,6 +26,8 @@ export class SessionListComponent implements OnInit {
     const filters = {
       car_id: this.carId !== 'null' ? this.carId : null,
       circuit_id: this.circuitId !== 'null' ? this.circuitId : null,
+      session_type_id:
+        this.sessionTypeId !== 'null' ? this.sessionTypeId : null,
     };
     console.log(filters);
     this.ss.get(filters).subscribe((resp: any) => (this.sessions = resp));
