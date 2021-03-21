@@ -1,9 +1,14 @@
 version: "2.0"
 services:
-  ng-fuel-calculator:
+  ng-blackbox:
     build:
-      context: ng-fuel-calculator/.
+      context: ng-blackbox/.
     ports:
-      - "8001:80"
+      - "8081:80"
     volumes:
-      - ./ng-fuel-calculator/nginx/:/etc/nginx/conf.d/
+      - ./ng-blackbox/nginx/:/etc/nginx/conf.d/
+  py-blackbox:
+    build:
+      context: py_blackbox_backend/.
+    ports:
+      - "8082:8000"
