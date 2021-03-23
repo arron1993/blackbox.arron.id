@@ -10,6 +10,7 @@ import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { FuelModule } from './fuel/fuel.module';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { FuelModule } from './fuel/fuel.module';
     CoreModule,
     FuelModule,
     FormsModule,
+    ChartsModule,
   ],
   providers: [
     {

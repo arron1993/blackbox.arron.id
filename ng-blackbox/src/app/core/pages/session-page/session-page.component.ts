@@ -8,6 +8,12 @@ import { SessionService } from '../../services/session.service';
   styleUrls: ['./session-page.component.scss'],
 })
 export class SessionPageComponent implements OnInit {
+  lapCount = 0;
+  lapTimes = [];
+  sector1Times = [];
+  sector2Times = [];
+  sector3Times = [];
+
   session = null;
   fastestLapTime = null;
   fastestSector1 = null;
@@ -24,12 +30,20 @@ export class SessionPageComponent implements OnInit {
         let fastestSector1 = { time: null, realTime: null };
         let fastestSector2 = { time: null, realTime: null };
         let fastestSector3 = { time: null, realTime: null };
-
+        let lapTimes = [];
+        let sector1Times = [];
+        let sector2Times = [];
+        let sector3Times = [];
         for (let stint of this.session.stints) {
           for (let lap of stint.laps) {
+            lapTimes.push(lap.time);
             let sector1 = lap.sector1;
             let sector2 = lap.sector2 - sector1;
             let sector3 = lap.sector3 - sector2;
+            sector1Times.push(sector1);
+            sector2Times.push(sector2);
+            sector3Times.push(sector3);
+
             if (lap.time < fastestLapTime || fastestLapTime === null) {
               fastestLapTime = lap.time;
             }
@@ -58,8 +72,21 @@ export class SessionPageComponent implements OnInit {
         this.fastestSector1 = fastestSector1;
         this.fastestSector2 = fastestSector2;
         this.fastestSector3 = fastestSector3;
+        this.lapTimes = lapTimes;
+        this.sector1Times = sector1Times;
+        this.sector2Times = sector2Times;
+        this.sector3Times = sector3Times;
+
+        this.lapCount = lapTimes.length + 1;
       });
     });
+  }
+
+  get medianLaptime() {
+    const median = [...this.lapTimes].sort()[
+      Math.floor((this.lapTimes.length - 1) / 2)
+    ];
+    return this.convertTime(median);
   }
 
   convertTime(time) {
