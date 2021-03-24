@@ -8,6 +8,7 @@ from car.models import Car
 from session.models import Session
 from session.serializers.session import SessionSerializer
 
+from session_type.models import SessionType
 
 class SessionList(generics.ListCreateAPIView):
     # permission_classes = (IsAuthenticated,)
@@ -27,7 +28,7 @@ class SessionList(generics.ListCreateAPIView):
         session["user"] = request.user.id
         session["circuit_id"] = Circuit.objects.get(keyname=session['circuit']).id
         session["car_id"] = Car.objects.get(keyname=session['car']).id
-        session["session_type_id"] = SessionType.objects.get(keyname=session['session_type']).id
+        session["session_type_id"] = SessionType.objects.get(key=session['session_type']).id
         serializer = SessionSerializer(data=session)
         if serializer.is_valid():
             serializer.save()
