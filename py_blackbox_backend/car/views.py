@@ -1,8 +1,8 @@
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+
 from car.models import Car
 from car.serializers.car import CarSerializer
-from rest_framework import generics
-
-from rest_framework.permissions import IsAuthenticated
 
 
 class CarList(generics.ListCreateAPIView):
