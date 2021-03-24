@@ -77,7 +77,7 @@ export class SessionPageComponent implements OnInit {
         this.sector2Times = sector2Times;
         this.sector3Times = sector3Times;
 
-        this.lapCount = lapTimes.length + 1;
+        this.lapCount = lapTimes.length;
       });
     });
   }
