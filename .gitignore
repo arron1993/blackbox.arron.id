@@ -1,5 +1,6 @@
 .py-blackbox-backend
 .py-blackbox
+./data
 __pycache__/
 *.py[cod]
 *$py.class
