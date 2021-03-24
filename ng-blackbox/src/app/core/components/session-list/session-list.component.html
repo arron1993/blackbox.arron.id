@@ -1,23 +1,33 @@
-<table class="table table-hover">
-  <thead>
-    <th>Time</th>
-    <th>Type</th>
-    <th>Circuit</th>
-    <th>Car</th>
-  </thead>
-  <tbody>
-    <ng-container *ngIf="sessions.length > 0; else noSessions">
-      <tr *ngFor="let session of sessions" [routerLink]="session.id">
-        <td>{{ session.created_at.substring(0, 16).replace("T", " ") }}</td>
-        <td>{{ session.session_type.name }}</td>
-        <td>{{ session.circuit.name }}</td>
-        <td>{{ session.car.name }}</td>
-      </tr>
-    </ng-container>
-    <ng-template #noSessions>
-      <tr>
-        <td colspan="4">No sessions found</td>
-      </tr>
-    </ng-template>
-  </tbody>
-</table>
+<ng-container *ngIf="sessions !== null; else loadingSessions">
+  <div class="d-none d-lg-flex row no-gutters py-3 border-bottom">
+    <div class="col-2">Time</div>
+    <div class="col-2">Type</div>
+    <div class="col-4">Circuit</div>
+    <div class="col-4">Car</div>
+  </div>
+
+  <ng-container *ngIf="sessions.length > 0; else noSessions">
+    <div
+      class="row no-gutters py-3 border-bottom hover"
+      *ngFor="let session of sessions"
+      [routerLink]="session.id"
+    >
+      <div class="col-12 col-lg-2">
+        {{ session.created_at.substring(0, 16).replace("T", " ") }}
+      </div>
+      <div class="col-12 col-lg-2">{{ session.session_type.name }}</div>
+      <div class="col-12 col-lg-4">{{ session.circuit.name }}</div>
+      <div class="col-12 col-lg-4">{{ session.car.name }}</div>
+    </div>
+  </ng-container>
+  <ng-template #noSessions>
+    <div>
+      <div>No sessions found</div>
+    </div>
+  </ng-template>
+</ng-container>
+
+<ng-template #loadingSessions>
+  <p>Loading sessions...</p>
+  <app-loading-spinner></app-loading-spinner>
+</ng-template>

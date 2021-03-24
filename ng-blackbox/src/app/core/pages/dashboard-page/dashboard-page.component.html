@@ -1,13 +1,13 @@
 <div class="row no-gutters">
-  <div class="col-4 pr-2">
+  <div class="col-12 col-lg-4 pr-lg-2">
     <app-session-type-list
       (sessionType)="sessionTypeId = $event"
     ></app-session-type-list>
   </div>
-  <div class="col-4 pr-2">
+  <div class="col-12 col-lg-4 pr-lg-2">
     <app-circuit-list (circuit)="circuitId = $event"></app-circuit-list>
   </div>
-  <div class="col-4">
+  <div class="col-12 col-lg-4">
     <app-car-list (car)="carId = $event"></app-car-list>
   </div>
 </div>

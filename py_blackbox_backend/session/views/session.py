@@ -6,7 +6,7 @@ from circuit.models import Circuit
 from car.models import Car
 
 from session.models import Session
-from session.serializers.session import SessionSerializer
+from session.serializers.session import SessionSerializer, SessionListSerializer
 
 from session_type.models import SessionType
 
@@ -20,7 +20,7 @@ class SessionList(generics.ListCreateAPIView):
         filters = {k: v for k, v in query_params.items() if
                    k in ['car_id', 'circuit_id', 'session_type_id']}
         sessions = Session.objects.filter(**filters)
-        serializer = SessionSerializer(sessions, many=True)
+        serializer = SessionListSerializer(sessions, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):

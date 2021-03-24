@@ -15,87 +15,85 @@
   </div>
 
   <div class="row no-gutters mt-4 bg-white p-3 border">
-    <div class="col-12">
-      <table
-        class="w-100"
-        *ngIf="session.stints.length > 0; else noLapsRecorded"
+    <div
+      class="col-12"
+      *ngIf="session.stints.length > 0; else noStintsRecorded"
+    >
+      <div
+        class="row no-gutters mt-3"
+        *ngFor="let stint of session.stints; let i = index"
       >
-        <thead>
-          <tr>
-            <th>Stint</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let stint of session.stints; let i = index">
-            <td>
-              <span class="text-red stint-title">{{ i + 1 }}</span>
-              <table class="table">
-                <thead>
-                  <th>Lap</th>
-                  <th>Time</th>
-                  <th>Sector 1</th>
-                  <th>Sector 2</th>
-                  <th>Sector 3</th>
-                  <th>Delta</th>
-                  <th>Fuel Usage</th>
-                  <th>Position</th>
-                  <th>Valid</th>
-                </thead>
-                <tr *ngFor="let lap of stint.laps">
-                  <td>{{ lap.number }}</td>
-                  <td
-                    [ngClass]="{
-                      'bg-success text-white': lap.time === fastestLapTime
-                    }"
-                  >
-                    {{ convertTime(lap.time) }}
-                  </td>
-                  <td
-                    [ngClass]="{
-                      'bg-success text-white':
-                        lap.sector1 === fastestSector1.time
-                    }"
-                  >
-                    {{ convertTime(lap.sector1) }}
-                  </td>
-                  <td
-                    [ngClass]="{
-                      'bg-success text-white':
-                        lap.sector2 === fastestSector2.time
-                    }"
-                  >
-                    {{ convertTime(lap.sector2 - lap.sector1) }}
-                  </td>
-                  <td
-                    [ngClass]="{
-                      'bg-success text-white':
-                        lap.sector3 === fastestSector3.time
-                    }"
-                  >
-                    {{ convertTime(lap.sector3 - lap.sector2) }}
-                  </td>
-                  <td>{{ convertTime(lap.delta_time) }}</td>
-                  <td>{{ lap.fuel_used.toFixed(2) }} litres</td>
-                  <td>{{ lap.position }}</td>
-                  <td
-                    [ngClass]="{
-                      'bg-success': lap.is_valid,
-                      'bg-danger': !lap.is_valid
-                    }"
-                  >
-                    {{ lap.is_valid }}
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <div class="col-12">
+          <span class="stint-title text-red">
+            {{ i + 1 }}
+          </span>
+        </div>
+        <div
+          class="d-none d-lg-flex col-12 row no-gutters font-weight-bold py-2 border-bottom"
+        >
+          <div class="col-12 col-lg-1">Lap</div>
+          <div class="col-12 col-lg-2">Time</div>
+          <div class="col-12 col-lg-2">Sector 1</div>
+          <div class="col-12 col-lg-2">Sector 2</div>
+          <div class="col-12 col-lg-2">Sector 3</div>
+          <div class="col-12 col-lg-2">Fuel</div>
+          <div class="col-12 col-lg-1">Position</div>
+        </div>
+        <ng-container *ngIf="stint.laps.length > 0; else noLapsRecorded">
+          <div
+            class="col-12 row no-gutters border-bottom hover"
+            *ngFor="let lap of stint.laps"
+          >
+            <div class="lap-data col-12 col-lg-1">{{ lap.number }}</div>
+            <div
+              class="lap-data col-12 col-lg-2"
+              [ngClass]="{
+                'bg-success text-white': lap.time === fastestLapTime
+              }"
+            >
+              {{ convertTime(lap.time) }}
+            </div>
+            <div
+              class="lap-data col-12 col-lg-2"
+              [ngClass]="{
+                'bg-success text-white': lap.sector1 === fastestSector1.time
+              }"
+            >
+              {{ convertTime(lap.sector1) }}
+            </div>
+            <div
+              class="lap-data col-12 col-lg-2"
+              [ngClass]="{
+                'bg-success text-white': lap.sector2 === fastestSector2.time
+              }"
+            >
+              {{ convertTime(lap.sector2 - lap.sector1) }}
+            </div>
+            <div
+              class="lap-data col-12 col-lg-2"
+              [ngClass]="{
+                'bg-success text-white': lap.sector3 === fastestSector3.time
+              }"
+            >
+              {{ convertTime(lap.sector3 - lap.sector2) }}
+            </div>
+            <div class="lap-data col-12 col-lg-2">
+              {{ lap.fuel_used.toFixed(2) }}L
+            </div>
+            <div class="lap-data col-12 col-lg-1">{{ lap.position }}</div>
+          </div>
+        </ng-container>
+      </div>
+
       <ng-template #noLapsRecorded>
         <p>No laps recorded</p>
       </ng-template>
     </div>
+    <ng-template #noStintsRecorded>
+      <p>No stints recorded</p>
+    </ng-template>
   </div>
+
   <div class="row p-3 mt-3" *ngIf="lapCount > 0">
     <div class="col-12 bg-white p-3 border">
       <div class="d-flex">

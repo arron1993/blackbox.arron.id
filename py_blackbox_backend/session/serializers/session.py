@@ -52,3 +52,13 @@ class SessionSerializer(serializers.ModelSerializer):
 
 
 
+class SessionListSerializer(SessionSerializer):
+    class Meta:
+        model = Session
+        fields = [
+            'id', 'user',
+            'car', "car_id",
+            'circuit', 'circuit_id',
+            "session_type", "session_type_id",
+            "created_at"
+        ]

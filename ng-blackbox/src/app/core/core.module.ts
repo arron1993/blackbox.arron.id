@@ -12,6 +12,7 @@ import { CircuitListComponent } from './components/circuit-list/circuit-list.com
 import { SessionPageComponent } from './pages/session-page/session-page.component';
 import { SessionTypeListComponent } from './components/session-type-list/session-type-list.component';
 import { LapChartComponent } from './components/lap-chart/lap-chart.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { LapChartComponent } from './components/lap-chart/lap-chart.component';
     SessionPageComponent,
     SessionTypeListComponent,
     LapChartComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     CommonModule,

@@ -11,12 +11,10 @@ export class SessionListComponent implements OnInit {
   @Input() circuitId = null;
   @Input() sessionTypeId = null;
 
-  sessions = [];
+  sessions = null;
   constructor(private ss: SessionService) {}
 
-  ngOnInit(): void {
-    this.getSessions();
-  }
+  ngOnInit(): void {}
 
   ngOnChanges(): void {
     this.getSessions();

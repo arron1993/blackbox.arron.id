@@ -1,20 +1,22 @@
 @import "./../../../../colours";
 
 .session-title {
-    border-bottom: 2px solid $red;
-    background-image:
-      linear-gradient(45deg, #f3f3f3 25%, transparent 25%),
-      linear-gradient(45deg, transparent 75%, #f3f3f3 75%),
-      linear-gradient(45deg, transparent 75%, #f3f3f3 75%),
-      linear-gradient(45deg, #f3f3f3 25%, #fff 25%);    
+  border-bottom: 2px solid $red;
+  background-image: linear-gradient(45deg, #f3f3f3 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #f3f3f3 75%),
+    linear-gradient(45deg, transparent 75%, #f3f3f3 75%),
+    linear-gradient(45deg, #f3f3f3 25%, #fff 25%);
 
-    background-size:100px 100px;       
+  background-size: 100px 100px;
 
-    background-position:0 0, 0 0, -50px -50px, 50px 50px;
+  background-position: 0 0, 0 0, -50px -50px, 50px 50px;
 }
 
 .stint-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.lap-data {
+  padding: 1rem 0.5rem;
 }
