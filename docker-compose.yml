@@ -8,7 +8,17 @@ services:
     volumes:
       - ./ng-blackbox/nginx/:/etc/nginx/conf.d/
   py-blackbox:
+    environment:
+      - DJANGO_DEBUG=False
     build:
       context: py_blackbox_backend/.
     ports:
       - "8082:8000"
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=live-blackbox
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres

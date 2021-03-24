@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import datetime
+import os
 
 from pathlib import Path
 
@@ -21,10 +22,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9qyc-ncc0jq(y*4y6j4w88bffe!isuzf)1e0*sxu4w1d=k4xxo'
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    '9qyc-ncc0jq(y*4y6j4w88bffe!isuzf)1e0*sxu4w1d=k4xxo')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -50,7 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    
+
 ]
 
 MIDDLEWARE = [
@@ -87,12 +92,23 @@ WSGI_APPLICATION = 'py_blackbox_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': "live-blackbox",
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': 'db'
+        }
+    }
 
 
 # Password validation

@@ -16,5 +16,4 @@ RUN pip install -r requirements.txt
 
 # copy project
 COPY . .
-
 CMD gunicorn py_blackbox_backend.wsgi:application --bind 0.0.0.0:8000
