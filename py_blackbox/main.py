@@ -22,9 +22,9 @@ class Game(Observer):
     def on_new_session(self, data=None):
         try:
             print(datetime.datetime.now(), "new session")
-            new_session = self.bbapi.create_session(
-                self.gapi.get_session_details()
-            ).json()
+            details = self.gapi.get_session_details()
+            print(details)
+            new_session = self.bbapi.create_session(details).json()
             self.session_id = new_session["id"]
             if not self.gapi.get_is_in_pitlane():
                 # if we're not starting in the pitlane
