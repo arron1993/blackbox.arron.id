@@ -1,22 +1,5 @@
-from game.shm.graphic import SPageFileGraphic
-from game.shm.static import SPageFileStatic
-from ctypes import sizeof
-
-import mmap
-
-
-class GraphicWrapper:
-    def __getattr__(self, attr):
-        buf = mmap.mmap(-1, sizeof(SPageFileGraphic), u"Local\\acpmf_graphics")
-        data = SPageFileGraphic.from_buffer(buf)
-        return getattr(data, attr)
-
-
-class StaticWrapper:
-    def __getattr__(self, attr):
-        buf = mmap.mmap(-1, sizeof(SPageFileStatic), u"Local\\acpmf_static")
-        data = SPageFileStatic.from_buffer(buf)
-        return getattr(data, attr)
+from game.wrappers.graphics import GraphicWrapper
+from game.wrappers.static import StaticWrapper
 
 
 class GameApi():

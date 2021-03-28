@@ -5,8 +5,9 @@ import getpass
 import sys
 
 from game.game import Game
-from game.pollers import SessionPoller
+from game.pollers import SessionPoller, StintPoller, LapPoller
 from blackbox.api import BlackboxApi
+
 
 def main():
     bbapi = BlackboxApi()
@@ -23,22 +24,22 @@ def main():
 
     game = Game(bbapi)
     game.attach('onNewSession',  game.on_new_session)
-    game.attach('onNewLap',  game.on_new_lap)
     game.attach('onNewStint', game.on_new_stint)
     game.attach('onNewSector', game.on_new_sector)
 
-    sp = SessionPoller()
-    sp.start()
-    # loops = [
-    #     BackgroundEventLoop(session_loop),
-    #     BackgroundEventLoop(stint_loop),
-    #     BackgroundEventLoop(lap_loop),
-    # ]
+    sep = SessionPoller()
+    stp = StintPoller()
+    lp = LapPoller()
+
+    sep.start()
+    stp.start()
+    lp.start()
+
     quit_ = False
     while not True:
         should_exit = input("type exit to quit: ")
-                    if should_exit == "exit":
-                sys.exit()
+        if should_exit == "exit":
+            sys.exit()
     return 0
 
 
