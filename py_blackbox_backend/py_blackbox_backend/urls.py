@@ -6,6 +6,7 @@ urlpatterns = [
     path('api/cars/', include('car.urls')),
     path('api/session/', include('session.urls')),
     path('api/types/', include('session_type.urls')),
+    path('api/fuel/', include('fuel.urls')),
     path('api/signin/', jwt_views.TokenObtainPairView.as_view(),
          name='token_obtain_pair'),
     path('api/signin/refresh/',

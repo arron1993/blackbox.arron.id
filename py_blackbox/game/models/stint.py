@@ -26,7 +26,8 @@ class Stint:
         sector_key = f"sector{human_readable_sector}"
         if sector == 2:
             self.lap.sector_times[sector_key] = self.gapi.get_last_lap_time()
-            self.complete_lap()
+            if self.gapi.get_completed_laps() > 0:
+                self.complete_lap()
         else:
             self.lap.sector_times[sector_key] = sector_time
 

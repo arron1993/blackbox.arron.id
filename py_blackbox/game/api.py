@@ -46,5 +46,8 @@ class GameApi():
     def get_current_sector(self):
         return self.graphic.currentSectorIndex
 
+    def get_completed_laps(self):
+        return self.graphic.completedLaps
+
     def get_split(self):
         return self.graphic.split

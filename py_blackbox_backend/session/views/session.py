@@ -9,10 +9,11 @@ from session.models import Session
 from session.serializers.session import SessionSerializer, SessionListSerializer
 
 from session_type.models import SessionType
+from session.permissions import IsOwner
 
 
 class SessionList(generics.ListCreateAPIView):
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     queryset = Session.objects.all()
     serializer_class = SessionSerializer
 
@@ -20,6 +21,7 @@ class SessionList(generics.ListCreateAPIView):
         query_params = self.request.query_params
         filters = {k: v for k, v in query_params.items() if
                    k in ['car_id', 'circuit_id', 'session_type_id']}
+        filters["user_id"] = request.user.id
         sessions = Session.objects.filter(**filters)
         serializer = SessionListSerializer(sessions, many=True)
         return Response(serializer.data)
@@ -40,7 +42,7 @@ class SessionList(generics.ListCreateAPIView):
 
 
 class SessionDetail(generics.RetrieveUpdateDestroyAPIView):
-    #permission_classes = (IsAuthenticated,)
+    permission_classes = (IsOwner, )
     queryset = Session.objects.all()
     serializer_class = SessionSerializer
     lookup_field = "id"
