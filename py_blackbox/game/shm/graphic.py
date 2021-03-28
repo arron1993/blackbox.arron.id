@@ -1,5 +1,4 @@
 from ctypes import Structure, sizeof, c_float, c_int32, c_wchar, c_int
-import mmap
 
 
 class SPageFileGraphic(Structure):
@@ -41,7 +40,6 @@ class SPageFileGraphic(Structure):
 
         ("windSpeed", c_float),
         ("windDirection", c_float),
-
 
         ("isSetupMenuVisible", c_int),
 

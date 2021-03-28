@@ -1,5 +1,6 @@
 from .observer import Observer
 
+
 class Event():
     def __init__(self, name, data=None, autofire=True):
         self.name = name
