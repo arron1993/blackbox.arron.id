@@ -4,6 +4,8 @@ from rest_framework import generics
 
 from rest_framework.permissions import IsAuthenticated
 
+from django.views.decorators.cache import cache_page
+
 
 class CircuitList(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)

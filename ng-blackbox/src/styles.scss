@@ -4,7 +4,23 @@
 $material-icons-font-path: "~material-icons/iconfont/";
 @import "~material-icons/iconfont/material-icons.scss";
 
+@font-face {
+  font-family: "NunitoSans";
+  src: url("/assets/fonts/nunito-sans/NunitoSans-Regular.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "RobotoMono";
+  src: url("/assets/fonts/roboto-mono/RobotoMono-Regular.ttf")
+    format("truetype");
+}
+
+.font-roboto-mono {
+  font-family: RobotoMono;
+}
 body {
+  font-family: "NunitoSans";
   background-color: $grey;
   min-height: 100vh;
   margin: 0;
