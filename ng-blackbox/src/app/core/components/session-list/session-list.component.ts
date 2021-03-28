@@ -10,13 +10,16 @@ export class SessionListComponent implements OnInit {
   @Input() carId = null;
   @Input() circuitId = null;
   @Input() sessionTypeId = null;
-
+  nextPage = null;
+  previousPage = null;
+  page = 1;
   sessions = null;
   constructor(private ss: SessionService) {}
 
   ngOnInit(): void {}
 
   ngOnChanges(): void {
+    this.page = 1;
     this.getSessions();
   }
 
@@ -26,8 +29,23 @@ export class SessionListComponent implements OnInit {
       circuit_id: this.circuitId !== 'null' ? this.circuitId : null,
       session_type_id:
         this.sessionTypeId !== 'null' ? this.sessionTypeId : null,
+      page: this.page,
     };
-    console.log(filters);
-    this.ss.get(filters).subscribe((resp: any) => (this.sessions = resp));
+
+    this.ss.get(filters).subscribe((resp: any) => {
+      console.log(resp);
+      this.sessions = resp.results;
+      this.nextPage = resp.next;
+      this.previousPage = resp.previous;
+    });
+  }
+
+  next() {
+    this.page = this.nextPage;
+    this.getSessions();
+  }
+  previous() {
+    this.page = this.previousPage;
+    this.getSessions();
   }
 }

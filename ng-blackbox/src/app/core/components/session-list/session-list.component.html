@@ -19,6 +19,27 @@
       <div class="col-12 col-lg-4">{{ session.circuit.name }}</div>
       <div class="col-12 col-lg-4">{{ session.car.name }}</div>
     </div>
+    <div class="mt-3 row no-gutters">
+      <button
+        (click)="previous()"
+        [disabled]="previousPage === null"
+        class="col-12 col-lg-1 btn btn-outline-red"
+      >
+        Previous
+      </button>
+      <div
+        class="col-12 col-lg-1 mt-2 mt-lg-0 offset-lg-4 text-center text-secondary"
+      >
+        Page {{ page }}
+      </div>
+      <button
+        (click)="next()"
+        [disabled]="nextPage === null"
+        class="col-12 mt-2 mt-lg-0 col-lg-1 offset-lg-5 btn btn-outline-red"
+      >
+        Next
+      </button>
+    </div>
   </ng-container>
   <ng-template #noSessions>
     <div>

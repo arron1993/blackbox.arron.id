@@ -1,4 +1,6 @@
 from rest_framework import generics, status, filters
+from rest_framework.views import APIView
+from session.pagination import PageNumberOnlyPagination
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
@@ -12,7 +14,7 @@ from session_type.models import SessionType
 from session.permissions import IsOwner
 
 
-class SessionList(generics.ListCreateAPIView):
+class SessionList(APIView, PageNumberOnlyPagination):
     permission_classes = (IsAuthenticated,)
     queryset = Session.objects.all()
     serializer_class = SessionSerializer
@@ -23,8 +25,11 @@ class SessionList(generics.ListCreateAPIView):
                    k in ['car_id', 'circuit_id', 'session_type_id']}
         filters["user_id"] = request.user.id
         sessions = Session.objects.filter(**filters).order_by("-created_at")
-        serializer = SessionListSerializer(sessions, many=True)
-        return Response(serializer.data)
+
+        results = self.paginate_queryset(sessions, request, view=self)
+
+        serializer = SessionListSerializer(results, many=True)
+        return self.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
         session = request.data
