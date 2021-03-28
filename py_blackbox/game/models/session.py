@@ -1,5 +1,6 @@
 from game.api import GameApi
 from observer.event import Event
+from game.models.stint import Stint
 
 
 class Session:
@@ -20,5 +21,5 @@ class Session:
             self.new_stint()
 
     def new_stint(self):
-        self.stint = Stint(self.bbapi)
-        self.stints.append(stint)
+        self.stint = Stint(self.bbapi, self.id)
+        self.stints.append(self.stint)

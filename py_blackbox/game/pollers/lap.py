@@ -1,3 +1,9 @@
+import time
+import threading
+
+from observer.event import Event
+from game.api import GameApi
+
 
 class LapPoller():
     def __init__(self):
@@ -9,7 +15,7 @@ class LapPoller():
         self.thread.start()
 
     def run(self):
-        current_sector = 0
+        current_sector = self.api.get_current_sector()
         while True:
             # to track a lap change we detect when
             # the car leaves sector 2, that way we
@@ -18,7 +24,7 @@ class LapPoller():
             if self.api.get_session_status() == 2:
                 # no point doing work if the game isn't running
                 last_sector = current_sector
-                current_sector = api.get_current_sector()
+                current_sector = self.api.get_current_sector()
                 if current_sector != last_sector:
                     Event("onNewSector", last_sector)
             time.sleep(1)

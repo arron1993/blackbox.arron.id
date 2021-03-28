@@ -1,3 +1,7 @@
+import datetime
+
+from game.api import GameApi
+from game.models.session import Session
 from observer.observer import Observer
 
 
@@ -11,7 +15,7 @@ class Game(Observer):
 
     def on_new_session(self, data=None):
         print(datetime.datetime.now(), "new session")
-        self.session = Session(bbapi)
+        self.session = Session(self.bbapi)
 
     def on_new_stint(self, data=None):
         self.session.new_stint()
@@ -24,4 +28,4 @@ class Game(Observer):
         """
         print(datetime.datetime.now(), "new sector", sector)
 
-        self.stint.update_lap()
+        self.session.stint.update_lap(sector)

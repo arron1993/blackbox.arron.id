@@ -1,12 +1,16 @@
 
+import datetime
+
 from game.api import GameApi
 from observer.event import Event
 
 
 class Lap:
-    def __init__(self, bbapi):
+    def __init__(self, bbapi, session_id, stint_id):
         self.bbapi = bbapi
         self.gapi = GameApi()
+        self.session_id = session_id
+        self.stint_id = stint_id
         self.sector_times = {}
 
     def save(self):

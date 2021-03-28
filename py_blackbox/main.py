@@ -35,8 +35,7 @@ def main():
     stp.start()
     lp.start()
 
-    quit_ = False
-    while not True:
+    while True:
         should_exit = input("type exit to quit: ")
         if should_exit == "exit":
             sys.exit()
