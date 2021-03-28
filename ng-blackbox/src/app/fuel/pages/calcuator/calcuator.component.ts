@@ -3,6 +3,7 @@ import { forkJoin } from 'rxjs';
 import { CarService } from 'src/app/core/services/car.service';
 import { CircuitService } from 'src/app/core/services/circuit.service';
 import { TimeService } from 'src/app/core/services/time.service';
+import { MetricService } from 'src/app/metrics/services/metric.service';
 import { FuelService } from '../../services/fuel.service';
 
 @Component({
@@ -28,7 +29,8 @@ export class CalcuatorComponent implements OnInit {
     private circuitService: CircuitService,
     private carService: CarService,
     private fs: FuelService,
-    private ts: TimeService
+    private ts: TimeService,
+    private ms: MetricService
   ) {}
 
   ngOnInit(): void {
@@ -38,9 +40,11 @@ export class CalcuatorComponent implements OnInit {
     forkJoin([circuitCall, carCall]).subscribe((resp: any[]) => {
       this.circuits = resp[0];
       this.cars = resp[1];
-      this.selectedCircuit = this.circuits[0].id;
-      this.selectedCar = this.cars[0].id;
-      this.update();
+      this.ms.getLastSession().subscribe((lastSession: any) => {
+        this.selectedCircuit = lastSession.circuit.id;
+        this.selectedCar = lastSession.car.id;
+        this.update();
+      });
     });
   }
 
