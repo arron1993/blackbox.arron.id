@@ -1,7 +1,9 @@
-from lib.s_page_file_graphic import SPageFileGraphic
-from lib.s_page_file_static import SPageFileStatic
+from game.shm.graphic import SPageFileGraphic
+from game.shm.static import SPageFileStatic
 from ctypes import sizeof
+
 import mmap
+
 
 class GraphicWrapper:
     def __getattr__(self, attr):

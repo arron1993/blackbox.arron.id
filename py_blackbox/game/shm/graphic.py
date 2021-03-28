@@ -1,4 +1,4 @@
-from ctypes import Structure, sizeof, c_float, c_int32, c_wchar, c_int, c_double
+from ctypes import Structure, sizeof, c_float, c_int32, c_wchar, c_int
 import mmap
 
 
