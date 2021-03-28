@@ -1,6 +1,8 @@
 import time
 import os
 import datetime
+import getpass
+import sys
 
 from background_event_loop.background_event_loop import BackgroundEventLoop
 from observer.observer import Observer
@@ -82,7 +84,10 @@ class Game(Observer):
 
         if sector == 2:
             self.sector_times[sector_key] = self.gapi.get_last_lap_time()
-            self.on_new_lap()
+            if len(self.sector_times == 3):
+                # only register the lap if we actually have three sector times
+                # otherwise the lap is in an inconsistent state
+                self.on_new_lap()
         else:
             self.sector_times[sector_key] = sector_time
 
@@ -99,11 +104,12 @@ def session_loop():
     while True:
         last_session_status = session_status
         last_session_type = session_type
+
         session_type = api.get_session_type()
+        session_status = api.get_session_status()
 
         session_type_changed = (last_session_type !=
                                 session_type and session_status != 0)
-        session_status = api.get_session_status()
         status_changed = (last_session_status !=
                           session_status and last_session_status == 0)
         if (status_changed or session_type_changed):
@@ -146,12 +152,14 @@ def main():
     bbapi = BlackboxApi()
 
     username = input("Enter username: ")
-    password = input("Enter password: ")
+    password = getpass.getpass("Enter password: ")
     resp = bbapi.signin(username, password)
 
     if not resp.ok:
         print("Invalid username or password")
-        return 1
+        sys.exit(1)
+    else:
+        print("Authentication Successful")
 
     if os.name == 'nt':
         game = Game(bbapi)
@@ -166,9 +174,11 @@ def main():
             BackgroundEventLoop(lap_loop),
         ]
         quit_ = False
-        while not quit_:
+        while True:
             should_exit = input("type exit to quit: ")
-            quit_ = should_exit == "exit"
+            if should_exit == "exit":
+                sys.exit()
+
     else:
         def create_session():
             res = bbapi.create_session({
