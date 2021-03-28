@@ -22,7 +22,7 @@ class SessionList(generics.ListCreateAPIView):
         filters = {k: v for k, v in query_params.items() if
                    k in ['car_id', 'circuit_id', 'session_type_id']}
         filters["user_id"] = request.user.id
-        sessions = Session.objects.filter(**filters)
+        sessions = Session.objects.filter(**filters).order_by("-created_at")
         serializer = SessionListSerializer(sessions, many=True)
         return Response(serializer.data)
 
