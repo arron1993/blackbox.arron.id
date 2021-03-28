@@ -3,6 +3,7 @@ from lib.s_page_file_static import SPageFileStatic
 from ctypes import sizeof
 import mmap
 
+
 class GraphicWrapper:
     def __getattr__(self, attr):
         buf = mmap.mmap(-1, sizeof(SPageFileGraphic), u"Local\\acpmf_graphics")
@@ -30,6 +31,9 @@ class GameApi():
 
     def get_last_lap_time(self):
         return self.graphic.iLastTime
+
+    def get_session_type(self):
+        return self.graphic.ACC_SESSION_TYPE
 
     def get_session_details(self):
         return {

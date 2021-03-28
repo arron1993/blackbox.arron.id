@@ -26,6 +26,8 @@ class Game(Observer):
             print(details)
             new_session = self.bbapi.create_session(details).json()
             self.session_id = new_session["id"]
+            self.stint_id = None
+            self.sector_times = {}
             if not self.gapi.get_is_in_pitlane():
                 # if we're not starting in the pitlane
                 # then start a new stint
@@ -88,15 +90,23 @@ class Game(Observer):
 def session_loop():
     api = GameApi()
     session_status = api.get_session_status()
+    session_type = api.get_session_type()
+
     if session_status != 0:
         # if we're already running, the create the new session
         Event("onNewSession", session_status)
 
     while True:
         last_session_status = session_status
+        last_session_type = session_type
+        session_type = api.get_session_type()
+
+        session_type_changed = (last_session_type !=
+                                session_type and session_status != 0)
         session_status = api.get_session_status()
-        if (last_session_status != session_status and
-                last_session_status == 0):
+        status_changed = (last_session_status !=
+                          session_status and last_session_status == 0)
+        if (status_changed or session_type_changed):
             Event("onNewSession", session_status)
         time.sleep(1)
 
