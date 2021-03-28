@@ -84,7 +84,7 @@ class Game(Observer):
 
         if sector == 2:
             self.sector_times[sector_key] = self.gapi.get_last_lap_time()
-            if len(self.sector_times == 3):
+            if len(self.sector_times) == 3:
                 # only register the lap if we actually have three sector times
                 # otherwise the lap is in an inconsistent state
                 self.on_new_lap()
