@@ -1,6 +1,8 @@
 import time
 import os
 import datetime
+import getpass
+import sys
 
 from game.game import Game
 from game.pollers import SessionPoller
@@ -10,12 +12,14 @@ def main():
     bbapi = BlackboxApi()
 
     username = input("Enter username: ")
-    password = input("Enter password: ")
+    password = getpass.getpass("Enter password: ")
     resp = bbapi.signin(username, password)
 
     if not resp.ok:
         print("Invalid username or password")
-        return 1
+        sys.exit(1)
+    else:
+        print("Authentication Successful")
 
     game = Game(bbapi)
     game.attach('onNewSession',  game.on_new_session)
@@ -31,9 +35,10 @@ def main():
     #     BackgroundEventLoop(lap_loop),
     # ]
     quit_ = False
-    while not quit_:
+    while not True:
         should_exit = input("type exit to quit: ")
-        quit_ = should_exit == "exit"
+                    if should_exit == "exit":
+                sys.exit()
     return 0
 
 

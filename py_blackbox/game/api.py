@@ -33,6 +33,9 @@ class GameApi():
     def get_last_lap_time(self):
         return self.graphic.iLastTime
 
+    def get_session_type(self):
+        return self.graphic.ACC_SESSION_TYPE
+
     def get_session_details(self):
         return {
             "session_type": self.graphic.ACC_SESSION_TYPE,

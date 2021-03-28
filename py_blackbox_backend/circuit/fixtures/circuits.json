@@ -78,7 +78,7 @@
   {
     "model": "circuit.circuit",
     "pk": 15,
-    "fields": { "name": "Mount Panorama Circuit", "keyname": "bathurst" }
+    "fields": { "name": "Mount Panorama Circuit", "keyname": "mount_panorama" }
   },
   {
     "model": "circuit.circuit",
