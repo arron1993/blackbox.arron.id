@@ -24,16 +24,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Stint',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('session_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='session.session')),
+                ('session_id', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='session.session')),
             ],
         ),
         migrations.AddField(
             model_name='lap',
             name='stint_id',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, to='session.stint'),
+            field=models.ForeignKey(
+                default=0, on_delete=django.db.models.deletion.CASCADE, to='session.stint'),
             preserve_default=False,
         ),
     ]

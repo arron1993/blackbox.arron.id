@@ -12,8 +12,8 @@ class Session(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     circuit = models.ForeignKey(Circuit, on_delete=models.DO_NOTHING)
-    car = models.ForeignKey(Car, on_delete=models.DO_NOTHING )
-    session_type = models.ForeignKey(SessionType, on_delete=models.DO_NOTHING )
+    car = models.ForeignKey(Car, on_delete=models.DO_NOTHING)
+    session_type = models.ForeignKey(SessionType, on_delete=models.DO_NOTHING)
 
 
 class Stint(models.Model):
@@ -36,4 +36,3 @@ class Lap(models.Model):
     sector1 = models.IntegerField(null=True)
     sector2 = models.IntegerField(null=True)
     sector3 = models.IntegerField(null=True)
-

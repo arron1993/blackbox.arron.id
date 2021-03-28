@@ -19,7 +19,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='session',
             name='session_type',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, to='session_type.sessiontype'),
+            field=models.ForeignKey(
+                default=1, on_delete=django.db.models.deletion.DO_NOTHING, to='session_type.sessiontype'),
             preserve_default=False,
         ),
     ]

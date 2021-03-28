@@ -1,5 +1,6 @@
 import json
 
+
 def main():
 
     cars = [
@@ -57,6 +58,7 @@ def main():
 
     with open("./cars.json", 'w') as f:
         json.dump(entries, f)
+
 
 if __name__ == "__main__":
     main()

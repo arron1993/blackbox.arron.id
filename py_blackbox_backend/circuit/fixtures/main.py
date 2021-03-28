@@ -1,5 +1,6 @@
 import json
 
+
 def main():
     template = {
         "model": "circuit.circuit",
@@ -35,16 +36,17 @@ def main():
     counter = 1
     for name, keyname in circuits:
         entry = {
-        "model": "circuit.circuit",
-        "pk": counter,
-        "fields": {
-            "name": name,
-            "keyname": keyname
+            "model": "circuit.circuit",
+            "pk": counter,
+            "fields": {
+                "name": name,
+                "keyname": keyname
+            }
         }
-    }
         entries.append(entry)
         counter += 1
     print(json.dumps(entries))
+
 
 if __name__ == "__main__":
     main()

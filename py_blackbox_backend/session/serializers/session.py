@@ -49,9 +49,6 @@ class SessionSerializer(serializers.ModelSerializer):
         ]
 
 
-
-
-
 class SessionListSerializer(SessionSerializer):
     class Meta:
         model = Session

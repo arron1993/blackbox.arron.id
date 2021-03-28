@@ -19,20 +19,26 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Session',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('type', models.CharField(max_length=50)),
-                ('car', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='car.car')),
-                ('circuit', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='circuit.circuit')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to=settings.AUTH_USER_MODEL)),
+                ('car', models.ForeignKey(
+                    on_delete=django.db.models.deletion.DO_NOTHING, to='car.car')),
+                ('circuit', models.ForeignKey(
+                    on_delete=django.db.models.deletion.DO_NOTHING, to='circuit.circuit')),
+                ('user', models.ForeignKey(
+                    on_delete=django.db.models.deletion.DO_NOTHING, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
             name='Lap',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('number', models.IntegerField()),
                 ('time', models.IntegerField()),
-                ('session', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='session.session')),
+                ('session', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='session.session')),
             ],
         ),
     ]
