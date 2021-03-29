@@ -1,0 +1,13 @@
+@import "../../../../colours.scss";
+
+.metric-tile {
+  font-size: 1.5rem;
+  background-color: white;
+  transition: 0.2s linear;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $orange;
+    color: white;
+  }
+}

@@ -25,6 +25,14 @@ const routes: Routes = [
       import('./fuel/fuel-routing.module').then((m) => m.FuelRoutingModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'metrics',
+    loadChildren: () =>
+      import('./metrics/metrics-routing.module').then(
+        (m) => m.MetricsRoutingModule
+      ),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

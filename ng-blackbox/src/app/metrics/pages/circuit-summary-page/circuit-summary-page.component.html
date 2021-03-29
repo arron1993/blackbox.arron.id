@@ -1,0 +1,23 @@
+<div class="row no-gutters mt-4 bg-white p-3 border">
+  <div class="row col-12 py-2">
+    <div class="col-12 col-lg-4 font-weight-bold">Circuit</div>
+    <div class="col-12 col-lg-4 font-weight-bold">Car</div>
+    <div class="col-12 col-lg-4 font-weight-bold">TIme</div>
+  </div>
+  <div
+    class="row col-12 py-2 border-bottom font-roboto-mono"
+    *ngFor="let summary of circuitSummary"
+  >
+    <div class="col-4 border-right">
+      {{ summary.circuit.name }}
+    </div>
+    <div class="col-4 border-right">
+      {{ summary.car.name }}
+    </div>
+    <div class="col-4">
+      {{ summary.best_time.minutes }}:{{ summary.best_time.seconds }}:{{
+        summary.best_time.milliseconds
+      }}
+    </div>
+  </div>
+</div>

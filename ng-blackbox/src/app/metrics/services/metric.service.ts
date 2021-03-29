@@ -10,4 +10,8 @@ export class MetricService {
   getLastSession() {
     return this.http.get('/api/metrics/last-session/');
   }
+
+  getCircuitSummary() {
+    return this.http.get('/api/metrics/circuits/');
+  }
 }

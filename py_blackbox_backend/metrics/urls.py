@@ -4,6 +4,7 @@ from metrics import views
 
 urlpatterns = [
     path('last-session/', views.MetricLastSession.as_view()),
+    path('circuits/', views.MetricsCircuitSummary.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
