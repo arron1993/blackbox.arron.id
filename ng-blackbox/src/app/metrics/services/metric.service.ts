@@ -11,7 +11,7 @@ export class MetricService {
     return this.http.get('/api/metrics/last-session/');
   }
 
-  getCircuitSummary() {
-    return this.http.get('/api/metrics/circuits/');
+  getCircuitSummary(carGroup) {
+    return this.http.get(`/api/metrics/circuits/${carGroup}/`);
   }
 }

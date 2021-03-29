@@ -1,4 +1,6 @@
-<div class="row no-gutters bg-white p-3 border">
+<app-car-group-selector (group)="updateGroup($event)"></app-car-group-selector>
+
+<div class="row no-gutters bg-white p-3 border mt-3">
   <ng-container *ngIf="circuitSummary.length > 0; else loadingSpinner">
     <div class="row col-12 py-2 border-bottom">
       <div class="col-12 col-lg-4 font-weight-bold">Circuit</div>
@@ -6,7 +8,7 @@
       <div class="col-12 col-lg-4 font-weight-bold">TIme</div>
     </div>
     <div
-      class="row col-12 py-3 border-bottom font-roboto-mono"
+      class="row hover col-12 py-3 border-bottom font-roboto-mono"
       *ngFor="let summary of circuitSummary"
     >
       <div class="col-4 border-right">

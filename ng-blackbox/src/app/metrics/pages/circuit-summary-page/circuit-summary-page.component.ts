@@ -8,16 +8,29 @@ import { MetricService } from '../../services/metric.service';
   styleUrls: ['./circuit-summary-page.component.scss'],
 })
 export class CircuitSummaryPageComponent implements OnInit {
-  circuitSummary: any[];
+  selectedCarGroup = 'gt3';
+
+  circuitSummary: any[] = [];
   constructor(private ms: MetricService, private ts: TimeService) {}
 
   ngOnInit(): void {
-    this.ms.getCircuitSummary().subscribe((summary: any[]) => {
-      this.circuitSummary = summary;
-      this.circuitSummary.map((x) => {
-        x.best_time = this.ts.convertTime(x.best_time);
-        return x;
+    this.getSummary();
+  }
+
+  getSummary() {
+    this.ms
+      .getCircuitSummary(this.selectedCarGroup)
+      .subscribe((summary: any[]) => {
+        this.circuitSummary = summary;
+        this.circuitSummary.map((x) => {
+          x.best_time = this.ts.convertTime(x.best_time);
+          return x;
+        });
       });
-    });
+  }
+
+  updateGroup(group) {
+    this.selectedCarGroup = group;
+    this.getSummary();
   }
 }

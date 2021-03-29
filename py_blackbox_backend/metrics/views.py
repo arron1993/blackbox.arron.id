@@ -20,13 +20,14 @@ class MetricLastSession(APIView):
 
 
 class MetricsCircuitSummary(APIView):
-    def get(self, request, format=None):
+    def get(self, request, car_group='gt3', format=None):
         circuits = Circuit.objects.only("id").all()
         summary = []
         for circuit in circuits:
             sessions = Session.objects.only(
                 "id").filter(circuit_id=circuit.id,
-                             user=request.user).all()
+                             user=request.user,
+                             car__group=car_group).all()
 
             stints = Stint.objects.only('id').filter(
                 session_id__in=sessions)

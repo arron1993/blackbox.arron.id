@@ -1,0 +1,13 @@
+<div class="row no-gutters bg-white p-3 border">
+  <div class="col-3 px-5" *ngFor="let group of groups">
+    <button
+      (click)="select(group.name)"
+      class="btn w-100 btn-{{ group.colour }}"
+      [ngClass]="{
+        selected: selectedGroup === group.name
+      }"
+    >
+      <span class="text-uppercase">{{ group.name }}</span>
+    </button>
+  </div>
+</div>
