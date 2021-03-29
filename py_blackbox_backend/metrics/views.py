@@ -25,9 +25,11 @@ class MetricsCircuitSummary(APIView):
         summary = []
         for circuit in circuits:
             sessions = Session.objects.only(
-                "id").filter(circuit_id=circuit.id).all()
+                "id").filter(circuit_id=circuit.id,
+                             user=request.user).all()
 
-            stints = Stint.objects.only('id').filter(session_id__in=sessions)
+            stints = Stint.objects.only('id').filter(
+                session_id__in=sessions)
             best_lap = Lap.objects.filter(
                 stint_id__in=stints).order_by("time").first()
 
