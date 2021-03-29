@@ -8,7 +8,7 @@
 
   <ng-container *ngIf="sessions.length > 0; else noSessions">
     <div
-      class="row no-gutters py-3 border-bottom hover"
+      class="row no-gutters py-3 border-bottom hover font-roboto-mono"
       *ngFor="let session of sessions"
       [routerLink]="session.id"
     >
