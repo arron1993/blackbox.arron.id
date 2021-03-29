@@ -18,6 +18,7 @@ class SessionList(APIView, PageNumberOnlyPagination):
     permission_classes = (IsAuthenticated,)
     queryset = Session.objects.all()
     serializer_class = SessionSerializer
+    page_size = 20
 
     def get(self, request, format=None):
         query_params = self.request.query_params

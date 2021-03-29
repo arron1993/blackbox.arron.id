@@ -6,20 +6,19 @@ import { SessionPageComponent } from './pages/session-page/session-page.componen
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: DashboardPageComponent,
-    canActivate: [AuthGuard]
-
-  }, {
-      path: ":id",
-      component: SessionPageComponent,
-      canActivate: [AuthGuard]
-
-  }
+    canActivate: [AuthGuard],
+  },
+  {
+    path: ':id',
+    component: SessionPageComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CoreRoutingModule { }
+export class CoreRoutingModule {}
