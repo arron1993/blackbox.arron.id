@@ -29,7 +29,7 @@ class MetricsCircuitSummary(APIView):
 
             stints = Stint.objects.only('id').filter(session_id__in=sessions)
             best_lap = Lap.objects.filter(
-                stint_id__in=stints).order_by("-time").first()
+                stint_id__in=stints).order_by("time").first()
 
             car = {"id": None, "name": None}
 
