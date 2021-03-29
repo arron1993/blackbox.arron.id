@@ -1,5 +1,5 @@
 <div class="row no-gutters bg-white p-3 border">
-  <div class="row col-12 py-2">
+  <div class="row col-12 py-2 border-bottom">
     <div class="col-12 col-lg-4 font-weight-bold">Circuit</div>
     <div class="col-12 col-lg-4 font-weight-bold">Car</div>
     <div class="col-12 col-lg-4 font-weight-bold">TIme</div>
@@ -16,9 +16,11 @@
     </div>
     <div class="col-4">
       <ng-container *ngIf="summary.best_time.minutes !== '00'; else noData">
-        {{ summary.best_time.minutes }}:{{ summary.best_time.seconds }}:{{
-          summary.best_time.milliseconds
-        }}
+        <a routerLink="/sessions/{{ summary.session_id }}">
+          {{ summary.best_time.minutes }}:{{ summary.best_time.seconds }}:{{
+            summary.best_time.milliseconds
+          }}
+        </a>
       </ng-container>
       <ng-template #noData> No Data </ng-template>
     </div>

@@ -31,15 +31,20 @@ class MetricsCircuitSummary(APIView):
             best_lap = Lap.objects.filter(
                 stint_id__in=stints).order_by("time").first()
 
-            car = {"id": None, "name": None}
-
+            car = {"name": None, "id": None}
             best_time = None
+            session_id = None
+
             if best_lap:
                 car = best_lap.stint_id.session_id.car
-
                 best_time = best_lap.time
-            summary.append(
-                {"car": car, "circuit": circuit, "best_time": best_time})
+                session_id = best_lap.stint_id.session_id.id
+
+            summary.append({
+                "car": car,
+                "circuit": circuit,
+                "session_id": session_id,
+                "best_time": best_time})
 
         serializer = CircuitSummarySerializer(summary, many=True)
         return Response(serializer.data)
