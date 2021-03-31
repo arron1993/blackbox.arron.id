@@ -1,4 +1,4 @@
-from ctypes import Structure, sizeof, c_float, c_int32, c_wchar, c_int
+from ctypes import Structure, c_float, c_wchar, c_int
 
 
 class SPageFileGraphic(Structure):
@@ -69,15 +69,3 @@ class SPageFileGraphic(Structure):
         ("iSplit", c_int),
         ("isValidLap", c_int),
     ]
-
-    def toDict(self):
-        return {
-            "bestTime": self.bestTime,
-            "iBestTime": self.iBestTime,
-            "lastTime": self.lastTime,
-            "iLastTime": self.iLastTime,
-            "sessionTimeLeft": self.sessionTimeLeft,
-            "estLapsLeft": self.sessionTimeLeft / (self.iLastTime+1),
-            "fuelXLap": self.fuelXLap,
-            "numberOfLaps": self.numberOfLaps
-        }

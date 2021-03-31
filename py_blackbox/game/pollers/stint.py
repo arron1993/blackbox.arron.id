@@ -4,6 +4,7 @@ import datetime
 
 from observer.event import Event
 from game.api import GameApi
+from game.models.session_status import SessionStatus
 
 
 class StintPoller():
@@ -23,8 +24,7 @@ class StintPoller():
             try:
                 last_session_type = session_type
                 session_type = self.api.get_session_type()
-                session_type_changed = (last_session_type != session_type and
-                                        session_type != 0)
+                session_type_changed = (last_session_type != session_type)
 
                 # if a session is running, and the type hasn't changed
                 # start a new stint
@@ -32,8 +32,8 @@ class StintPoller():
                 # the pitlane when
                 # when a session(qualifying) ends and we're teleported
                 # to the formation lap
-                if (self.api.get_session_status() != 0 and not
-                        session_type_changed):
+                if (self.api.get_session_status() != SessionStatus.OFF and
+                        not session_type_changed):
                     was_in_pitlane = is_in_pitlane
                     is_in_pitlane = self.api.get_is_in_pitlane()
                     if was_in_pitlane == 1 and is_in_pitlane == 0:

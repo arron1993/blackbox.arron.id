@@ -1,5 +1,4 @@
 from game.api import GameApi
-from observer.event import Event
 from game.models.stint import Stint
 
 
@@ -17,7 +16,7 @@ class Session:
         self.stints = []
         if not self.gapi.get_is_in_pitlane():
             # if we're not starting in the pitlane
-            # then start a new stint
+            # then start a nsew stint
             self.new_stint()
 
     def new_stint(self):

@@ -6,6 +6,7 @@ from pprint import pprint
 
 from observer.event import Event
 from game.api import GameApi
+from game.models.session_status import SessionStatus
 
 
 class LapPoller():
@@ -25,7 +26,7 @@ class LapPoller():
                 # the car leaves sector 2, that way we
                 # can record the sector times
                 # then create the lap entry
-                if self.api.get_session_status() == 2:
+                if self.api.get_session_status() == SessionStatus.LIVE:
                     # no point doing work if the game isn't running
                     last_sector = current_sector
                     current_sector = self.api.get_current_sector()

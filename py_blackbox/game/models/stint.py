@@ -1,8 +1,6 @@
 import datetime
 
 from game.api import GameApi
-from observer.event import Event
-
 from game.models.lap import Lap
 
 

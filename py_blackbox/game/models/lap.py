@@ -2,7 +2,6 @@ import datetime
 
 from pprint import pprint
 from game.api import GameApi
-from observer.event import Event
 
 
 class Lap:

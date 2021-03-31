@@ -1,4 +1,4 @@
-from ctypes import Structure, sizeof, c_float, c_int32, c_wchar, c_int
+from ctypes import Structure, c_float, c_wchar, c_int
 
 
 class SPageFileStatic(Structure):
@@ -47,11 +47,3 @@ class SPageFileStatic(Structure):
         ("PitWindowEnd", c_int),
         ("isOnline", c_int),
     ]
-
-    def toDict(self):
-        return {
-            "PitWindowStart": self.PitWindowStart,
-            "PitWindowEnd": self.PitWindowEnd,
-            "carModel": self.carModel,
-            "track": self.track,
-        }

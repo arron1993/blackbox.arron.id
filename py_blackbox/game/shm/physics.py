@@ -1,4 +1,4 @@
-from ctypes import Structure, sizeof, c_float, c_int
+from ctypes import Structure, c_float, c_int
 
 
 class SPageFilePhysics(Structure):
@@ -89,9 +89,3 @@ class SPageFilePhysics(Structure):
         ("suspensionDamage", c_float * 4),
         ("tyreTemp", c_float * 4),
     ]
-
-    def __dict__(self):
-        return {
-            "fuel": self.fuel,
-            "brakeBias": self.brakeBias,
-        }
