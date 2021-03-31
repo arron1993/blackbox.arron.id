@@ -1,6 +1,5 @@
 import datetime
 
-from pprint import pprint
 from game.api import GameApi
 
 
@@ -18,12 +17,12 @@ class Lap:
             details["sector1"] = self.sector_times.get("sector1", 0)
             details["sector2"] = self.sector_times.get("sector2", 0)
             details["sector3"] = self.sector_times.get("sector3", 0)
-            pprint(datetime.datetime.now(), "last lap", details)
+            print(datetime.datetime.now(), "last lap", details)
             self.bbapi.create_lap(
                 self.session_id,
                 self.stint_id,
                 details
             ).json()
         else:
-            pprint(datetime.datetime.now(),
-                   "Missing sector times, ignoring lap..")
+            print(datetime.datetime.now(),
+                  "Missing sector times, ignoring lap..")
