@@ -1,3 +1,5 @@
+import datetime
+
 from game.api import GameApi
 from game.models.stint import Stint
 
@@ -7,8 +9,10 @@ class Session:
         self.bbapi = bbapi
         self.gapi = GameApi()
         self.id = None
+        details = self.gapi.get_session_details()
+        print(datetime.datetime.now(), "New Session", details)
         new_session = self.bbapi.create_session(
-            self.gapi.get_session_details()
+            details
         ).json()
 
         self.id = new_session["id"]
