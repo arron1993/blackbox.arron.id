@@ -24,7 +24,6 @@ class SPageFileGraphic(Structure):
         ("tyreCompound", c_wchar * 33),
         ("replayTimeMultiplier", c_float),
         ("normalizedCarPosition", c_float),
-
         ("activeCars", c_int),
         ("carCoordinates", c_float * 60 * 3),
         ("carID", c_int * 60),
@@ -34,15 +33,11 @@ class SPageFileGraphic(Structure):
         ("penalty", c_int),
         ("idealLineOn", c_int),
         ("isInPitLane", c_int),
-
         ("surfaceGrip", c_float),
         ("mandatoryPitDone", c_int),
-
         ("windSpeed", c_float),
         ("windDirection", c_float),
-
         ("isSetupMenuVisible", c_int),
-
         ("mainDisplayIndex", c_int),
         ("secondaryDisplayIndex", c_int),
         ("TC", c_int),
@@ -58,7 +53,6 @@ class SPageFileGraphic(Structure):
         ("driverStintTotalTimeLeft", c_int),
         ("driverStintTimeLeft", c_int),
         ("rainTyres", c_int),
-
         ("sessionIndex", c_int),
         ("usedFuel", c_float),
         ("deltaLapTime", c_wchar * 15),
