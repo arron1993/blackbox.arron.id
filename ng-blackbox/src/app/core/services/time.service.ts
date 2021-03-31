@@ -6,21 +6,21 @@ import { Injectable } from '@angular/core';
 export class TimeService {
   constructor() {}
 
-  convertTime(time) {
-    const ms = time % 1000;
-    time = (time - ms) / 1000;
+  convertTime(duration) {
+    let ms = duration % 1000;
+    let seconds = Math.floor((duration / 1000) % 60);
+    let minutes = Math.floor((duration / (1000 * 60)) % 60);
+    let hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
-    const seconds = time % 60;
-    time = (time - seconds) / 60;
-    const mins = time % 60;
-    const minsPadded = mins.toString().padStart(2, '0');
-    const secondsPadded = seconds.toString().padStart(2, '0');
-    const msPadded = ms.toString().padStart(3, '0');
+    const hh = hours < 10 ? '0' + hours : hours;
+    const mm = minutes < 10 ? '0' + minutes : minutes;
+    const ss = seconds < 10 ? '0' + seconds : seconds;
 
     return {
-      minutes: minsPadded,
-      seconds: secondsPadded,
-      milliseconds: msPadded,
+      hours: hh,
+      minutes: mm,
+      seconds: ss,
+      milliseconds: ms,
     };
   }
 }

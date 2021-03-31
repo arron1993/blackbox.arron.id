@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='session',
             name='session_length',
-            field=models.IntegerField(default=20),
+            field=models.IntegerField(default=1500000),
             preserve_default=False,
         ),
     ]

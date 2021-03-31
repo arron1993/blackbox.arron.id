@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SessionService } from '../../services/session.service';
+import { TimeService } from '../../services/time.service';
 
 @Component({
   selector: 'app-session-page',
@@ -20,7 +21,11 @@ export class SessionPageComponent implements OnInit {
   fastestSector2 = null;
   fastestSector3 = null;
 
-  constructor(private route: ActivatedRoute, private ss: SessionService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private ss: SessionService,
+    private ts: TimeService
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -90,18 +95,16 @@ export class SessionPageComponent implements OnInit {
   }
 
   convertTime(duration) {
-    let milliseconds = duration % 1000;
-    let seconds = Math.floor((duration / 1000) % 60);
-    let minutes = Math.floor((duration / (1000 * 60)) % 60);
-    let hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+    const time = this.ts.convertTime(duration);
+    return `${time.minutes}:${time.seconds}:${time.milliseconds}`;
+  }
 
-    const hh = hours < 10 ? '0' + hours : hours;
-    const mm = minutes < 10 ? '0' + minutes : minutes;
-    const ss = seconds < 10 ? '0' + seconds : seconds;
-    if (hh != '00') {
-      return `${hh}:${mm}:${ss}`;
+  formatSessionLength(length) {
+    const time = this.ts.convertTime(length);
+    if (time.hours !== '00') {
+      return `${time.hours} hours ${time.minutes} minutes`;
     } else {
-      return `${mm}:${ss}.${milliseconds}`;
+      return `${time.minutes} minutes`;
     }
   }
 
