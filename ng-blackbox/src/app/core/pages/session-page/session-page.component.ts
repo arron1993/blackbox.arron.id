@@ -89,16 +89,20 @@ export class SessionPageComponent implements OnInit {
     return this.convertTime(median);
   }
 
-  convertTime(time) {
-    const ms = time % 1000;
-    time = (time - ms) / 1000;
-    const seconds = time % 60;
-    time = (time - seconds) / 60;
-    const mins = time % 60;
-    const minsPadded = mins.toString().padStart(2, '0');
-    const secondsPadded = seconds.toString().padStart(2, '0');
-    const msPadded = ms.toString().padStart(3, '0');
-    return `${minsPadded}:${secondsPadded}:${msPadded}`;
+  convertTime(duration) {
+    let milliseconds = duration % 1000;
+    let seconds = Math.floor((duration / 1000) % 60);
+    let minutes = Math.floor((duration / (1000 * 60)) % 60);
+    let hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+    const hh = hours < 10 ? '0' + hours : hours;
+    const mm = minutes < 10 ? '0' + minutes : minutes;
+    const ss = seconds < 10 ? '0' + seconds : seconds;
+    if (hh != '00') {
+      return `${hh}:${mm}:${ss}`;
+    } else {
+      return `${mm}:${ss}.${milliseconds}`;
+    }
   }
 
   formatDate(isoDate) {

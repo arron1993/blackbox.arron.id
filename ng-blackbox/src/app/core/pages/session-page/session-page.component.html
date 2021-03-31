@@ -10,7 +10,10 @@
       </h1>
     </div>
     <div class="col-12 text-center">
-      <h4>{{ session.created_at.substring(0, 16).replace("T", " ") }}</h4>
+      <h4>
+        {{ session.created_at.substring(0, 16).replace("T", " ") }} -
+        {{ convertTime(session.session_length) }}
+      </h4>
     </div>
   </div>
 
@@ -80,7 +83,9 @@
             <div class="lap-data col-12 col-lg-2">
               {{ lap.fuel_used.toFixed(2) }}L
             </div>
-            <div class="lap-data col-12 col-lg-1">{{ lap.position }}</div>
+            <div class="lap-data col-12 col-lg-1">
+              {{ lap.position }}/{{ lap.num_cars }}
+            </div>
           </div>
         </ng-container>
       </div>
