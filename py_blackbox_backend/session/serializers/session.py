@@ -45,7 +45,7 @@ class SessionSerializer(serializers.ModelSerializer):
             'car', "car_id",
             'circuit', 'circuit_id',
             "session_type", "session_type_id",
-            "created_at", "stints"
+            "created_at", "stints", "session_length"
         ]
 
 

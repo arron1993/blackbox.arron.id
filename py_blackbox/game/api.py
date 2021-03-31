@@ -24,7 +24,8 @@ class GameApi():
             "session_type": self.graphic.ACC_SESSION_TYPE,
             "car": self.static.carModel,
             # # silverstone is "Silverstone" can't be doing with that
-            "circuit": self.static.track.lower()
+            "circuit": self.static.track.lower(),
+            "session_length": self.graphic.sessionTimeLeft
         }
 
     def get_last_lap_details(self):
@@ -35,6 +36,7 @@ class GameApi():
             "position": self.graphic.position,
             "delta_time": self.graphic.iDeltaLapTime,
             "is_valid": self.graphic.isValidLap,
+            "num_cars": self.static.numCars,
         }
 
     def get_is_in_pitlane(self):

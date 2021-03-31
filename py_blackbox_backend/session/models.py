@@ -15,6 +15,8 @@ class Session(models.Model):
     car = models.ForeignKey(Car, on_delete=models.DO_NOTHING)
     session_type = models.ForeignKey(SessionType, on_delete=models.DO_NOTHING)
 
+    session_length = models.IntegerField()
+
 
 class Stint(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -36,3 +38,5 @@ class Lap(models.Model):
     sector1 = models.IntegerField(null=True)
     sector2 = models.IntegerField(null=True)
     sector3 = models.IntegerField(null=True)
+
+    num_cars = models.IntegerField()

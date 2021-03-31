@@ -32,4 +32,4 @@ class LapPoller():
                         Event("onNewSector", last_sector)
             except Exception as e:
                 print(datetime.datetime.now(), "Lap Error", e)
-            time.sleep(0.5)
+            time.sleep(3)

@@ -32,7 +32,7 @@ class StintPoller():
                 # the pitlane when
                 # when a session(qualifying) ends and we're teleported
                 # to the formation lap
-                if (self.api.get_session_status() != SessionStatus.OFF and
+                if (self.api.get_session_status() != SessionStatus.OFF.value and
                         not session_type_changed):
                     was_in_pitlane = is_in_pitlane
                     is_in_pitlane = self.api.get_is_in_pitlane()
