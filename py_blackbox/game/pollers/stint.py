@@ -1,5 +1,6 @@
 import time
 import threading
+import datetime
 
 from observer.event import Event
 from game.api import GameApi
@@ -16,12 +17,28 @@ class StintPoller():
 
     def run(self):
         is_in_pitlane = self.api.get_is_in_pitlane()
+        session_type = self.api.get_session_type()
 
         while True:
-            if self.api.get_session_status() == 2:
-                was_in_pitlane = is_in_pitlane
-                is_in_pitlane = self.api.get_is_in_pitlane()
-                if was_in_pitlane == 1 and is_in_pitlane == 0:
-                    # was in the pitlane but has now left
-                    Event("onNewStint")
-            time.sleep(1)
+            try:
+                last_session_type = session_type
+                session_type = self.api.get_session_type()
+                session_type_changed = (last_session_type != session_type and
+                                        session_type != 0)
+
+                # if a session is running, and the type hasn't changed
+                # start a new stint
+                # a new stint can be wrongly created if we're in
+                # the pitlane when
+                # when a session(qualifying) ends and we're teleported
+                # to the formation lap
+                if (self.api.get_session_status() != 0 and not
+                        session_type_changed):
+                    was_in_pitlane = is_in_pitlane
+                    is_in_pitlane = self.api.get_is_in_pitlane()
+                    if was_in_pitlane == 1 and is_in_pitlane == 0:
+                        # was in the pitlane but has now left
+                        Event("onNewStint")
+            except Exception as e:
+                print(datetime.datetime.now(), "Stint Error", e)
+            time.sleep(5)

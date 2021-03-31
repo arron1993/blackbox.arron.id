@@ -1,5 +1,4 @@
-from ctypes import Structure, sizeof, c_float, c_int32, c_wchar, c_int
-import mmap
+from ctypes import Structure, sizeof, c_float, c_int
 
 
 class SPageFilePhysics(Structure):

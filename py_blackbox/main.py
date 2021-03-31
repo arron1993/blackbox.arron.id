@@ -1,6 +1,3 @@
-import time
-import os
-import datetime
 import getpass
 import sys
 

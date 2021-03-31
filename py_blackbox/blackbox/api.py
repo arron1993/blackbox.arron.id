@@ -1,5 +1,4 @@
 import requests
-import os
 import jwt
 import datetime
 
@@ -66,4 +65,5 @@ class BlackboxApi():
         return self.post(f"api/session/{session_id}/stints/", {})
 
     def create_lap(self, session_id, stint_id, data):
-        return self.post(f"api/session/{session_id}/stints/{stint_id}/laps/", data)
+        return self.post(
+            f"api/session/{session_id}/stints/{stint_id}/laps/", data)

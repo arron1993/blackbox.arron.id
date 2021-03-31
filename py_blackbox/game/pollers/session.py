@@ -1,5 +1,8 @@
 import threading
 import time
+import datetime
+
+from pprint import pprint
 
 from game.api import GameApi
 from observer.event import Event
@@ -22,19 +25,23 @@ class SessionPoller():
             Event("onNewSession", session_status)
 
         while True:
-            last_session_status = session_status
-            last_session_type = session_type
+            try:
+                last_session_status = session_status
+                last_session_type = session_type
 
-            session_status = self.api.get_session_status()
-            session_type = self.api.get_session_type()
-            session_status_change = (last_session_status != session_status and
-                                     last_session_status == 0)
+                session_status = self.api.get_session_status()
+                session_type = self.api.get_session_type()
+                session_status_change = (
+                    last_session_status != session_status and
+                    last_session_status == 0)
 
-            # the session can change without quitting
-            # e.g. qualifying to race
-            session_type_changed = (last_session_type != session_type and
-                                    session_type != 0)
+                # the session can change without quitting
+                # e.g. qualifying to race
+                session_type_changed = (last_session_type != session_type and
+                                        session_type != 0)
 
-            if session_status_change or session_type_changed:
-                Event("onNewSession", session_status)
-            time.sleep(1)
+                if session_status_change or session_type_changed:
+                    Event("onNewSession", session_status)
+            except Exception as e:
+                pprint(datetime.datetime.now(), "Session Error:", e)
+            time.sleep(5)
