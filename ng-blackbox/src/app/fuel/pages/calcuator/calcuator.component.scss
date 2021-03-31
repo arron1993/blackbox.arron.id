@@ -1,0 +1,11 @@
+@import "../../../../colours";
+
+.fuel-for-stint {
+  font-size: 5rem;
+  font-weight: bold;
+
+  .inner {
+    border: 5px solid $green;
+    border-radius: 50px;
+  }
+}

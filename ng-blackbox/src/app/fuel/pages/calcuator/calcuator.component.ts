@@ -26,6 +26,7 @@ export class CalcuatorComponent implements OnInit {
   };
 
   fuelUsage = 1;
+  estimatedLaps = 1;
 
   constructor(
     private circuitService: CircuitService,
@@ -52,14 +53,18 @@ export class CalcuatorComponent implements OnInit {
   }
 
   get fuelForStint() {
+    this.estimatedLaps = this.getTotalLaps();
+    const stintFuelUsage = this.fuelUsage * this.estimatedLaps;
+
+    return Math.round(stintFuelUsage * 100) / 100;
+  }
+
+  getTotalLaps() {
     const minutes = parseInt(this.lapTime.minutes);
     const seconds = parseInt(this.lapTime.seconds);
     const milliseconds = parseInt(this.lapTime.milliseconds);
     const lapInSeconds = minutes * 60 + seconds + milliseconds / 1000;
-
-    const estimatedLaps = (this.stintLength * 60) / lapInSeconds;
-    const stintFuelUsage = this.fuelUsage * estimatedLaps;
-    return Math.round(stintFuelUsage * 100) / 100;
+    return Math.ceil((this.stintLength * 60) / lapInSeconds);
   }
 
   update() {
