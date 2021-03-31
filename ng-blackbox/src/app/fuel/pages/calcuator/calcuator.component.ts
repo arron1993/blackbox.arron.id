@@ -17,13 +17,15 @@ export class CalcuatorComponent implements OnInit {
 
   selectedCar;
   selectedCircuit;
-  stintLength = 30;
-  lapTime = {
-    minutes: '0',
-    seconds: '0',
+  stintLength = 20;
+
+  lapTime: any = {
+    minutes: '1',
+    seconds: '30',
     milliseconds: '0',
   };
-  fuelUsage = 0;
+
+  fuelUsage = 1;
 
   constructor(
     private circuitService: CircuitService,
@@ -41,6 +43,7 @@ export class CalcuatorComponent implements OnInit {
       this.circuits = resp[0];
       this.cars = resp[1];
       this.ms.getLastSession().subscribe((lastSession: any) => {
+        this.stintLength = this.ts.toMinutes(lastSession.session_length);
         this.selectedCircuit = lastSession.circuit.id;
         this.selectedCar = lastSession.car.id;
         this.update();
@@ -60,7 +63,6 @@ export class CalcuatorComponent implements OnInit {
   }
 
   update() {
-    console.log(this.selectedCar, this.selectedCircuit);
     this.fs
       .get(this.selectedCar, this.selectedCircuit)
       .subscribe((resp: any) => {

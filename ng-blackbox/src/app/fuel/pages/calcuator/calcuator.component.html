@@ -10,44 +10,58 @@
   <div class="col-12 mt-4">
     <form #calcForm="ngForm">
       <div class="row no-gutters">
-        <div class="col-6 pr-lg-3">
-          <div class="form-group bg-white p-3 border">
-            <label class="font-italic">Circuit</label>
-            <select
-              class="form-control"
-              [(ngModel)]="selectedCircuit"
-              name="selectedCircuit"
-              (ngModelChange)="update()"
-            >
-              <option *ngFor="let circuit of circuits" [value]="circuit.id">
-                {{ circuit.name }}
-              </option>
-            </select>
+        <div class="col-6 pr-lg-3 row no-gutters">
+          <div class="col-12">
+            <div class="form-group bg-white p-3 border">
+              <label class="font-italic">Circuit</label>
+              <select
+                class="form-control"
+                [(ngModel)]="selectedCircuit"
+                name="selectedCircuit"
+                (ngModelChange)="update()"
+              >
+                <option *ngFor="let circuit of circuits" [value]="circuit.id">
+                  {{ circuit.name }}
+                </option>
+              </select>
+            </div>
           </div>
-
-          <div class="form-group bg-white p-3 border">
-            <label class="font-italic">Car</label>
-            <select
-              class="form-control"
-              [(ngModel)]="selectedCar"
-              name="selectedCar"
-              (ngModelChange)="update()"
-            >
-              <option *ngFor="let car of cars" [value]="car.id">
-                {{ car.name }}
-              </option>
-            </select>
+          <div class="col-12">
+            <div class="form-group bg-white p-3 border">
+              <label class="font-italic">Car</label>
+              <select
+                class="form-control"
+                [(ngModel)]="selectedCar"
+                name="selectedCar"
+                (ngModelChange)="update()"
+              >
+                <option *ngFor="let car of cars" [value]="car.id">
+                  {{ car.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group bg-white p-3 border">
+              <label class="font-italic">Stint Length (Minutes)</label>
+              <input
+                [(ngModel)]="stintLength"
+                name="stintLength"
+                type="number"
+                class="form-control"
+              />
+            </div>
           </div>
         </div>
         <div class="col-6">
-          <div class="form-group bg-white p-3 border">
-            <label class="font-italic">Stint Length (Minutes)</label>
-            <input
-              [(ngModel)]="stintLength"
-              name="stintLength"
-              type="number"
-              class="form-control"
-            />
+          <div class="p-3 bg-white border">
+            <div>Predicted fuel usage for stint</div>
+            <div
+              class="text-center text-dark-grey py-5"
+              style="font-size: 5rem"
+            >
+              {{ fuelForStint }}L
+            </div>
           </div>
         </div>
       </div>
@@ -102,10 +116,5 @@
         </div>
       </div>
     </form>
-  </div>
-  <div class="col-12 mt-4">
-    <div class="p-3 bg-white border">
-      Predicted fuel usage for stint {{ fuelForStint }}L
-    </div>
   </div>
 </div>

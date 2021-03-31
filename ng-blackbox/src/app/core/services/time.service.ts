@@ -23,4 +23,8 @@ export class TimeService {
       milliseconds: ms,
     };
   }
+
+  toMinutes(duration) {
+    return duration / 1000 / 60;
+  }
 }
