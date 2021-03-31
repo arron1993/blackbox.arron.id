@@ -24,8 +24,10 @@ class SessionList(APIView, PageNumberOnlyPagination):
         query_params = self.request.query_params
         filters = {k: v for k, v in query_params.items() if
                    k in ['car_id', 'circuit_id', 'session_type_id']}
-        filters["user_id"] = request.user.id
-        sessions = Session.objects.filter(**filters).order_by("-created_at")
+        sessions = Session.objects.filter(
+            user_id=request.user.id,
+            stint__id__isnull=False,
+            **filters).order_by("-created_at")
 
         results = self.paginate_queryset(sessions, request, view=self)
 

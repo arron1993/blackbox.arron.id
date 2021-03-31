@@ -3,7 +3,7 @@
     <div class="col-2">Time</div>
     <div class="col-2">Type</div>
     <div class="col-4">Circuit</div>
-    <div class="col-4">Car</div>
+    <div class="col-3">Car</div>
   </div>
 
   <ng-container *ngIf="sessions.length > 0; else noSessions">
@@ -27,15 +27,19 @@
       >
         Previous
       </button>
-      <div
-        class="col-12 col-lg-1 mt-2 mt-lg-0 offset-lg-4 text-center text-secondary"
-      >
+      <div class="col-12 col-lg-10 mt-2 mt-lg-0 text-center text-secondary">
         Page {{ page }}
+        <div class="w-100">
+          {{ count }} Sessions
+          <div style="font-size: 0.75rem">
+            Sessions with no stints are not shown
+          </div>
+        </div>
       </div>
       <button
         (click)="next()"
         [disabled]="nextPage === null"
-        class="col-12 mt-2 mt-lg-0 col-lg-1 offset-lg-5 btn btn-outline-red"
+        class="col-12 mt-2 mt-lg-0 col-lg-1 btn btn-outline-red"
       >
         Next
       </button>

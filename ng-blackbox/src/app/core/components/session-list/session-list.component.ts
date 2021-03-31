@@ -14,6 +14,7 @@ export class SessionListComponent implements OnInit {
   previousPage = null;
   page = 1;
   sessions = null;
+  count = null;
   constructor(private ss: SessionService) {}
 
   ngOnInit(): void {}
@@ -35,6 +36,7 @@ export class SessionListComponent implements OnInit {
     this.ss.get(filters).subscribe((resp: any) => {
       console.log(resp);
       this.sessions = resp.results;
+      this.count = resp.count;
       this.nextPage = resp.next;
       this.previousPage = resp.previous;
     });
