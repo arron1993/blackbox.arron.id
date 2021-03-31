@@ -13,11 +13,11 @@ class Lap:
 
     def save(self):
         if len(self.sector_times) == 3:
-
+            details = self.gapi.get_last_lap_details()
             details["sector1"] = self.sector_times.get("sector1", 0)
             details["sector2"] = self.sector_times.get("sector2", 0)
             details["sector3"] = self.sector_times.get("sector3", 0)
-            details = self.gapi.get_last_lap_details()
+
             print(datetime.datetime.now(), "last lap", details)
             self.bbapi.create_lap(
                 self.session_id,

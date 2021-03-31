@@ -14,7 +14,6 @@ class Game(Observer):
         Observer.__init__(self)
 
     def on_new_session(self, data=None):
-        print(datetime.datetime.now(), "new session")
         self.session = Session(self.bbapi)
 
     def on_new_stint(self, data=None):
