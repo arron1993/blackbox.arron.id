@@ -9,6 +9,10 @@
     </div>
     <div
       class="row hover col-12 py-3 border-bottom font-roboto-mono"
+      [ngClass]="{
+        'bg-yellow': summary.circuit.id == selectedCircuit
+      }"
+      (click)="selectedCircuit = summary.circuit.id"
       *ngFor="let summary of circuitSummary"
     >
       <div class="col-4 border-right">

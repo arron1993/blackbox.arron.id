@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TimeService } from 'src/app/core/services/time.service';
 import { MetricService } from '../../services/metric.service';
 
@@ -9,12 +10,19 @@ import { MetricService } from '../../services/metric.service';
 })
 export class CircuitSummaryPageComponent implements OnInit {
   selectedCarGroup = 'gt3';
-
   circuitSummary: any[] = [];
-  constructor(private ms: MetricService, private ts: TimeService) {}
+  selectedCircuit;
+  constructor(
+    private ms: MetricService,
+    private ts: TimeService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.getSummary();
+    this.route.fragment.subscribe((fragment: string) => {
+      this.selectedCircuit = fragment;
+    });
   }
 
   getSummary() {

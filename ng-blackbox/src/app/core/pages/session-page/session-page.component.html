@@ -4,7 +4,13 @@
       class="col-12 text-center font-weight-bold"
       style="letter-spacing: 2px"
     >
-      <h1>{{ session.circuit.name }}</h1>
+      <h1
+        routerLink="/metrics/circuits/"
+        [fragment]="session.circuit.id"
+        style="cursor: pointer"
+      >
+        {{ session.circuit.name }}
+      </h1>
       <h1>
         {{ session.car.name }}
       </h1>
