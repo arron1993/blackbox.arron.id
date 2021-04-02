@@ -44,7 +44,10 @@ export class CalcuatorComponent implements OnInit {
       this.circuits = resp[0];
       this.cars = resp[1];
       this.ms.getLastSession().subscribe((lastSession: any) => {
-        this.stintLength = this.ts.toMinutes(lastSession.session_length);
+        if (lastSession.session_length > 0) {
+          this.stintLength = this.ts.toMinutes(lastSession.session_length);
+        }
+
         this.selectedCircuit = lastSession.circuit.id;
         this.selectedCar = lastSession.car.id;
         this.update();
