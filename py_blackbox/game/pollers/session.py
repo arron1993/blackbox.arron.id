@@ -2,7 +2,6 @@ import threading
 import time
 import datetime
 
-
 from game.api import GameApi
 from game.models.session_status import SessionStatus
 
