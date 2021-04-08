@@ -19,6 +19,9 @@ class GameApi():
     def get_session_type(self):
         return self.graphic.ACC_SESSION_TYPE
 
+    def get_number_of_cars(self):
+        return self.static.numCars
+
     def get_session_details(self):
         return {
             "session_type": self.graphic.ACC_SESSION_TYPE,

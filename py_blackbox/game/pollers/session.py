@@ -34,7 +34,6 @@ class SessionPoller():
                 session_status_change = (
                     last_session_status != session_status and
                     last_session_status == SessionStatus.OFF.value)
-
                 # the session can change without quitting
                 # e.g. qualifying to race
                 session_type_changed = (last_session_type != session_type and
