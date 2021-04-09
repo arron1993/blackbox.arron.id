@@ -28,7 +28,7 @@ class MetricsCircuitSummary(APIView):
                 "id").filter(circuit_id=circuit.id,
                              user=request.user,
                              stint__id__isnull=False,
-                             car__group=car_group).all()
+                             car__group=car_group).distinct()
 
             stints = Stint.objects.only('id').filter(
                 session_id__in=sessions)

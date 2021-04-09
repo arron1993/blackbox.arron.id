@@ -27,8 +27,7 @@ class SessionList(APIView, PageNumberOnlyPagination):
         sessions = Session.objects.filter(
             user_id=request.user.id,
             stint__id__isnull=False,
-            **filters).order_by("-created_at")
-
+            **filters).order_by("-created_at").distinct()
         results = self.paginate_queryset(sessions, request, view=self)
 
         serializer = SessionListSerializer(results, many=True)
