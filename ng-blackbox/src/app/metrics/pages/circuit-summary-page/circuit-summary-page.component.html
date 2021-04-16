@@ -4,9 +4,10 @@
   <ng-container *ngIf="circuitSummary.length > 0; else loadingSpinner">
     <div class="row col-12 py-2 border-bottom">
       <div class="col-12 col-lg-4 font-weight-bold">Circuit</div>
-      <div class="col-12 col-lg-4 font-weight-bold">Car</div>
+      <div class="col-12 col-lg-3 font-weight-bold">Car</div>
       <div class="col-12 col-lg-2 font-weight-bold">Best Time</div>
       <div class="col-12 col-lg-2 font-weight-bold">Median Time</div>
+      <div class="col-12 col-lg-1 font-weight-bold">Totals</div>
     </div>
     <div
       class="row hover col-12 py-3 border-bottom font-roboto-mono"
@@ -19,7 +20,7 @@
       <div class="col-4 border-right">
         {{ summary.circuit.name }}
       </div>
-      <div class="col-4 border-right">
+      <div class="col-3 border-right">
         {{ summary.car.name || "No Data" }}
       </div>
       <div class="col-2">
@@ -39,6 +40,10 @@
           }}
         </ng-container>
         <ng-template #noData> No Data </ng-template>
+      </div>
+      <div class="col-1">
+        <div>{{ summary.total_sessions }} sessions</div>
+        <div>{{ summary.total_laps }} laps</div>
       </div>
     </div>
   </ng-container>

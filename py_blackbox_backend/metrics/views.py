@@ -31,18 +31,20 @@ class MetricsCircuitSummary(APIView):
                              user=request.user,
                              stint__id__isnull=False,
                              car__group=car_group).distinct()
-
+            total_sessions = len(sessions)
             stints = Stint.objects.only('id').filter(
                 session_id__in=sessions)
+
             laps = Lap.objects.filter(
-                stint_id__in=stints).order_by("time")
+                stint_id__in=stints).order_by("time")[:1000]
 
             median_time = None
             car = {"name": None, "id": None}
             best_time = None
             session_id = None
             best_lap = None
-            if len(laps) > 0:
+            total_laps = len(laps)
+            if total_laps > 0:
                 best_lap = laps[0]
                 median_time = statistics.median([lap.time for lap in laps])
                 car = best_lap.stint_id.session_id.car
@@ -54,7 +56,10 @@ class MetricsCircuitSummary(APIView):
                 "circuit": circuit,
                 "session_id": session_id,
                 "best_time": best_time,
-                "median_time": median_time})
+                "median_time": median_time,
+                "total_sessions": total_sessions,
+                "total_laps": total_laps,
+            })
 
         serializer = CircuitSummarySerializer(summary, many=True)
         return Response(serializer.data)

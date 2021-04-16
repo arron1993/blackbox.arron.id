@@ -8,5 +8,7 @@ class CircuitSummarySerializer(serializers.Serializer):
     best_time = serializers.IntegerField()
     median_time = serializers.IntegerField()
     session_id = serializers.IntegerField()
+    total_laps = serializers.IntegerField()
+    total_sessions = serializers.IntegerField()
     car = CarSerializer()
     circuit = CircuitSerializer()
