@@ -2,7 +2,11 @@
   <div class="col-12">
     <select class="form-control" (change)="onChange($event)">
       <option value="null">Circuit</option>
-      <option [value]="circuit.id" *ngFor="let circuit of circuits">
+      <option
+        [selected]="circuitId"
+        [value]="circuit.id"
+        *ngFor="let circuit of circuits"
+      >
         {{ circuit.name }}
       </option>
     </select>
