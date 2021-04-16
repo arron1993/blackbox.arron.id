@@ -32,6 +32,7 @@ export class CircuitSummaryPageComponent implements OnInit {
         this.circuitSummary = summary;
         this.circuitSummary.map((x) => {
           x.best_time = this.ts.convertTime(x.best_time);
+          x.median_time = this.ts.convertTime(x.median_time);
           return x;
         });
       });

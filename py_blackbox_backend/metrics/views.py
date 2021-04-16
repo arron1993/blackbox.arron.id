@@ -1,3 +1,5 @@
+import statistics
+
 from django.db.models import Min
 
 from rest_framework.views import APIView
@@ -32,14 +34,17 @@ class MetricsCircuitSummary(APIView):
 
             stints = Stint.objects.only('id').filter(
                 session_id__in=sessions)
-            best_lap = Lap.objects.filter(
-                stint_id__in=stints).order_by("time").first()
+            laps = Lap.objects.filter(
+                stint_id__in=stints).order_by("time")
 
+            median_time = None
             car = {"name": None, "id": None}
             best_time = None
             session_id = None
-
-            if best_lap:
+            best_lap = None
+            if len(laps) > 0:
+                best_lap = laps[0]
+                median_time = statistics.median([lap.time for lap in laps])
                 car = best_lap.stint_id.session_id.car
                 best_time = best_lap.time
                 session_id = best_lap.stint_id.session_id.id
@@ -48,7 +53,8 @@ class MetricsCircuitSummary(APIView):
                 "car": car,
                 "circuit": circuit,
                 "session_id": session_id,
-                "best_time": best_time})
+                "best_time": best_time,
+                "median_time": median_time})
 
         serializer = CircuitSummarySerializer(summary, many=True)
         return Response(serializer.data)
