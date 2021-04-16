@@ -9,16 +9,27 @@ import { SessionTypeService } from '../../services/session-type.service';
 export class SessionTypeListComponent implements OnInit {
   @Output() sessionType = new EventEmitter();
   sessionTypes = [];
+  typeId = null;
 
   constructor(private sst: SessionTypeService) {}
 
   ngOnInit(): void {
     this.sst.get().subscribe((resp: any) => {
       this.sessionTypes = resp;
+      const typeId = sessionStorage.getItem('filter-typeId');
+      if (typeId) {
+        this.typeId = typeId;
+        this.emit(typeId);
+      }
     });
   }
 
+  emit(value) {
+    this.sessionType.emit(value);
+  }
+
   onChange(e) {
-    this.sessionType.emit(e.target.value);
+    sessionStorage.setItem('filter-typeId', e.target.value);
+    this.emit(e.target.value);
   }
 }

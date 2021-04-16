@@ -16,7 +16,7 @@ export class CircuitListComponent implements OnInit {
   ngOnInit(): void {
     this.cs.get().subscribe((resp: any) => {
       this.circuits = resp;
-      this.circuitId = localStorage.getItem(`filter-circuitId`);
+      this.circuitId = sessionStorage.getItem(`filter-circuitId`);
       if (this.circuitId !== undefined) {
         this.emit(this.circuitId);
       }
@@ -30,7 +30,7 @@ export class CircuitListComponent implements OnInit {
   onChange(event) {
     const value = event.target.value;
     this.circuitId = value;
-    localStorage.setItem(`filter-circuitId`, value);
+    sessionStorage.setItem(`filter-circuitId`, value);
     this.emit(value);
   }
 }

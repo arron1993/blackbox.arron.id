@@ -10,16 +10,28 @@ export class CarListComponent implements OnInit {
   @Output() car = new EventEmitter();
 
   cars = [];
+  carId = null;
 
   constructor(private cs: CarService) {}
 
   ngOnInit(): void {
     this.cs.get().subscribe((resp: any[]) => {
       this.cars = resp;
+      const carId = sessionStorage.getItem('filter-carId');
+      if (carId) {
+        this.carId = carId;
+        this.emit(this.carId);
+      }
     });
   }
 
+  emit(value) {
+    this.car.emit(value);
+  }
+
   onChange(event) {
-    this.car.emit(event.target.value);
+    const value = event.target.value;
+    sessionStorage.setItem('filter-carId', value);
+    this.emit(value);
   }
 }
