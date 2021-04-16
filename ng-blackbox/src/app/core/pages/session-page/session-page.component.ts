@@ -37,8 +37,8 @@ export class SessionPageComponent implements OnInit {
         for (const lap of laps) {
           this.lapTimes.push(lap.time);
           this.sector1Times.push(lap.sector1);
-          this.sector2Times.push(lap.sector2);
-          this.sector3Times.push(lap.sector3);
+          this.sector2Times.push(lap.sector2 - lap.sector1);
+          this.sector3Times.push(lap.sector3 - lap.sector2);
         }
         this.fastestSector1 = Math.min(...this.sector1Times);
         this.fastestSector2 = Math.min(...this.sector2Times);
