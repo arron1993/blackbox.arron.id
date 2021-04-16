@@ -31,58 +31,19 @@ export class SessionPageComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.ss.getDetail(params.id).subscribe((resp: any) => {
         this.session = resp;
-        let fastestLapTime = null;
-        let fastestSector1 = { time: null, realTime: null };
-        let fastestSector2 = { time: null, realTime: null };
-        let fastestSector3 = { time: null, realTime: null };
-        let lapTimes = [];
-        let sector1Times = [];
-        let sector2Times = [];
-        let sector3Times = [];
-        for (let stint of this.session.stints) {
-          for (let lap of stint.laps) {
-            lapTimes.push(lap.time);
-            let sector1 = lap.sector1;
-            let sector2 = lap.sector2 - sector1;
-            let sector3 = lap.sector3 - sector2;
-            sector1Times.push(sector1);
-            sector2Times.push(sector2);
-            sector3Times.push(sector3);
+        const laps = this.session.stints.map((stint) => stint.laps)[0];
+        this.lapCount = laps.length;
 
-            if (lap.time < fastestLapTime || fastestLapTime === null) {
-              fastestLapTime = lap.time;
-            }
-            // probably a more efficient way of doing this
-            if (
-              sector1 < fastestSector1.realTime ||
-              fastestSector1.realTime === null
-            ) {
-              fastestSector1 = { time: lap.sector1, realTime: sector1 };
-            }
-            if (
-              sector2 < fastestSector2.realTime ||
-              fastestSector2.realTime === null
-            ) {
-              fastestSector2 = { time: lap.sector2, realTime: sector2 };
-            }
-            if (
-              sector3 < fastestSector3.realTime ||
-              fastestSector3.realTime === null
-            ) {
-              fastestSector3 = { time: lap.sector3, realTime: sector3 };
-            }
-          }
+        for (const lap of laps) {
+          this.lapTimes.push(lap.time);
+          this.sector1Times.push(lap.sector1);
+          this.sector2Times.push(lap.sector2);
+          this.sector3Times.push(lap.sector3);
         }
-        this.fastestLapTime = fastestLapTime;
-        this.fastestSector1 = fastestSector1;
-        this.fastestSector2 = fastestSector2;
-        this.fastestSector3 = fastestSector3;
-        this.lapTimes = lapTimes;
-        this.sector1Times = sector1Times;
-        this.sector2Times = sector2Times;
-        this.sector3Times = sector3Times;
-
-        this.lapCount = lapTimes.length;
+        this.fastestSector1 = Math.min(...this.sector1Times);
+        this.fastestSector2 = Math.min(...this.sector2Times);
+        this.fastestSector3 = Math.min(...this.sector3Times);
+        this.fastestLapTime = Math.min(...this.lapTimes);
       });
     });
   }
