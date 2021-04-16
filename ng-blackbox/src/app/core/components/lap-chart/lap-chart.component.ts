@@ -10,16 +10,8 @@ import { Color, Label } from 'ng2-charts';
 export class LapChartComponent implements OnInit {
   @Input() lapCount: number;
   @Input() lapTimes: number[];
-  @Input() sector1Times: number[];
-  @Input() sector2Times: number[];
-  @Input() sector3Times: number[];
 
-  public lineChartData: ChartDataSets[] = [
-    { data: [], label: 'Time' },
-    { data: [], label: 'Sector 1' },
-    { data: [], label: 'Sector 2' },
-    { data: [], label: 'Sector 3' },
-  ];
+  public lineChartData: ChartDataSets[] = [];
 
   public lineChartLabels: Label[] = [];
 
@@ -57,15 +49,6 @@ export class LapChartComponent implements OnInit {
       borderColor: 'black',
       backgroundColor: 'rgba(255,0,0,0.0)',
     },
-    {
-      borderColor: 'red',
-    },
-    {
-      borderColor: 'green',
-    },
-    {
-      borderColor: 'purple',
-    },
   ];
   public lineChartLegend = true;
   public lineChartType = 'line';
@@ -76,9 +59,9 @@ export class LapChartComponent implements OnInit {
     for (let i = 1; i <= this.lapCount; i++) {
       this.lineChartLabels.push(<Label>(<unknown>i));
     }
-    this.lineChartData[0].data = this.lapTimes;
-    this.lineChartData[1].data = this.sector1Times;
-    this.lineChartData[2].data = this.sector2Times;
-    this.lineChartData[3].data = this.sector3Times;
+    this.lineChartData = [{ label: 'Times', data: this.lapTimes }];
+    // this.lineChartData[1].data = this.sector1Times;
+    // this.lineChartData[2].data = this.sector2Times;
+    // this.lineChartData[3].data = this.sector3Times;
   }
 }
