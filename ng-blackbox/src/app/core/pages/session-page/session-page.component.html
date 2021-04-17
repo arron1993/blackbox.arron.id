@@ -73,15 +73,17 @@
             <div
               class="lap-data col-12 col-lg-2"
               [ngClass]="{
-                'bg-success text-white': lap.sector2 === fastestSector2
+                'bg-success text-white':
+                  getRealSectorTime(lap, 2) === fastestSector2
               }"
             >
-              {{ convertTime(lap.sector2 - lap.sector1) }}
+              {{ convertTime(getRealSectorTime(lap, 2)) }}
             </div>
             <div
               class="lap-data col-12 col-lg-2"
               [ngClass]="{
-                'bg-success text-white': lap.sector3 === fastestSector3
+                'bg-success text-white':
+                  getRealSectorTime(lap, 3) === fastestSector3
               }"
             >
               {{ convertTime(lap.sector3 - lap.sector2) }}

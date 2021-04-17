@@ -48,6 +48,19 @@ export class SessionPageComponent implements OnInit {
     });
   }
 
+  getRealSectorTime(lap, sector) {
+    switch (sector) {
+      case 1:
+        return lap.sector1;
+        break;
+      case 2:
+        return lap.sector2 - lap.sector1;
+
+      case 3:
+        return lap.sector3 - lap.sector2;
+    }
+  }
+
   get medianLaptime() {
     const median = [...this.lapTimes].sort()[
       Math.floor((this.lapTimes.length - 1) / 2)
