@@ -31,7 +31,8 @@ export class SessionPageComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.ss.getDetail(params.id).subscribe((resp: any) => {
         this.session = resp;
-        const laps = this.session.stints.map((stint) => stint.laps)[0];
+        let laps = this.session.stints.map((stint) => stint.laps);
+        laps = [].concat.apply([], laps);
         this.lapCount = laps.length;
 
         for (const lap of laps) {
