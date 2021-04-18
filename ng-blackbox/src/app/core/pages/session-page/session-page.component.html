@@ -109,8 +109,13 @@
 
   <div class="row p-3 mt-3" *ngIf="lapCount > 0">
     <div class="col-12 bg-white p-3 border">
-      <div class="d-flex">
-        <!-- <h3>{{ lapCount }} Laps {{ medianLaptime }} Median Time</h3> -->
+      <div class="d-flex justify-content-between">
+        <div>
+          <h3>{{ medianLaptime }} Median Time</h3>
+        </div>
+        <div>
+          <h3>{{ lapCount }} Laps</h3>
+        </div>
       </div>
 
       <app-lap-chart
