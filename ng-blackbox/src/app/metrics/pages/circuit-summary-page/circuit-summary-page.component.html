@@ -2,7 +2,7 @@
 
 <div class="row no-gutters bg-white p-3 border mt-3">
   <ng-container *ngIf="circuitSummary.length > 0; else loadingSpinner">
-    <div class="row col-12 py-2 border-bottom">
+    <div class="d-none d-lg-flex row col-12 py-2 border-bottom">
       <div class="col-12 col-lg-4 font-weight-bold">Circuit</div>
       <div class="col-12 col-lg-3 font-weight-bold">Car</div>
       <div class="col-12 col-lg-2 font-weight-bold">Best Time</div>
@@ -17,13 +17,13 @@
       (click)="selectedCircuit = summary.circuit.id"
       *ngFor="let summary of circuitSummary"
     >
-      <div class="col-4 border-right">
+      <div class="col-12 col-lg-4 border-right">
         {{ summary.circuit.name }}
       </div>
-      <div class="col-3 border-right">
+      <div class="col-12 col-lg-3 border-right">
         {{ summary.car.name || "No Data" }}
       </div>
-      <div class="col-2">
+      <div class="col-12 col-lg-2">
         <ng-container *ngIf="summary.best_time.minutes !== '00'; else noData">
           <a routerLink="/sessions/{{ summary.session_id }}">
             {{ summary.best_time.minutes }}:{{ summary.best_time.seconds }}:{{
@@ -33,7 +33,7 @@
         </ng-container>
         <ng-template #noData> No Data </ng-template>
       </div>
-      <div class="col-2">
+      <div class="col-12 col-lg-2">
         <ng-container *ngIf="summary.median_time.minutes !== '00'; else noData">
           {{ summary.median_time.minutes }}:{{ summary.median_time.seconds }}:{{
             summary.median_time.milliseconds
@@ -41,7 +41,7 @@
         </ng-container>
         <ng-template #noData> No Data </ng-template>
       </div>
-      <div class="col-1">
+      <div class="col-12 col-lg-1">
         <div>{{ summary.total_sessions }} sessions</div>
         <div>{{ summary.total_laps }} laps</div>
       </div>
