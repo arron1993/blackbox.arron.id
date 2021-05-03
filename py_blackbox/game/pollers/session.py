@@ -20,8 +20,8 @@ class SessionPoller():
     def run(self):
         session_status = self.api.get_session_status()
         session_type = self.api.get_session_type()
-        if session_status != SessionStatus.OFF.value:
-            # if we're already running, the create the new session
+        if session_status == SessionStatus.LIVE.value:
+            # if we're already running, then create the new session
             Event("onNewSession", session_status)
 
         while True:
@@ -34,12 +34,13 @@ class SessionPoller():
                 session_status_change = (
                     last_session_status != session_status and
                     last_session_status == SessionStatus.OFF.value)
+
+                session_is_live = (session_status == SessionStatus.LIVE.value)
                 # the session can change without quitting
                 # e.g. qualifying to race
                 session_type_changed = (last_session_type != session_type and
                                         session_type != SessionStatus.OFF.value)
-
-                if session_status_change or session_type_changed:
+                if (session_status_change or session_type_changed) and (session_is_live):
                     Event("onNewSession", session_status)
             except Exception as e:
                 print(datetime.datetime.now(), "Session Error:", e)

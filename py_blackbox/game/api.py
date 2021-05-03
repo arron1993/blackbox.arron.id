@@ -24,14 +24,17 @@ class GameApi():
     def get_number_of_cars(self):
         return self.static.numCars
 
+    def get_track_temp(self):
+        return self.physics.roadTemp
+
     def get_session_details(self):
         return {
             "session_type": self.graphic.ACC_SESSION_TYPE,
             "car": self.static.carModel,
             # # silverstone is "Silverstone" can't be doing with that
             "circuit": self.static.track.lower(),
-            "air_temp": self.physics.airTemp,
-            "track_temp": self.physics.trackTemp,
+            "air_temp": round(self.physics.airTemp),
+            "track_temp": round(self.physics.roadTemp),
             "session_length": self.graphic.sessionTimeLeft
         }
 
