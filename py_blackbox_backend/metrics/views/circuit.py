@@ -1,4 +1,5 @@
 import statistics
+import datetime
 
 from django.db.models import Min
 
@@ -34,16 +35,25 @@ class MetricsCircuitSummary(APIView):
             session_id = None
             best_lap = None
             total_laps = len(laps)
+            new_best = False
             if total_laps > 0:
                 best_lap = laps[0]
                 median_time = statistics.median([lap.time for lap in laps])
                 car = best_lap.stint_id.session_id.car
                 best_time = best_lap.time
                 session_id = best_lap.stint_id.session_id.id
+                best_lap.stint_id.session_id.created_at
+
+                session_date = best_lap.stint_id.session_id.created_at.replace(
+                    tzinfo=None)
+
+                time_since_session = datetime.datetime.now() - session_date
+                new_best = time_since_session.days < 7
 
             summary.append({
                 "car": car,
                 "circuit": circuit,
+                "new_best": best_lap,
                 "session_id": session_id,
                 "best_time": best_time,
                 "median_time": median_time,
