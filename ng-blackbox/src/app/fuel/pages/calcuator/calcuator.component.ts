@@ -56,7 +56,7 @@ export class CalcuatorComponent implements OnInit {
   }
 
   get fuelForStint() {
-    this.estimatedLaps = this.getTotalLaps();
+    this.estimatedLaps = this.getTotalLaps() + 1;
     const stintFuelUsage = this.fuelUsage * this.estimatedLaps;
 
     return Math.round(stintFuelUsage * 100) / 100;
