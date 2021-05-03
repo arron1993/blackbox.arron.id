@@ -32,5 +32,6 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     FormsModule,
     ChartsModule,
   ],
+  exports: [CarListComponent],
 })
 export class CoreModule {}

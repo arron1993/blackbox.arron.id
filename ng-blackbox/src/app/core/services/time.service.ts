@@ -27,4 +27,9 @@ export class TimeService {
   toMinutes(duration) {
     return duration / 1000 / 60;
   }
+
+  formatTime(time) {
+    time = this.convertTime(time);
+    return `${time.minutes}:${time.seconds}:${time.milliseconds}`;
+  }
 }

@@ -1,13 +1,22 @@
 @import "../../../../colours.scss";
 
-.metric-tile {
+.tile {
   font-size: 1.5rem;
   background-color: white;
   transition: 0.2s linear;
+  cursor: pointer;
 
-  &:hover {
-    cursor: pointer;
-    background-color: $orange;
-    color: white;
+  &.circuit-tile {
+    &:hover {
+      background-color: $orange;
+      color: white;
+    }
+  }
+
+  &.car-tile {
+    &:hover {
+      background-color: $red;
+      color: white;
+    }
   }
 }

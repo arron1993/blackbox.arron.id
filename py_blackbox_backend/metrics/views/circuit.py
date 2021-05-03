@@ -8,17 +8,7 @@ from rest_framework.response import Response
 from session.models import Session, Stint, Lap
 from circuit.models import Circuit
 
-from session.serializers.session import SessionSerializer
 from metrics.serializers.circuit_summary import CircuitSummarySerializer
-
-
-class MetricLastSession(APIView):
-
-    def get(self, request, format=None):
-        last_session = Session.objects.filter(
-            user=request.user).order_by("-created_at").first()
-        serializer = SessionSerializer(last_session)
-        return Response(serializer.data)
 
 
 class MetricsCircuitSummary(APIView):

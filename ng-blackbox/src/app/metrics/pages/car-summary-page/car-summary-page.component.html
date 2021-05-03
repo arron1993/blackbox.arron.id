@@ -1,0 +1,20 @@
+<app-car-list (car)="getTimes($event)"></app-car-list>
+
+<div class="row no-gutters bg-white p-3 border mt-3">
+  <div class="row no-gutters col-12 py-2 font-weight-bold border-bottom">
+    <div class="col-6">Circuit</div>
+    <div class="col-6">Time</div>
+  </div>
+
+  <div
+    class="row no-gutters col-12 py-3 font-roboto-mono border-bottom"
+    *ngFor="let result of results"
+  >
+    <div class="col-6">
+      {{ result.circuit.name }}
+    </div>
+    <div class="col-6">
+      {{ ts.formatTime(result.lap.time) }}
+    </div>
+  </div>
+</div>
