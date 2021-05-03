@@ -33,8 +33,11 @@ class GameApi():
             "session_length": self.graphic.sessionTimeLeft
         }
 
+    def get_tyre_pressures(self):
+        return self.physics.wheelsPressure
+
     def get_last_lap_details(self):
-        print(self.physics.wheelPressure)
+        print(self.physics.wheelsPressure)
         return {
             "number": self.graphic.completedLaps,
             "time": self.graphic.iLastTime,
