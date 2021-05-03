@@ -95,10 +95,16 @@
             </div>
             <div class="lap-data col-12 col-lg-1">
               <div class="row no-gutters w-100">
-                <div class="col-6">{{ lap.front_left_pressure }}</div>
-                <div class="col-6">{{ lap.front_right_pressure }}</div>
-                <div class="col-6">{{ lap.rear_left_pressure }}</div>
-                <div class="col-6">{{ lap.rear_right_pressure }}</div>
+                <div class="col-6">
+                  {{ lap.front_left_pressure.toFixed(2) }}
+                </div>
+                <div class="col-6">
+                  {{ lap.front_right_pressure.toFixed(2) }}
+                </div>
+                <div class="col-6">{{ lap.rear_left_pressure.toFixed(2) }}</div>
+                <div class="col-6">
+                  {{ lap.rear_right_pressure.toFixed(2) }}
+                </div>
               </div>
             </div>
             <div class="lap-data col-12 col-lg-1">
