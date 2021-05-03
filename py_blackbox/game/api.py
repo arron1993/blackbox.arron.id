@@ -57,6 +57,9 @@ class GameApi():
             "rear_right_pressure": tyre_pressures[3],
         }
 
+    def get_is_engine_running(self):
+        return self.physics.isEngineRunning
+
     def get_is_in_pitlane(self):
         return self.graphic.isInPitLane
 
