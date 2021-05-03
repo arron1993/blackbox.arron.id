@@ -8,15 +8,10 @@ import { MetricService } from '../../services/metric.service';
   styleUrls: ['./car-summary-page.component.scss'],
 })
 export class CarSummaryPageComponent implements OnInit {
-  results = [];
+  carOne;
+  carTwo;
+
   constructor(private ms: MetricService, private ts: TimeService) {}
 
   ngOnInit(): void {}
-
-  getTimes(carID) {
-    this.ms.getCarSummary(carID).subscribe((resp: any[]) => {
-      this.results = resp;
-      console.log(this.results);
-    });
-  }
 }

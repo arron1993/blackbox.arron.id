@@ -1,20 +1,40 @@
-<app-car-list (car)="getTimes($event)"></app-car-list>
-
-<div class="row no-gutters bg-white p-3 border mt-3">
-  <div class="row no-gutters col-12 py-2 font-weight-bold border-bottom">
-    <div class="col-6">Circuit</div>
-    <div class="col-6">Time</div>
+<div class="row no-gutters">
+  <div class="col-12 col-lg-6">
+    <app-car-list
+      storePrefix="summary-one"
+      (car)="carOne = $event"
+    ></app-car-list>
   </div>
 
-  <div
-    class="row no-gutters col-12 py-3 font-roboto-mono border-bottom"
-    *ngFor="let result of results"
-  >
-    <div class="col-6">
-      {{ result.circuit.name }}
-    </div>
-    <div class="col-6">
-      {{ ts.formatTime(result.lap.time) }}
-    </div>
+  <div class="col-12 col-lg-6">
+    <app-car-list
+      storePrefix="summary-two"
+      (car)="carTwo = $event"
+    ></app-car-list>
   </div>
 </div>
+
+<div *ngIf="carOne || carTwo" class="row no-gutters bg-white p-3 border mt-3">
+  <div
+    [ngClass]="{
+      'col-6': carTwo,
+      'col-12': !carTwo
+    }"
+  >
+    <div class="row no-gutters py-2 font-weight-bold border-bottom">
+      <div class="col-6">Circuit</div>
+      <div class="col-6">Time</div>
+    </div>
+    <app-car-summary-list [carID]="carOne"></app-car-summary-list>
+  </div>
+
+  <div *ngIf="carTwo" class="col-6">
+    <div class="row no-gutters py-2 font-weight-bold border-bottom">
+      <div class="col-6">Circuit</div>
+      <div class="col-6">Time</div>
+    </div>
+    <app-car-summary-list [carID]="carTwo"></app-car-summary-list>
+  </div>
+</div>
+
+<!-- <app-car-summary-list class="col-12" [carID]="carTwo"></app-car-summary-list> -->

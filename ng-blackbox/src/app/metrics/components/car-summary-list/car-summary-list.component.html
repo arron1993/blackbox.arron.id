@@ -1,0 +1,11 @@
+<div
+  class="row col-12 no-gutters py-3 font-roboto-mono border-bottom"
+  *ngFor="let result of results"
+>
+  <div class="col-6">
+    {{ result.circuit.name }}
+  </div>
+  <div class="col-6">
+    {{ ts.formatTime(result.lap.time) }}
+  </div>
+</div>

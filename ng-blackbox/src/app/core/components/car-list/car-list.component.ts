@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CarService } from '../../services/car.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { CarService } from '../../services/car.service';
 })
 export class CarListComponent implements OnInit {
   @Output() car = new EventEmitter();
+  @Input() filterPrefix = '';
 
   cars = [];
   carId = null;
@@ -17,7 +18,7 @@ export class CarListComponent implements OnInit {
   ngOnInit(): void {
     this.cs.get().subscribe((resp: any[]) => {
       this.cars = resp;
-      const carId = sessionStorage.getItem('filter-carId');
+      const carId = sessionStorage.getItem(`filter-${this.filterPrefix}-carId`);
       if (carId) {
         this.carId = carId;
         this.emit(this.carId);

@@ -7,6 +7,7 @@ import { MetricDashboardPageComponent } from './pages/metric-dashboard-page/metr
 import { CarGroupSelectorComponent } from './components/car-group-selector/car-group-selector.component';
 import { CarSummaryPageComponent } from './pages/car-summary-page/car-summary-page.component';
 import { CoreModule } from '../core/core.module';
+import { CarSummaryListComponent } from './components/car-summary-list/car-summary-list.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { CoreModule } from '../core/core.module';
     MetricDashboardPageComponent,
     CarGroupSelectorComponent,
     CarSummaryPageComponent,
+    CarSummaryListComponent,
   ],
   imports: [CommonModule, MetricsRoutingModule, CoreModule],
 })
