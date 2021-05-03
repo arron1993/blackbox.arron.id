@@ -30,6 +30,8 @@ class GameApi():
             "car": self.static.carModel,
             # # silverstone is "Silverstone" can't be doing with that
             "circuit": self.static.track.lower(),
+            "air_temp": self.physics.airTemp,
+            "track_temp": self.physics.trackTemp,
             "session_length": self.graphic.sessionTimeLeft
         }
 

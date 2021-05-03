@@ -40,7 +40,7 @@ class SPageFilePhysics(Structure):
         ("ballast", c_float),
         ("airDensity", c_float),
         ("airTemp", c_float),
-        ("roadTemp", c_float),
+        ("trackTemp", c_float),
         ("localAngularVel", c_float * 3),
         ("finalFF", c_float),
         ("performanceMeter", c_float),

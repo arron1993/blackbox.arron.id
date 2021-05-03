@@ -16,6 +16,8 @@ class Session(models.Model):
     session_type = models.ForeignKey(SessionType, on_delete=models.DO_NOTHING)
 
     session_length = models.IntegerField()
+    track_temp = models.IntegerField()
+    air_temp = models.IntegerField()
 
 
 class Stint(models.Model):
@@ -40,3 +42,8 @@ class Lap(models.Model):
     sector3 = models.IntegerField(null=True)
 
     num_cars = models.IntegerField()
+
+    front_left_pressure = models.FloatField()
+    front_right_pressure = models.FloatField()
+    rear_left_pressure = models.FloatField()
+    rear_right_pressure = models.FloatField()
