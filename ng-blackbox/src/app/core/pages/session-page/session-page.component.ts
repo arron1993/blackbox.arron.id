@@ -75,11 +75,16 @@ export class SessionPageComponent implements OnInit {
   }
 
   formatSessionLength(length) {
-    const time = this.ts.convertTime(length);
-    if (time.hours !== '00') {
-      return `${time.hours} hours ${time.minutes} minutes`;
+    if (length < 0) {
+      return 'N/A';
     } else {
-      return `${time.minutes} minutes`;
+      const time = this.ts.convertTime(length);
+
+      if (time.hours !== '00') {
+        return `${time.hours} hours ${time.minutes} minutes`;
+      } else {
+        return `${time.minutes} minutes`;
+      }
     }
   }
 
