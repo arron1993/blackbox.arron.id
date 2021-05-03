@@ -53,7 +53,7 @@ class MetricsCircuitSummary(APIView):
             summary.append({
                 "car": car,
                 "circuit": circuit,
-                "new_best": best_lap,
+                "new_best": new_best,
                 "session_id": session_id,
                 "best_time": best_time,
                 "median_time": median_time,
