@@ -6,6 +6,6 @@ from ctypes import sizeof
 
 class PhysicsWrapper:
     def __getattr__(self, attr):
-        buf = mmap.mmap(-1, sizeof(SPageFilePhysics), u"Local\\acpmf_physic")
+        buf = mmap.mmap(-1, sizeof(SPageFilePhysics), u"Local\\acpmf_physics")
         data = SPageFilePhysics.from_buffer(buf)
         return getattr(data, attr)

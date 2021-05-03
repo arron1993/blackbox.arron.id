@@ -23,7 +23,6 @@ class LapPoller():
         current_sector = self.api.get_current_sector()
         current_lap = self.api.get_completed_laps()
         while True:
-            print(self.api.get_tyre_pressures())
             try:
                 # to track a lap change we detect when
                 # the car leaves sector 2, that way we

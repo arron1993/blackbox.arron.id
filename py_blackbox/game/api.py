@@ -37,7 +37,7 @@ class GameApi():
         return self.physics.wheelsPressure
 
     def get_last_lap_details(self):
-        print(self.physics.wheelsPressure)
+        tyre_pressures = self.physics.wheelsPressure
         return {
             "number": self.graphic.completedLaps,
             "time": self.graphic.iLastTime,
@@ -46,6 +46,10 @@ class GameApi():
             "delta_time": self.graphic.iDeltaLapTime,
             "is_valid": self.graphic.isValidLap,
             "num_cars": self.static.numCars,
+            "front_left_pressure": tyre_pressures[0],
+            "front_right_pressure": tyre_pressures[1],
+            "rear_left_pressure": tyre_pressures[2],
+            "rear_right_pressure": tyre_pressures[3],
         }
 
     def get_is_in_pitlane(self):
