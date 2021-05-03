@@ -39,14 +39,15 @@
           </span>
         </div>
         <div
-          class="d-none d-lg-flex col-12 row no-gutters font-weight-bold py-2 border-bottom"
+          class="d-none d-lg-flex col-12 row no-gutters font-weight-bold py-1 border-bottom"
         >
           <div class="col-12 col-lg-1">Lap</div>
           <div class="col-12 col-lg-2">Time</div>
           <div class="col-12 col-lg-2">Sector 1</div>
           <div class="col-12 col-lg-2">Sector 2</div>
           <div class="col-12 col-lg-2">Sector 3</div>
-          <div class="col-12 col-lg-2">Fuel</div>
+          <div class="col-12 col-lg-1">Fuel</div>
+          <div class="col-12 col-lg-1">Tyres</div>
           <div class="col-12 col-lg-1">Position</div>
         </div>
         <ng-container *ngIf="stint.laps.length > 0; else noLapsRecorded">
@@ -89,8 +90,16 @@
             >
               {{ convertTime(lap.sector3 - lap.sector2) }}
             </div>
-            <div class="lap-data col-12 col-lg-2">
+            <div class="lap-data col-12 col-lg-1">
               {{ lap.fuel_used.toFixed(2) }}L
+            </div>
+            <div class="lap-data col-12 col-lg-1">
+              <div class="row no-gutters w-100">
+                <div class="col-6">{{ lap.front_left_pressure }}</div>
+                <div class="col-6">{{ lap.front_right_pressure }}</div>
+                <div class="col-6">{{ lap.rear_left_pressure }}</div>
+                <div class="col-6">{{ lap.rear_right_pressure }}</div>
+              </div>
             </div>
             <div class="lap-data col-12 col-lg-1">
               {{ lap.position }}/{{ lap.num_cars }}
