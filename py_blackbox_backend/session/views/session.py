@@ -1,8 +1,12 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+
 from rest_framework import generics, status, filters
 from rest_framework.views import APIView
-from py_blackbox_backend.pagination import PageNumberOnlyPagination
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+
+from py_blackbox_backend.pagination import PageNumberOnlyPagination
 
 from circuit.models import Circuit
 from car.models import Car
@@ -20,6 +24,7 @@ class SessionList(APIView, PageNumberOnlyPagination):
     serializer_class = SessionSerializer
     page_size = 20
 
+    @method_decorator(cache_page(60))
     def get(self, request, format=None):
         query_params = self.request.query_params
         filters = {k: v for k, v in query_params.items() if
