@@ -1,11 +1,13 @@
 from game.wrappers.graphics import GraphicWrapper
 from game.wrappers.static import StaticWrapper
+from game.wrappers.physics import PhysicsWrapper
 
 
 class GameApi():
     def __init__(self):
         self.graphic = GraphicWrapper()
         self.static = StaticWrapper()
+        self.physics = PhysicsWrapper()
 
     def get_session_status(self):
         return self.graphic.ACC_STATUS
@@ -32,6 +34,7 @@ class GameApi():
         }
 
     def get_last_lap_details(self):
+        print(self.physics.wheelPressure)
         return {
             "number": self.graphic.completedLaps,
             "time": self.graphic.iLastTime,
