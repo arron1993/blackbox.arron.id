@@ -12,12 +12,14 @@ import { CoreModule } from './core/core.module';
 import { FuelModule } from './fuel/fuel.module';
 import { ChartsModule } from 'ng2-charts';
 import { MetricsModule } from './metrics/metrics.module';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    LayoutModule,
     AuthModule,
     CoreModule,
     FuelModule,
