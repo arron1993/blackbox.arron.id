@@ -14,7 +14,10 @@
   </div>
 </div>
 
-<div *ngIf="carOne || carTwo" class="row no-gutters bg-white p-3 border mt-3">
+<div
+  *ngIf="carOne || carTwo; else selectACar"
+  class="row no-gutters bg-white p-3 border mt-3"
+>
   <div
     [ngClass]="{
       'col-6': carTwo,
@@ -36,5 +39,9 @@
     <app-car-summary-list [carID]="carTwo"></app-car-summary-list>
   </div>
 </div>
-
+<ng-template #selectACar>
+  <div class="row no-gutters bg-white p-3 border mt-3">
+    <p>Select a car to start</p>
+  </div>
+</ng-template>
 <!-- <app-car-summary-list class="col-12" [carID]="carTwo"></app-car-summary-list> -->
