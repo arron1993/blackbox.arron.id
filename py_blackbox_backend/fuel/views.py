@@ -16,12 +16,13 @@ class FuelStatsView(APIView):
             car_id=car_id,
             circuit_id=circuit_id,
             stint__id__isnull=False,
-            user_id=request.user.id).order_by("-created_at").distinct()[:100]
+            user_id=request.user.id).order_by("-created_at").distinct()
 
         stints = Stint.objects.only('id').filter(session_id__in=sessions)
-        laps = Lap.objects.filter(stint_id__in=stints)
+        laps = Lap.objects.filter(stint_id__in=stints)[:100]
         if len(laps) == 0:
             return Response({})
+
         lap_times = []
         fuel_usage = []
         for lap in laps:
