@@ -21,6 +21,7 @@ class Session(models.Model):
 
 
 class Stint(models.Model):
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     session_id = models.ForeignKey(Session, on_delete=models.CASCADE)

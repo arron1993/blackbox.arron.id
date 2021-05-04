@@ -28,7 +28,7 @@ class MetricsCircuitSummary(APIView):
 
             # use last 100 laps
             laps = Lap.objects.filter(
-                stint_id__in=stints).order_by("time")
+                stint_id__in=stints).order_by("created_at")
 
             median_time = None
             car = {"name": None, "id": None}
