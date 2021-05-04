@@ -28,7 +28,7 @@ class MetricsCircuitSummary(APIView):
 
             # use last 100 laps
             laps = Lap.objects.filter(
-                stint_id__in=stints).order_by("time")[:100]
+                stint_id__in=stints).order_by("time")
 
             median_time = None
             car = {"name": None, "id": None}
@@ -39,7 +39,8 @@ class MetricsCircuitSummary(APIView):
             new_best = False
             if total_laps > 0:
                 best_lap = laps[0]
-                median_time = statistics.median([lap.time for lap in laps])
+                median_time = statistics.median(
+                    [lap.time for lap in laps[:100]])
                 car = best_lap.stint_id.session_id.car
                 best_time = best_lap.time
                 session_id = best_lap.stint_id.session_id.id
