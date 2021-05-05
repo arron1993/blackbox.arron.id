@@ -33,8 +33,6 @@ class GameApi():
             "car": self.static.carModel,
             # # silverstone is "Silverstone" can't be doing with that
             "circuit": self.static.track.lower(),
-            "air_temp": round(self.physics.airTemp),
-            "track_temp": round(self.physics.roadTemp),
             "session_length": self.graphic.sessionTimeLeft
         }
 
@@ -55,6 +53,8 @@ class GameApi():
             "front_right_pressure": tyre_pressures[1],
             "rear_left_pressure": tyre_pressures[2],
             "rear_right_pressure": tyre_pressures[3],
+            "air_temp": round(self.physics.airTemp),
+            "track_temp": round(self.physics.roadTemp),
         }
 
     def get_is_engine_running(self):
