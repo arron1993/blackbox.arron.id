@@ -2,6 +2,14 @@
 
 <div class="row no-gutters bg-white p-3 border mt-3">
   <ng-container *ngIf="circuitSummary.length > 0; else loadingSpinner">
+    <div
+      class="col-12 text-right pb-2"
+      style="font-size: 0.85rem; line-height: 0.9"
+    >
+      <div>* PB label shows if set within the last 3 days</div>
+      <div>* The last 100 laps are used for best and median calculations</div>
+    </div>
+
     <div class="d-none d-lg-flex row col-12 py-2 border-bottom">
       <div class="col-12 col-lg-4 font-weight-bold">Circuit</div>
       <div class="col-12 col-lg-3 font-weight-bold">Car</div>
@@ -9,6 +17,7 @@
       <div class="col-12 col-lg-2 font-weight-bold">Median Time</div>
       <div class="col-12 col-lg-1 font-weight-bold">Totals</div>
     </div>
+
     <div
       class="row hover col-12 py-3 border-bottom font-roboto-mono"
       [ngClass]="{
