@@ -17,7 +17,7 @@ export class Split {
     const regex = /(?<minutes>[0-9]+):(?<seconds>[0-9]+)\.(?<milliseconds>[0-9]+)/;
     const groups = time.match(regex).groups;
 
-    const mins = parseInt(groups.minutes, 10) * 60;
+    const mins = parseInt(groups.minutes, 10) * 60 * 1000;
     const seconds = parseInt(groups.seconds, 10) * 1000;
     const milli = parseInt(groups.milliseconds, 10);
     return mins + seconds + milli;
