@@ -18,15 +18,15 @@ export class Split {
     const groups = time.match(regex).groups;
 
     return (
-      (parseInt(groups.minutes, 10) * 60 +
-        parseInt(groups.seconds) +
-        parseInt(groups.milliseconds)) *
-      1000
+      (parseInt(groups.minutes, 10) * 60 + parseInt(groups.seconds)) * 1000 +
+      parseInt(groups.milliseconds, 10)
     );
   }
 
   getSplit(time) {
+    console.log(time);
     if (time < this.pro) {
+      console.log(time, this.pro);
       return 'pro';
     } else if (time <= this.silver) {
       return 'silver';

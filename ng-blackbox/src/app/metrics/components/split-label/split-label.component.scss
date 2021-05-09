@@ -7,7 +7,7 @@
   font-size: 0.75rem;
 
   &.pro {
-    background-color: gold;
+    background-color: $yellow;
     color: white;
   }
 
@@ -22,7 +22,7 @@
   }
 
   &.rookie {
-    background-color: $yellow;
-    color: black;
+    background-color: $green;
+    color: white;
   }
 }
