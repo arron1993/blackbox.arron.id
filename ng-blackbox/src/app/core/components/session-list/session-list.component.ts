@@ -34,7 +34,6 @@ export class SessionListComponent implements OnInit {
     };
 
     this.ss.get(filters).subscribe((resp: any) => {
-      console.log(resp);
       this.sessions = resp.results;
       this.count = resp.count;
       this.nextPage = resp.next;

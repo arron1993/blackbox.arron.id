@@ -24,9 +24,7 @@ export class Split {
   }
 
   getSplit(time) {
-    console.log(time);
     if (time < this.pro) {
-      console.log(time, this.pro);
       return 'pro';
     } else if (time <= this.silver) {
       return 'silver';

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { tap, shareReplay } from 'rxjs/operators';
 
 // @ts-ignore
-import jwt_decode from "jwt-decode";
+import jwt_decode from 'jwt-decode';
 
 import * as moment from 'moment';
 
@@ -16,17 +16,14 @@ interface JWTPayload {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class AuthService {
-
   private apiRoot = '/api/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   private setSession(authResult) {
-    console.log(authResult);
     const token = authResult.access;
     const payload = <JWTPayload>jwt_decode(token);
     const expiresAt = moment.unix(payload.exp);
@@ -48,27 +45,26 @@ export class AuthService {
   }
 
   signin(username: string, password: string) {
-    return this.http.post(
-      this.apiRoot.concat('signin/'),
-      { username, password }
-    ).pipe(
-      tap(response => {
-        this.setSession(response)
-      }),
-      shareReplay(),
-    );
+    return this.http
+      .post(this.apiRoot.concat('signin/'), { username, password })
+      .pipe(
+        tap((response) => {
+          this.setSession(response);
+        }),
+        shareReplay()
+      );
   }
 
   signup(email: string, password: string) {
-    return this.http.post(
-      this.apiRoot.concat('signup/'), {
-      "username": email,
-      "password": password,
-    }
-    ).pipe(
-      tap(response => this.setSession(response)),
-      shareReplay(),
-    );
+    return this.http
+      .post(this.apiRoot.concat('signup/'), {
+        username: email,
+        password: password,
+      })
+      .pipe(
+        tap((response) => this.setSession(response)),
+        shareReplay()
+      );
   }
 
   signout() {
@@ -78,14 +74,19 @@ export class AuthService {
   }
 
   refreshToken() {
-    if (moment().isBetween(this.getExpiration().subtract(1, 'days'), this.getExpiration())) {
-      return this.http.post(
-        this.apiRoot.concat('signin/refresh/'),
-        { refresh: this.rToken }
-      ).pipe(
-        tap(response => this.setSession(response)),
-        shareReplay(),
-      ).subscribe();
+    if (
+      moment().isBetween(
+        this.getExpiration().subtract(1, 'days'),
+        this.getExpiration()
+      )
+    ) {
+      return this.http
+        .post(this.apiRoot.concat('signin/refresh/'), { refresh: this.rToken })
+        .pipe(
+          tap((response) => this.setSession(response)),
+          shareReplay()
+        )
+        .subscribe();
     }
   }
 
@@ -105,9 +106,7 @@ export class AuthService {
   }
 
   whoami(): any {
-    const jwtToken = localStorage.getItem("token");
+    const jwtToken = localStorage.getItem('token');
     return jwt_decode(jwtToken);
   }
 }
-
-
