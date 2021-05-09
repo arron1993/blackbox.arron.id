@@ -17,6 +17,15 @@ export class GenericLineChartComponent implements OnInit {
   public options = {
     responsive: true,
     maintainAspectRatio: false,
+    scales: {
+      yAxes: [
+        {
+          stacked: false,
+          type: 'linear',
+        },
+      ],
+      xAxes: [{ stacked: false }],
+    },
   };
 
   public colours: Color[] = [];
@@ -38,7 +47,8 @@ export class GenericLineChartComponent implements OnInit {
     let colour = Math.floor(Math.random() * 255);
     for (let i = 0; i < this._data.length; i++) {
       this.colours.push({
-        backgroundColor: `hsl(${colour}, 100%, 50%)`,
+        borderColor: `hsl(${colour}, 100%, 50%)`,
+        backgroundColor: 'rgba(255,0,0,0.0)',
       });
 
       // randomise the different a bit so when it wraps
