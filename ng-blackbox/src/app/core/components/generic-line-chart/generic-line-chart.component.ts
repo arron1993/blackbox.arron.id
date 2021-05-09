@@ -65,15 +65,23 @@ export class GenericLineChartComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  setData() {
     for (let dataEntry of this.data) {
       this._data.push({
         label: dataEntry[0],
         data: dataEntry[1],
       });
     }
+  }
 
+  setLabels() {
     this._labels = this.labels;
+  }
+
+  ngOnInit(): void {
+    this.setData();
+    this.setLabels();
+
     this.setColours();
     this.setOptions();
   }

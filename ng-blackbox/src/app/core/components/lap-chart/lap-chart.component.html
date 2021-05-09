@@ -1,5 +1,8 @@
+<button class="btn btn-sm btn-outline-green" (click)="hideFirstLap()">
+  Hide First Lap
+</button>
 <app-generic-line-chart
-  [labels]="labels"
-  [data]="data"
+  [labels]="_labels"
+  [data]="_data"
   [options]="options"
 ></app-generic-line-chart>

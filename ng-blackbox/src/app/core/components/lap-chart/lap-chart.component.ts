@@ -6,8 +6,12 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./lap-chart.component.scss'],
 })
 export class LapChartComponent implements OnInit {
-  @Input() labels: number;
+  @Input() labels;
   @Input() data;
+
+  firstLap = null;
+  _data = [];
+  _labels = [];
 
   public options = {
     responsive: true,
@@ -38,7 +42,22 @@ export class LapChartComponent implements OnInit {
     return `${minsPadded}:${secondsPadded}:${msPadded}`;
   }
 
+  hideFirstLap() {
+    if (!this.firstLap) {
+      this.firstLap = this._data[0][1][0];
+      this._data[0][1].shift();
+      this._labels.shift();
+    } else {
+      this._data[0][1].unshift(this.firstLap);
+      this._labels.unshift(1);
+      this.firstLap = null;
+    }
+  }
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._data = this.data;
+    this._labels = this.labels;
+  }
 }
