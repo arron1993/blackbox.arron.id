@@ -138,6 +138,16 @@
         [lapTimes]="lapTimes"
         [lapCount]="lapCount"
       ></app-lap-chart>
+
+      <app-generic-line-chart
+        [labels]="lapCountArray()"
+        [data]="[
+          ['Front Left', flPressures],
+          ['Front Right', frPressures],
+          ['Rear Left', rlPressures],
+          ['Rear Right', rrPressures]
+        ]"
+      ></app-generic-line-chart>
     </div>
   </div>
 </ng-container>

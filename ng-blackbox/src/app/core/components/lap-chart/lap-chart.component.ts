@@ -60,8 +60,5 @@ export class LapChartComponent implements OnInit {
       this.lineChartLabels.push(<Label>(<unknown>i));
     }
     this.lineChartData = [{ label: 'Times', data: this.lapTimes }];
-    // this.lineChartData[1].data = this.sector1Times;
-    // this.lineChartData[2].data = this.sector2Times;
-    // this.lineChartData[3].data = this.sector3Times;
   }
 }

@@ -21,12 +21,24 @@ export class SessionPageComponent implements OnInit {
   fastestSector2 = null;
   fastestSector3 = null;
 
+  flPressures = [];
+  frPressures = [];
+  rlPressures = [];
+  rrPressures = [];
+
   constructor(
     private route: ActivatedRoute,
     private ss: SessionService,
     private ts: TimeService
   ) {}
 
+  lapCountArray() {
+    const count = [];
+    for (let x = 0; x < this.lapCount; x++) {
+      count.push(x + 1);
+    }
+    return count;
+  }
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.ss.getDetail(params.id).subscribe((resp: any) => {
@@ -40,7 +52,12 @@ export class SessionPageComponent implements OnInit {
           this.sector1Times.push(lap.sector1);
           this.sector2Times.push(lap.sector2 - lap.sector1);
           this.sector3Times.push(lap.sector3 - lap.sector2);
+          this.flPressures.push(lap.front_left_pressure);
+          this.frPressures.push(lap.front_right_pressure);
+          this.rlPressures.push(lap.rear_left_pressure);
+          this.rrPressures.push(lap.rear_right_pressure);
         }
+
         this.fastestSector1 = Math.min(...this.sector1Times);
         this.fastestSector2 = Math.min(...this.sector2Times);
         this.fastestSector3 = Math.min(...this.sector3Times);

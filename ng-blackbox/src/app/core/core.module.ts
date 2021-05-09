@@ -13,6 +13,7 @@ import { SessionPageComponent } from './pages/session-page/session-page.componen
 import { SessionTypeListComponent } from './components/session-type-list/session-type-list.component';
 import { LapChartComponent } from './components/lap-chart/lap-chart.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { GenericLineChartComponent } from './components/generic-line-chart/generic-line-chart.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     SessionTypeListComponent,
     LapChartComponent,
     LoadingSpinnerComponent,
+    GenericLineChartComponent,
   ],
   imports: [
     CommonModule,

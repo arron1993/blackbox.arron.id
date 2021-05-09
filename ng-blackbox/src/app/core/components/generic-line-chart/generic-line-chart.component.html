@@ -1,0 +1,14 @@
+<div style="display: block" *ngIf="data">
+  <canvas
+    baseChart
+    width="400"
+    height="400"
+    [datasets]="_data"
+    [labels]="_labels"
+    [options]="options"
+    [colors]="colours"
+    [legend]="legend"
+    [chartType]="chartType"
+  >
+  </canvas>
+</div>
