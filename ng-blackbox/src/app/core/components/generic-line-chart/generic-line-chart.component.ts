@@ -10,11 +10,13 @@ import { Color, Label } from 'ng2-charts';
 export class GenericLineChartComponent implements OnInit {
   @Input() data;
   @Input() labels;
+  @Input() yCallback;
+  @Input() options;
 
-  public _data: ChartDataSets[] = [];
-  public _labels: Label[] = [];
+  _data: ChartDataSets[] = [];
+  _labels: Label[] = [];
 
-  public options = {
+  _options = {
     responsive: true,
     maintainAspectRatio: false,
     scales: {
@@ -22,28 +24,27 @@ export class GenericLineChartComponent implements OnInit {
         {
           stacked: false,
           type: 'linear',
+          ticks: {
+            callback: this._yCallback,
+          },
         },
       ],
       xAxes: [{ stacked: false }],
     },
   };
 
-  public colours: Color[] = [];
+  colours: Color[] = [];
 
-  public legend = true;
-  public chartType = 'line';
+  legend = true;
+  chartType = 'line';
 
   constructor() {}
 
-  ngOnInit(): void {
-    for (let dataEntry of this.data) {
-      this._data.push({
-        label: dataEntry[0],
-        data: dataEntry[1],
-      });
-    }
+  _yCallback(value) {
+    return value;
+  }
 
-    this._labels = this.labels;
+  setColours() {
     let colour = Math.floor(Math.random() * 255);
     for (let i = 0; i < this._data.length; i++) {
       this.colours.push({
@@ -55,7 +56,25 @@ export class GenericLineChartComponent implements OnInit {
       // we don't end up with the same colours
       const variance = Math.floor(Math.random() * 25);
       colour = (colour + (50 + variance)) % 255;
-      console.log(colour);
     }
+  }
+
+  setOptions() {
+    if (this.options) {
+      this._options = this.options;
+    }
+  }
+
+  ngOnInit(): void {
+    for (let dataEntry of this.data) {
+      this._data.push({
+        label: dataEntry[0],
+        data: dataEntry[1],
+      });
+    }
+
+    this._labels = this.labels;
+    this.setColours();
+    this.setOptions();
   }
 }

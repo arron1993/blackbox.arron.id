@@ -135,8 +135,8 @@
       </div>
 
       <app-lap-chart
-        [lapTimes]="lapTimes"
-        [lapCount]="lapCount"
+        [data]="[['Times', lapTimes]]"
+        [labels]="lapCountArray()"
       ></app-lap-chart>
 
       <app-generic-line-chart

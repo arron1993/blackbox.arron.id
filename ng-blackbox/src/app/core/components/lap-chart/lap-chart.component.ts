@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ChartDataSets } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-lap-chart',
@@ -8,14 +6,10 @@ import { Color, Label } from 'ng2-charts';
   styleUrls: ['./lap-chart.component.scss'],
 })
 export class LapChartComponent implements OnInit {
-  @Input() lapCount: number;
-  @Input() lapTimes: number[];
+  @Input() labels: number;
+  @Input() data;
 
-  public lineChartData: ChartDataSets[] = [];
-
-  public lineChartLabels: Label[] = [];
-
-  public lineChartOptions = {
+  public options = {
     responsive: true,
     maintainAspectRatio: false,
     scales: {
@@ -44,21 +38,7 @@ export class LapChartComponent implements OnInit {
     return `${minsPadded}:${secondsPadded}:${msPadded}`;
   }
 
-  public lineChartColors: Color[] = [
-    {
-      borderColor: 'black',
-      backgroundColor: 'rgba(255,0,0,0.0)',
-    },
-  ];
-  public lineChartLegend = true;
-  public lineChartType = 'line';
-
   constructor() {}
 
-  ngOnInit(): void {
-    for (let i = 1; i <= this.lapCount; i++) {
-      this.lineChartLabels.push(<Label>(<unknown>i));
-    }
-    this.lineChartData = [{ label: 'Times', data: this.lapTimes }];
-  }
+  ngOnInit(): void {}
 }
