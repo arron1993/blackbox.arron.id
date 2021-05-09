@@ -5,4 +5,4 @@ from circuit.models import Circuit
 class CircuitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Circuit
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'keyname']

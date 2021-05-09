@@ -1,0 +1,28 @@
+@import "../../../../colours";
+
+.label {
+  padding: 0.25rem 1rem;
+  border-radius: 10px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+
+  &.pro {
+    background-color: gold;
+    color: white;
+  }
+
+  &.silver {
+    background-color: silver;
+    color: white;
+  }
+
+  &.am {
+    background-color: $red;
+    color: white;
+  }
+
+  &.rookie {
+    background-color: $yellow;
+    color: black;
+  }
+}

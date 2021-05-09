@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TimeService } from 'src/app/core/services/time.service';
 import { MetricService } from '../../services/metric.service';
+import { SplitService } from '../../services/split.service';
 
 @Component({
   selector: 'app-circuit-summary-page',
@@ -15,6 +16,7 @@ export class CircuitSummaryPageComponent implements OnInit {
   constructor(
     private ms: MetricService,
     private ts: TimeService,
+    private ss: SplitService,
     private route: ActivatedRoute
   ) {}
 
@@ -31,6 +33,7 @@ export class CircuitSummaryPageComponent implements OnInit {
       .subscribe((summary: any[]) => {
         this.circuitSummary = summary;
         this.circuitSummary.map((x) => {
+          x.split = this.ss.get(x.circuit.keyname, x.best_time);
           x.best_time = this.ts.convertTime(x.best_time);
           x.median_time = this.ts.convertTime(x.median_time);
           return x;

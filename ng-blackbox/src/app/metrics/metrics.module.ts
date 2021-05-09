@@ -8,6 +8,7 @@ import { CarGroupSelectorComponent } from './components/car-group-selector/car-g
 import { CarSummaryPageComponent } from './pages/car-summary-page/car-summary-page.component';
 import { CoreModule } from '../core/core.module';
 import { CarSummaryListComponent } from './components/car-summary-list/car-summary-list.component';
+import { SplitLabelComponent } from './components/split-label/split-label.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { CarSummaryListComponent } from './components/car-summary-list/car-summa
     CarGroupSelectorComponent,
     CarSummaryPageComponent,
     CarSummaryListComponent,
+    SplitLabelComponent,
   ],
   imports: [CommonModule, MetricsRoutingModule, CoreModule],
 })
