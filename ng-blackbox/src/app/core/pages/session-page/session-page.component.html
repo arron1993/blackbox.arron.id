@@ -39,7 +39,15 @@
           </span>
         </div>
         <div
-          class="d-none d-lg-flex col-12 row no-gutters font-weight-bold py-1 border-bottom"
+          class="
+            d-none d-lg-flex
+            col-12
+            row
+            no-gutters
+            font-weight-bold
+            py-1
+            border-bottom
+          "
         >
           <div class="col-12 col-lg-1">Lap</div>
           <div class="col-12 col-lg-2">Time</div>
@@ -146,6 +154,14 @@
           ['Front Right', frPressures],
           ['Rear Left', rlPressures],
           ['Rear Right', rrPressures]
+        ]"
+      ></app-generic-line-chart>
+
+      <app-generic-line-chart
+        [labels]="lapCountArray()"
+        [data]="[
+          ['Track Temp', trackTemps],
+          ['Air Temp', airTemps]
         ]"
       ></app-generic-line-chart>
     </div>

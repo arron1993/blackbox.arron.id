@@ -26,6 +26,9 @@ export class SessionPageComponent implements OnInit {
   rlPressures = [];
   rrPressures = [];
 
+  trackTemps = [];
+  airTemps = [];
+
   constructor(
     private route: ActivatedRoute,
     private ss: SessionService,
@@ -56,6 +59,8 @@ export class SessionPageComponent implements OnInit {
           this.frPressures.push(lap.front_right_pressure);
           this.rlPressures.push(lap.rear_left_pressure);
           this.rrPressures.push(lap.rear_right_pressure);
+          this.trackTemps.push(lap.track_temp);
+          this.airTemps.push(lap.air_temp);
         }
 
         this.fastestSector1 = Math.min(...this.sector1Times);
