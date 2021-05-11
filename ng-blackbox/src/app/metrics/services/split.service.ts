@@ -10,7 +10,7 @@ export class SplitService {
   circuits = [
     // RCI Classes
     new Split('barcelona', '1:44.500', '1:45.900', '1:47.900', '1:48.000'),
-    new Split('bathurst', '2:02.500', '2:03.900', '2:05.900', '2:06.000'),
+    new Split('mount_panorama', '2:02.500', '2:03.900', '2:05.900', '2:06.000'),
     new Split('brands_hatch', '1:24.000', '1:25.400', '1:26.900', '1:27.000'),
     new Split('hungaroring', '1:44.500', '1:45.900', '1:47.400', '1:47.500'),
     new Split('kyalami', '1:42.000', '1:43.400', '1:45.400', '1:45.500'),
